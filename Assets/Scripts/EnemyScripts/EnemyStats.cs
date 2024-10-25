@@ -7,6 +7,30 @@ public class EnemyStats : MonoBehaviour
     [SerializeField] float _enemyHealth = 50f;
     [SerializeField] float _enemyDamage = 10f;
 
+    /**
+    * Called when the enemy takes damage. Reduces health and destroys the enemy if health falls below 0.
+    */
+    public void TakeDamage(float damageAmount)
+    {
+        _enemyHealth -= damageAmount;  // Reduce the enemy's health by the damage amount
+
+        if (_enemyHealth <= 0)
+        {
+            Die();  // Call the Die function if health is 0 or less
+        }
+    }
+
+    /**
+    * Called when the enemy's health reaches 0. Handles enemy death.
+    */
+    private void Die()
+    {
+        // You can add death animations, sounds, or other effects here
+
+        // Destroy the enemy object
+        Destroy(gameObject);
+    }
+
     public float GetEnemyHealth()
     {
         return _enemyHealth;

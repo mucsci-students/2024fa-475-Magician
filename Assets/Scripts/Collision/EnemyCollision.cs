@@ -9,13 +9,11 @@ public class EnemyCollision : MonoBehaviour
     EnemyStats _enemyStat;
     
     float _gunDamage;
-    float _enemyHealth;
 
     void Start()
     {
         _weaponStat = _gun.GetComponent<WeaponStat>();
         _enemyStat = gameObject.GetComponent<EnemyStats>();
-        _enemyHealth = _enemyStat.GetEnemyHealth();
         _gunDamage = _weaponStat.GetWeaponDamage();
     }
 
@@ -24,15 +22,7 @@ public class EnemyCollision : MonoBehaviour
         if (collision.gameObject.CompareTag("Ammo"))
         {
             Destroy(collision.gameObject);
-            _enemyHealth -= _gunDamage;
-            if (_enemyHealth <= 0)
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
-                _enemyStat.SetEnemyHealth(_enemyHealth);
-            }
+            _enemyStat.TakeDamage(_gunDamage);
         }
     }
 }

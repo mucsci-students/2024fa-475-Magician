@@ -8,6 +8,7 @@ TagManager:
   - SmallEnemy
   - Weapon
   - Obstacle
+  - MeleeCone
   layers:
   - Default
   - TransparentFX
@@ -16,7 +17,7 @@ TagManager:
   - Water
   - UI
   - Player
-  - SmallEnemy
+  - Enemy
   - 
   - 
   - 

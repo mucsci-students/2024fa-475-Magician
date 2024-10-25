@@ -4,13 +4,21 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerActions : MonoBehaviour
-{ 
+{
     [SerializeField] Rigidbody2D _playerRigidBody;  // Reference to the Rigidbody2D component for applying physics-based movement
     [SerializeField] Animator _playerAnimator;      // Reference to the Animator component to handle player animations
     [SerializeField] Texture2D _crosshairTexture;
     [SerializeField] GameObject _bulletPrefab;
     [SerializeField] Transform _gun;
     [SerializeField] GameObject _player;
+    [SerializeField] float _meleeDamage = 25f;      // Damage dealt by melee attack
+    [SerializeField] LayerMask _enemyLayer;
+
+    // New settings for additional raycasts
+    [SerializeField] float _raycastDistanceLeft = 1.5f;  // Distance for the left raycast
+    [SerializeField] float _raycastDistanceRight = 1.5f; // Distance for the right raycast
+    [SerializeField] float _raycastDistanceMiddle = 1.5f; // Default range of melee attack for the main raycast
+    [SerializeField] float _raycastAngleOffset = 30f;    // Angle offset for the side raycasts
 
     WeaponStat _weaponStat;
     PlayerStats _playerStat;
@@ -22,6 +30,7 @@ public class PlayerActions : MonoBehaviour
     float _fireRate;
     float _gunDamage;
     float _playerMoveSpeed;
+    bool _hasDealtMeleeDamage = false;
 
     void Start()
     {
@@ -39,6 +48,7 @@ public class PlayerActions : MonoBehaviour
     {
         UpdatePlayerAnimationStat();
         UpdateStats();
+        DetectEnemyWithRaycasts(); // Main raycast logic for melee attacks
     }
 
     /**
@@ -126,7 +136,59 @@ public class PlayerActions : MonoBehaviour
     private void OnStab(InputValue inputValue)
     {
         if (inputValue.isPressed)
+        {
             _playerAnimator.SetBool("isStabbing", true);
+            _hasDealtMeleeDamage = true;
+        }
+    }
+
+    /**
+    * Detect enemies using three raycasts (center, left, and right).
+    * The raycasts are adjusted by angle and distance.
+    */
+    private void DetectEnemyWithRaycasts()
+    {
+        // Calculate the forward direction based on player facing
+        Vector2 forwardDirection = new Vector2(_lastHorizontal, _lastVertical).normalized;
+
+        if (forwardDirection == Vector2.zero)
+            return; // If no movement, skip raycast
+
+        // Cast the central ray
+        RaycastHit2D centerHit = Physics2D.Raycast(transform.position, forwardDirection, _raycastDistanceMiddle, _enemyLayer);
+        Debug.DrawRay(transform.position, forwardDirection * _raycastDistanceMiddle, Color.cyan);
+
+        // Calculate left and right directions with the angle offset
+        Vector2 leftDirection = Quaternion.Euler(0, 0, _raycastAngleOffset) * forwardDirection;
+        Vector2 rightDirection = Quaternion.Euler(0, 0, -_raycastAngleOffset) * forwardDirection;
+
+        // Cast the left and right rays
+        RaycastHit2D leftHit = Physics2D.Raycast(transform.position, leftDirection, _raycastDistanceLeft, _enemyLayer);
+        RaycastHit2D rightHit = Physics2D.Raycast(transform.position, rightDirection, _raycastDistanceRight, _enemyLayer);
+
+        Debug.DrawRay(transform.position, leftDirection * _raycastDistanceLeft, Color.green);
+        Debug.DrawRay(transform.position, rightDirection * _raycastDistanceRight, Color.red);
+
+        // Apply damage if an enemy is detected in any of the raycasts
+        if (_playerAnimator.GetBool("isStabbing"))
+        {
+            if (centerHit.collider != null) ApplyDamage(centerHit.collider);
+            if (leftHit.collider != null) ApplyDamage(leftHit.collider);
+            if (rightHit.collider != null) ApplyDamage(rightHit.collider);
+        }
+    }
+
+    private void ApplyDamage(Collider2D enemyCollider)
+    {
+        // Check if the collider belongs to an enemy with the EnemyStats component
+        EnemyStats enemyStats = enemyCollider.GetComponent<EnemyStats>();
+        if (enemyStats != null && _hasDealtMeleeDamage)
+        {
+            enemyStats.TakeDamage(_meleeDamage);
+            Debug.Log("Enemy hit! Damage applied: " + _meleeDamage);
+            Debug.Log("Current enemy health: " + enemyStats.GetEnemyHealth());
+            _hasDealtMeleeDamage = false;
+        }
     }
 
     private void OnFire(InputValue inputValue)
