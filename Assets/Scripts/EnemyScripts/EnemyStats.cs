@@ -25,7 +25,7 @@ public class EnemyStats : MonoBehaviour
     */
     private void Die()
     {
-        // You can add death animations, sounds, or other effects here
+        // Add death animations, sounds, or other effects here
 
         // Destroy the enemy object
         Destroy(gameObject);

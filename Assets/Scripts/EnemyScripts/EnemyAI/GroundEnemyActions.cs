@@ -19,16 +19,25 @@ public class GroundEnemyActions : MonoBehaviour
     [Header("Player Detection")]
     [SerializeField] Transform _playerTransform;   // Reference to the player
     [SerializeField] float detectionRadius = 3f;   // Radius to detect the player
+    [SerializeField] GameObject _player;
+    PlayerStats _playerStats;
+    EnemyStats _enemyStats;
 
     private Vector2 _movementDirection;    // Stores the current movement direction
     private bool _isMoving = false;        // Tracks if the enemy is moving
     private float _changeStateTimer = 0f;  // Timer to switch between idle/moving
     private float _currentStateDuration = 0f; // Duration of the current state
     private bool _isChasingPlayer = false; // Tracks if the enemy is chasing the player
+    private float _nextFireTime = 0f;
+    private float _enemyAttackRate = 2f;
+    private float _enemyDamage;
 
     void Start()
     {
         ChangeState(); // Set initial state (either idle or moving)
+        _playerStats = _player.GetComponent<PlayerStats>();
+        _enemyStats = gameObject.GetComponent<EnemyStats>();
+        _enemyDamage = _enemyStats.GetEnemyDamage();
     }
 
     void Update()
@@ -36,6 +45,7 @@ public class GroundEnemyActions : MonoBehaviour
         UpdateStateTimer();
         DetectPlayer();
         UpdateAnimation(); // Update animations based on velocity
+        AutoAttack();
     }
 
     void FixedUpdate()
@@ -127,6 +137,18 @@ public class GroundEnemyActions : MonoBehaviour
         else
         {
             _enemyRigidBody.velocity = Vector2.zero; // Idle, no movement
+        }
+    }
+
+    private void AutoAttack()
+    {
+        bool isEnemyAttacking = _enemyAnimator.GetBool("isZombieAttack");
+        if (isEnemyAttacking && Time.time >= _nextFireTime)
+        {
+            _playerStats.TakeDamage(_enemyDamage);
+            Debug.Log("Player got hit! Damage applied: " + _enemyDamage);
+            Debug.Log("Current player health: " + _playerStats.GetPlayerHealth());
+            _nextFireTime = Time.time + _enemyAttackRate;
         }
     }
 
