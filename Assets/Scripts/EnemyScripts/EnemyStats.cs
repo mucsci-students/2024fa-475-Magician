@@ -35,7 +35,6 @@ public class EnemyStats : MonoBehaviour
 
         Rigidbody2D _enemyRigidbody = gameObject.GetComponent<Rigidbody2D>();
         _enemyRigidbody.velocity = Vector2.zero;       // Stop linear movement
-        _enemyRigidbody.angularVelocity = 0f;          // Stop any rotation
         _enemyRigidbody.isKinematic = true;            // Disable physics simulation
 
         _isDead = true;

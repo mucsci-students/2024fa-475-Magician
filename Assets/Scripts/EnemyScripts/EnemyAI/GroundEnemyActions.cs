@@ -44,10 +44,13 @@ public class GroundEnemyActions : MonoBehaviour
 
     void Update()
     {
-        UpdateStateTimer();
-        DetectPlayer();
-        UpdateAnimation(); // Update animations based on velocity
-        AutoAttack();
+        if (!_isDead)
+        {
+            UpdateStateTimer();
+            DetectPlayer();
+            UpdateAnimation(); // Update animations based on velocity
+            AutoAttack();
+        }
         _isDead = _enemyStats.GetIsDead();
     }
 
@@ -80,132 +83,111 @@ public class GroundEnemyActions : MonoBehaviour
     // Detects if the player is within the detection radius
     private void DetectPlayer()
     {
-        if (!_isDead)
+        if (Vector2.Distance(transform.position, _playerTransform.position) <= detectionRadius)
         {
-            if (Vector2.Distance(transform.position, _playerTransform.position) <= detectionRadius)
-            {
-                _isChasingPlayer = true;  // Start chasing the player
-            }
-            else
-            {
-                _isChasingPlayer = false; // Resume wandering behavior
-            }
+            _isChasingPlayer = true;  // Start chasing the player
+        }
+        else
+        {
+            _isChasingPlayer = false; // Resume wandering behavior
         }
     }
 
     // Changes the state between idle and moving
     private void ChangeState()
     {
-        if (!_isDead)
+        _isMoving = !_isMoving;
+
+        if (_isMoving)
         {
-            _isMoving = !_isMoving;
-
-            if (_isMoving)
-            {
-                ChooseRandomDirection();
-                _currentStateDuration = Random.Range(moveTimeMin, moveTimeMax); // Set how long to move
-            }
-            else
-            {
-                _currentStateDuration = Random.Range(idleTimeMin, idleTimeMax); // Set how long to stay idle
-            }
-
-            _changeStateTimer = 0f;  // Reset the state change timer
+            ChooseRandomDirection();
+            _currentStateDuration = Random.Range(moveTimeMin, moveTimeMax); // Set how long to move
         }
+        else
+        {
+            _currentStateDuration = Random.Range(idleTimeMin, idleTimeMax); // Set how long to stay idle
+        }
+
+        _changeStateTimer = 0f;  // Reset the state change timer
     }
 
     // Chooses a random movement direction
     private void ChooseRandomDirection()
     {
-        if (!_isDead)
-        {
-            int randomDirection = Random.Range(0, 8);
+        int randomDirection = Random.Range(0, 8);
 
-            switch (randomDirection)
-            {
-                case 0: _movementDirection = Vector2.up; break;
-                case 1: _movementDirection = Vector2.down; break;
-                case 2: _movementDirection = Vector2.left; break;
-                case 3: _movementDirection = Vector2.right; break;
-                case 4: _movementDirection = new Vector2(1, 1).normalized; break;   // Diagonal up-right
-                case 5: _movementDirection = new Vector2(-1, 1).normalized; break;  // Diagonal up-left
-                case 6: _movementDirection = new Vector2(1, -1).normalized; break;  // Diagonal down-right
-                case 7: _movementDirection = new Vector2(-1, -1).normalized; break; // Diagonal down-left
-            }
+        switch (randomDirection)
+        {
+            case 0: _movementDirection = Vector2.up; break;
+            case 1: _movementDirection = Vector2.down; break;
+            case 2: _movementDirection = Vector2.left; break;
+            case 3: _movementDirection = Vector2.right; break;
+            case 4: _movementDirection = new Vector2(1, 1).normalized; break;   // Diagonal up-right
+            case 5: _movementDirection = new Vector2(-1, 1).normalized; break;  // Diagonal up-left
+            case 6: _movementDirection = new Vector2(1, -1).normalized; break;  // Diagonal down-right
+            case 7: _movementDirection = new Vector2(-1, -1).normalized; break; // Diagonal down-left
         }
     }
 
     // Handles automatic movement and obstacle detection
     private void AutoMove()
     {
-        if (!_isDead)
+        if (_isMoving)
         {
-            if (_isMoving)
+            if (IsObstacleInPath())
             {
-                if (IsObstacleInPath())
-                {
-                    ChooseRandomDirection(); // Pick a new direction if obstacle detected
-                }
-                else
-                {
-                    _enemyRigidBody.velocity = _movementDirection * _enemyMoveSpeed;
-                }
+                ChooseRandomDirection(); // Pick a new direction if obstacle detected
             }
             else
             {
-                _enemyRigidBody.velocity = Vector2.zero; // Idle, no movement
+                _enemyRigidBody.velocity = _movementDirection * _enemyMoveSpeed;
             }
+        }
+        else
+        {
+            _enemyRigidBody.velocity = Vector2.zero; // Idle, no movement
         }
     }
 
     private void AutoAttack()
     {
-        if (!_isDead)
+        bool isEnemyAttacking = _enemyAnimator.GetBool("isZombieAttack");
+        if (isEnemyAttacking && Time.time >= _nextFireTime)
         {
-            bool isEnemyAttacking = _enemyAnimator.GetBool("isZombieAttack");
-            if (isEnemyAttacking && Time.time >= _nextFireTime)
-            {
-                _playerStats.TakeDamage(_enemyDamage);
-                Debug.Log("Player got hit! Damage applied: " + _enemyDamage);
-                Debug.Log("Current player health: " + _playerStats.GetPlayerHealth());
-                _nextFireTime = Time.time + _enemyAttackRate;
-            }
+            _playerStats.TakeDamage(_enemyDamage);
+            Debug.Log("Player got hit! Damage applied: " + _enemyDamage);
+            Debug.Log("Current player health: " + _playerStats.GetPlayerHealth());
+            _nextFireTime = Time.time + _enemyAttackRate;
         }
     }
 
     // Moves the enemy toward the player when in chase mode
     private void MoveTowardsPlayer()
     {
-        if (!_isDead)
-        {
-            Vector2 directionToPlayer = (_playerTransform.position - transform.position).normalized;
+        Vector2 directionToPlayer = (_playerTransform.position - transform.position).normalized;
 
-            _enemyRigidBody.velocity = directionToPlayer * _enemyMoveSpeed; // Move toward the player
+        _enemyRigidBody.velocity = directionToPlayer * _enemyMoveSpeed; // Move toward the player
 
-            // Update the enemy's animation based on the movement direction
-            _enemyAnimator.SetFloat("E_Horizontal", directionToPlayer.x);
-            _enemyAnimator.SetFloat("E_Vertical", directionToPlayer.y);
-            _enemyAnimator.SetFloat("E_Speed", directionToPlayer.magnitude);
-        }
+        // Update the enemy's animation based on the movement direction
+        _enemyAnimator.SetFloat("E_Horizontal", directionToPlayer.x);
+        _enemyAnimator.SetFloat("E_Vertical", directionToPlayer.y);
+        _enemyAnimator.SetFloat("E_Speed", directionToPlayer.magnitude);
     }
 
     // Updates the enemy's animation based on its velocity
     private void UpdateAnimation()
     {
-        if (!_isDead)
-        {
-            Vector2 velocity = _enemyRigidBody.velocity;
+        Vector2 velocity = _enemyRigidBody.velocity;
 
-            if (velocity.sqrMagnitude > 0.1f)  // Check if the enemy is moving
-            {
-                _enemyAnimator.SetFloat("E_Horizontal", velocity.x);
-                _enemyAnimator.SetFloat("E_Vertical", velocity.y);
-                _enemyAnimator.SetFloat("E_Speed", velocity.magnitude);
-            }
-            else
-            {
-                _enemyAnimator.SetFloat("E_Speed", 0);  // Idle animation
-            }
+        if (velocity.sqrMagnitude > 0.1f)  // Check if the enemy is moving
+        {
+            _enemyAnimator.SetFloat("E_Horizontal", velocity.x);
+            _enemyAnimator.SetFloat("E_Vertical", velocity.y);
+            _enemyAnimator.SetFloat("E_Speed", velocity.magnitude);
+        }
+        else
+        {
+            _enemyAnimator.SetFloat("E_Speed", 0);  // Idle animation
         }
     }
 

@@ -2902,6 +2902,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 779747059834511124, guid: 4ac40e259645007438cd00caf73f9754, type: 3}
   m_PrefabInstance: {fileID: 7418107193595198907}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &2076257066 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4524164657484626787, guid: 4ac40e259645007438cd00caf73f9754, type: 3}
+  m_PrefabInstance: {fileID: 7418107193595198907}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6159850984700520198
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3027,6 +3032,14 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8775535976773638865, guid: 4ac40e259645007438cd00caf73f9754, type: 3}
+      propertyPath: _playerHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8775535976773638865, guid: 4ac40e259645007438cd00caf73f9754, type: 3}
+      propertyPath: _playerAnimator
+      value: 
+      objectReference: {fileID: 2076257066}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

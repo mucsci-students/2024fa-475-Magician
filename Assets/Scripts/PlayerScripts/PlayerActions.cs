@@ -31,6 +31,7 @@ public class PlayerActions : MonoBehaviour
     float _gunDamage;
     float _playerMoveSpeed;
     bool _hasDealtMeleeDamage = false;
+    private bool _isDead;
 
     void Start()
     {
@@ -40,15 +41,20 @@ public class PlayerActions : MonoBehaviour
         _fireRate = _weaponStat.GetWeaponFireRate();
         _gunDamage = _weaponStat.GetWeaponDamage();
         _playerMoveSpeed = _playerStat.GetPlayerMoveSpeed();
+        _isDead = _playerStat.GetIsDead();
         // Change the cursor to the crosshair and hide the default system cursor
         Cursor.SetCursor(_crosshairTexture, Vector2.zero, CursorMode.Auto);
     }
 
     void Update()
     {
-        UpdatePlayerAnimationStat();
-        UpdateStats();
-        DetectEnemyWithRaycasts(); // Main raycast logic for melee attacks
+        if (!_isDead)
+        {
+            UpdatePlayerAnimationStat();
+            UpdateStats();
+            DetectEnemyWithRaycasts(); // Main raycast logic for melee attacks
+        }
+        _isDead = _playerStat.GetIsDead();
     }
 
     /**
@@ -101,7 +107,10 @@ public class PlayerActions : MonoBehaviour
     */
     void FixedUpdate()
     {
-        Run();
+        if(!_isDead)
+        {
+            Run();
+        }
     }
 
     /**

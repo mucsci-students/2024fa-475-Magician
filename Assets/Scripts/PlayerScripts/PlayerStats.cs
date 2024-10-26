@@ -8,6 +8,8 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] float _playerHealth = 100f;
     [SerializeField] float _meleeDamage = 10f;
     [SerializeField] float _playerMoveSpeed = 1f;
+    bool _isDead = false;
+    float _destroyTime = 10f;
 
     public void TakeDamage(float damageAmount)
     {
@@ -22,9 +24,25 @@ public class PlayerStats : MonoBehaviour
     private void Die()
     {
         // Add death animations, sounds, or other effects here
+        _playerAnimator.SetTrigger("playerDead");
+        Collider2D _playerCollider = gameObject.GetComponent<Collider2D>();
+        _playerCollider.isTrigger = true;
 
-        // Destroy the enemy object
-        //Destroy(gameObject);
+        Rigidbody2D _playerRigidbody = gameObject.GetComponent<Rigidbody2D>();
+        _playerRigidbody.velocity = Vector2.zero;       // Stop linear movement
+        _playerRigidbody.isKinematic = true;            // Disable physics simulation
+
+        _isDead = true;
+    }
+
+    public bool GetIsDead()
+    {
+        return _isDead;
+    }
+
+    public void SetIsDead(bool isDead)
+    {
+        _isDead = isDead;
     }
 
     public float GetPlayerHealth()
