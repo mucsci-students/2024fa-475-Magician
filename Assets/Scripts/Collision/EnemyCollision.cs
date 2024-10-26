@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyCollision : MonoBehaviour
@@ -9,7 +10,9 @@ public class EnemyCollision : MonoBehaviour
 
     WeaponStat _weaponStat;
     EnemyStats _enemyStat;
+    GroundEnemyActions _enemyActions;
     float _gunDamage;
+    bool _isEnemyShot = false;
 
     void Start()
     {
@@ -24,22 +27,17 @@ public class EnemyCollision : MonoBehaviour
         {
             Destroy(collision.gameObject);
             _enemyStat.TakeDamage(_gunDamage);
+            _isEnemyShot = true;
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public bool GetEnemyShot()
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            _enemyAnimator.SetBool("isZombieAttack", true);
-        }
+        return _isEnemyShot;
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    public void SetEnemyShot(bool isEnemyShot)
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            _enemyAnimator.SetBool("isZombieAttack", false);
-        }
+        _isEnemyShot = isEnemyShot;
     }
 }

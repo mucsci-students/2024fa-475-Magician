@@ -1,117 +1,293 @@
-using System.Collections;
 using UnityEngine;
 
 public class GroundEnemyActions : MonoBehaviour
 {
+    public enum EnemyState
+    {
+        Idle,
+        Wandering,
+        ChasingPlayer,
+        ChasingAfterShot,
+        Attacking,
+        Dead
+    }
+
     [Header("Enemy Movement")]
-    [SerializeField] float _enemyMoveSpeed = 5f; // Enemy's movement speed
-    [SerializeField] Rigidbody2D _enemyRigidBody; // Rigidbody2D for movement
-    [SerializeField] Animator _enemyAnimator;    // Animator component for animations
-    [SerializeField] float _raycastDistance = 1f; // Distance for detecting obstacles with Raycast
-    [SerializeField] LayerMask obstacleLayer; // Layer mask to detect obstacles
+    [SerializeField] private float _enemyMoveSpeed = 5f;
+    [SerializeField] private Rigidbody2D _enemyRigidBody;
+    [SerializeField] private Animator _enemyAnimator;
+    [SerializeField] private float _raycastDistance = 1f;
+    [SerializeField] private LayerMask obstacleLayer;
 
     [Header("Idle and Movement Timers")]
-    [Range(1f, 10f)][SerializeField] float idleTimeMin = 1f; // Minimum idle time
-    [Range(1f, 10f)][SerializeField] float idleTimeMax = 3f; // Maximum idle time
-    [Range(1f, 10f)][SerializeField] float moveTimeMin = 2f; // Minimum move time
-    [Range(1f, 10f)][SerializeField] float moveTimeMax = 5f; // Maximum move time
+    [Range(1f, 10f)][SerializeField] private float idleTimeMin = 1f;
+    [Range(1f, 10f)][SerializeField] private float idleTimeMax = 3f;
+    [Range(1f, 10f)][SerializeField] private float moveTimeMin = 2f;
+    [Range(1f, 10f)][SerializeField] private float moveTimeMax = 5f;
 
     [Header("Player Detection")]
-    [SerializeField] Transform _playerTransform;   // Reference to the player
-    [SerializeField] float detectionRadius = 3f;   // Radius to detect the player
-    [SerializeField] GameObject _player;
-    PlayerStats _playerStats;
-    EnemyStats _enemyStats;
+    [SerializeField] private Transform _playerTransform;
+    [SerializeField] private GameObject _player;
+    [SerializeField] private float _detectionRadius = 3f;
+    [SerializeField] private float _enemyAttackRate = 3f;
+    [SerializeField] private float _enemyChaseTime = 5f;
+    [SerializeField] private float _attackRange = 0.1f;
 
-    private Vector2 _movementDirection;    // Stores the current movement direction
-    private bool _isMoving = false;        // Tracks if the enemy is moving
-    private float _changeStateTimer = 0f;  // Timer to switch between idle/moving
-    private float _currentStateDuration = 0f; // Duration of the current state
-    private bool _isChasingPlayer = false; // Tracks if the enemy is chasing the player
-    private float _nextFireTime = 0f;
-    private float _enemyAttackRate = 2f;
+    private PlayerStats _playerStats;
+    private EnemyStats _enemyStats;
+    private EnemyCollision _enemyCollision;
+
+    private EnemyState _currentState;
+    private Vector2 _movementDirection;
+    private float _changeStateTimer = 0f;
+    private float _currentStateDuration = 0f;
+    private float _nextEnemyChaseTime = 0f;
     private float _enemyDamage;
     private bool _isDead;
+    private bool _isEnemyShot;
+    private bool _isChasingPlayer;
+
+    // Attack cooldown
+    private float _attackCooldown = 1.5f;
+    private float _attackTimer = 0f;
 
     void Start()
     {
-        ChangeState(); // Set initial state (either idle or moving)
-        _playerStats = _player.GetComponent<PlayerStats>();
-        _enemyStats = gameObject.GetComponent<EnemyStats>();
-        _enemyDamage = _enemyStats.GetEnemyDamage();
-        _isDead = _enemyStats.GetIsDead();
+        InitializeComponents();
+        _currentState = EnemyState.Idle;
     }
 
     void Update()
     {
-        if (!_isDead)
+        if (_isDead)
         {
-            UpdateStateTimer();
-            DetectPlayer();
-            UpdateAnimation(); // Update animations based on velocity
-            AutoAttack();
+            HandleDeadState();
         }
-        _isDead = _enemyStats.GetIsDead();
+        else
+        {
+            UpdateStatusFlags();
+            HandleStateTransitions();
+            UpdateAnimation();
+        }
     }
 
     void FixedUpdate()
     {
-        if (!_isDead)
+        if (_isDead)
         {
-            if (_isChasingPlayer)
-            {
-                MoveTowardsPlayer(); // Chase the player
-            }
-            else
-            {
-                AutoMove(); // Continue wandering
-            }
-        }
-    }
-
-    // Updates the timer for changing between idle and moving states
-    private void UpdateStateTimer()
-    {
-        _changeStateTimer += Time.deltaTime;
-
-        if (!_isChasingPlayer && _changeStateTimer >= _currentStateDuration)
-        {
-            ChangeState();  // Change the enemy's state (idle or moving)
-        }
-    }
-
-    // Detects if the player is within the detection radius
-    private void DetectPlayer()
-    {
-        if (Vector2.Distance(transform.position, _playerTransform.position) <= detectionRadius)
-        {
-            _isChasingPlayer = true;  // Start chasing the player
+            StopEnemyMovement();
         }
         else
         {
-            _isChasingPlayer = false; // Resume wandering behavior
+            HandleMovement();
         }
     }
 
-    // Changes the state between idle and moving
-    private void ChangeState()
+    // Initialization methods
+    private void InitializeComponents()
     {
-        _isMoving = !_isMoving;
+        _playerStats = _player.GetComponent<PlayerStats>();
+        _enemyStats = GetComponent<EnemyStats>();
+        _enemyDamage = _enemyStats.GetEnemyDamage();
+        _isDead = _enemyStats.GetIsDead();
+        _enemyCollision = GetComponent<EnemyCollision>();
+    }
 
-        if (_isMoving)
+    // Update methods
+    private void UpdateStatusFlags()
+    {
+        _isDead = _enemyStats.GetIsDead();
+        _isEnemyShot = _enemyCollision.GetEnemyShot();
+    }
+
+    private void HandleStateTransitions()
+    {
+        switch (_currentState)
+        {
+            case EnemyState.Idle:
+            case EnemyState.Wandering:
+                HandleIdleOrWanderingState();
+                break;
+
+            case EnemyState.ChasingPlayer:
+                HandleChasingPlayerState();
+                break;
+
+            case EnemyState.ChasingAfterShot:
+                HandleChasingAfterShotState();
+                break;
+
+            case EnemyState.Attacking:
+                HandleAttackingState();
+                break;
+        }
+    }
+
+    private void HandleIdleOrWanderingState()
+    {
+        UpdateStateTimer();
+        DetectPlayer();
+
+        if (_isChasingPlayer)
+        {
+            TransitionToState(EnemyState.ChasingPlayer);
+        }
+        else if (_isEnemyShot)
+        {
+            StartChasingAfterShot();
+        }
+        else if (_changeStateTimer >= _currentStateDuration)
+        {
+            ChangeIdleOrWanderingState();
+        }
+    }
+
+    private void HandleChasingPlayerState()
+    {
+        DetectPlayer();
+
+        if (!_isChasingPlayer)
+        {
+            TransitionToState(EnemyState.Idle);
+        }
+        else if (IsPlayerWithinAttackRange())
+        {
+            StartAttacking();
+        }
+    }
+
+    private void HandleChasingAfterShotState()
+    {
+        if (Time.time >= _nextEnemyChaseTime)
+        {
+            StopChasingAfterShot();
+        }
+        else if (IsPlayerWithinAttackRange())
+        {
+            StartAttacking();
+        }
+    }
+
+    private void HandleAttackingState()
+    {
+        if (!IsPlayerWithinAttackRange())
+        {
+            StopAttacking();
+            TransitionToState(EnemyState.ChasingPlayer);
+        }
+        else
+        {
+            PerformAttack();
+        }
+    }
+
+    private void HandleDeadState()
+    {
+        TransitionToState(EnemyState.Dead);
+    }
+
+    // FixedUpdate methods
+    private void HandleMovement()
+    {
+        switch (_currentState)
+        {
+            case EnemyState.Idle:
+                StopEnemyMovement();
+                break;
+
+            case EnemyState.Wandering:
+                AutoMove();
+                break;
+
+            case EnemyState.ChasingPlayer:
+            case EnemyState.ChasingAfterShot:
+                MoveTowardsPlayer();
+                break;
+
+            case EnemyState.Attacking:
+                StopEnemyMovement();
+                break;
+        }
+    }
+
+    private void StopEnemyMovement()
+    {
+        _enemyRigidBody.velocity = Vector2.zero;
+    }
+
+    // State transition methods
+    private void TransitionToState(EnemyState newState)
+    {
+        _currentState = newState;
+        _changeStateTimer = 0f;
+    }
+
+    private void ChangeIdleOrWanderingState()
+    {
+        if (_currentState == EnemyState.Idle)
+        {
+            TransitionToState(EnemyState.Wandering);
+            ChooseRandomDirection();
+            _currentStateDuration = Random.Range(moveTimeMin, moveTimeMax);
+        }
+        else if (_currentState == EnemyState.Wandering)
+        {
+            TransitionToState(EnemyState.Idle);
+            _currentStateDuration = Random.Range(idleTimeMin, idleTimeMax);
+        }
+    }
+
+    private void StartChasingAfterShot()
+    {
+        TransitionToState(EnemyState.ChasingAfterShot);
+        _nextEnemyChaseTime = Time.time + _enemyChaseTime;
+    }
+
+    private void StopChasingAfterShot()
+    {
+        _enemyCollision.SetEnemyShot(false);
+        _isEnemyShot = false;
+        TransitionToState(EnemyState.Idle);
+    }
+
+    private void StartAttacking()
+    {
+        TransitionToState(EnemyState.Attacking);
+        _enemyAnimator.SetBool("isZombieAttack", true);
+        _attackTimer = 0f;
+    }
+
+    private void StopAttacking()
+    {
+        _enemyAnimator.SetBool("isZombieAttack", false);
+    }
+
+    // Movement methods
+    private void AutoMove()
+    {
+        if (IsObstacleInPath())
         {
             ChooseRandomDirection();
-            _currentStateDuration = Random.Range(moveTimeMin, moveTimeMax); // Set how long to move
         }
         else
         {
-            _currentStateDuration = Random.Range(idleTimeMin, idleTimeMax); // Set how long to stay idle
+            _enemyRigidBody.velocity = _movementDirection * _enemyMoveSpeed;
         }
-
-        _changeStateTimer = 0f;  // Reset the state change timer
     }
 
-    // Chooses a random movement direction
+    private void MoveTowardsPlayer()
+    {
+        Vector2 directionToPlayer = GetDirectionToPlayer();
+        _enemyRigidBody.velocity = directionToPlayer * _enemyMoveSpeed;
+
+        UpdateMovementAnimation(directionToPlayer);
+    }
+
+    private Vector2 GetDirectionToPlayer()
+    {
+        return (_playerTransform.position - transform.position).normalized;
+    }
+
     private void ChooseRandomDirection()
     {
         int randomDirection = Random.Range(0, 8);
@@ -129,75 +305,105 @@ public class GroundEnemyActions : MonoBehaviour
         }
     }
 
-    // Handles automatic movement and obstacle detection
-    private void AutoMove()
-    {
-        if (_isMoving)
-        {
-            if (IsObstacleInPath())
-            {
-                ChooseRandomDirection(); // Pick a new direction if obstacle detected
-            }
-            else
-            {
-                _enemyRigidBody.velocity = _movementDirection * _enemyMoveSpeed;
-            }
-        }
-        else
-        {
-            _enemyRigidBody.velocity = Vector2.zero; // Idle, no movement
-        }
-    }
-
-    private void AutoAttack()
-    {
-        bool isEnemyAttacking = _enemyAnimator.GetBool("isZombieAttack");
-        if (isEnemyAttacking && Time.time >= _nextFireTime)
-        {
-            _playerStats.TakeDamage(_enemyDamage);
-            Debug.Log("Player got hit! Damage applied: " + _enemyDamage);
-            Debug.Log("Current player health: " + _playerStats.GetPlayerHealth());
-            _nextFireTime = Time.time + _enemyAttackRate;
-        }
-    }
-
-    // Moves the enemy toward the player when in chase mode
-    private void MoveTowardsPlayer()
-    {
-        Vector2 directionToPlayer = (_playerTransform.position - transform.position).normalized;
-
-        _enemyRigidBody.velocity = directionToPlayer * _enemyMoveSpeed; // Move toward the player
-
-        // Update the enemy's animation based on the movement direction
-        _enemyAnimator.SetFloat("E_Horizontal", directionToPlayer.x);
-        _enemyAnimator.SetFloat("E_Vertical", directionToPlayer.y);
-        _enemyAnimator.SetFloat("E_Speed", directionToPlayer.magnitude);
-    }
-
-    // Updates the enemy's animation based on its velocity
-    private void UpdateAnimation()
-    {
-        Vector2 velocity = _enemyRigidBody.velocity;
-
-        if (velocity.sqrMagnitude > 0.1f)  // Check if the enemy is moving
-        {
-            _enemyAnimator.SetFloat("E_Horizontal", velocity.x);
-            _enemyAnimator.SetFloat("E_Vertical", velocity.y);
-            _enemyAnimator.SetFloat("E_Speed", velocity.magnitude);
-        }
-        else
-        {
-            _enemyAnimator.SetFloat("E_Speed", 0);  // Idle animation
-        }
-    }
-
-    // Checks for obstacles in the enemy's path using a Raycast
     private bool IsObstacleInPath()
     {
         RaycastHit2D hit = Physics2D.Raycast(_enemyRigidBody.position, _movementDirection, _raycastDistance, obstacleLayer);
-
         Debug.DrawRay(_enemyRigidBody.position, _movementDirection * _raycastDistance, Color.red);
-
         return hit.collider != null;
+    }
+
+    // Detection methods
+    private void DetectPlayer()
+    {
+        float distanceToPlayer = GetDistanceToPlayer();
+
+        if (distanceToPlayer <= _detectionRadius)
+        {
+            _isChasingPlayer = true;
+        }
+        else
+        {
+            _isChasingPlayer = false;
+
+            if (_currentState == EnemyState.ChasingPlayer || _currentState == EnemyState.Attacking)
+            {
+                StopAttacking();
+                TransitionToState(EnemyState.Idle);
+            }
+        }
+    }
+
+    private bool IsPlayerWithinAttackRange()
+    {
+        return GetDistanceToPlayer() <= _attackRange;
+    }
+
+    private float GetDistanceToPlayer()
+    {
+        return Vector2.Distance(transform.position, _playerTransform.position);
+    }
+
+    // Attack methods
+    private void PerformAttack()
+    {
+        if (_attackTimer > 0f)
+        {
+            _attackTimer -= Time.deltaTime;
+        }
+        else
+        {
+            ApplyDamageToPlayer();
+            _attackTimer = _attackCooldown;
+        }
+    }
+
+    private void ApplyDamageToPlayer()
+    {
+        _playerStats.TakeDamage(_enemyDamage);
+        Debug.Log("Player got hit! Damage applied: " + _enemyDamage);
+        Debug.Log("Current player health: " + _playerStats.GetPlayerHealth());
+    }
+
+    // Animation methods
+    private void UpdateAnimation()
+    {
+        if (_currentState == EnemyState.Attacking)
+        {
+            HandleAttackAnimation();
+        }
+        else
+        {
+            UpdateMovementAnimation(_enemyRigidBody.velocity);
+        }
+    }
+
+    private void HandleAttackAnimation()
+    {
+        AnimatorStateInfo currentStateInfo = _enemyAnimator.GetCurrentAnimatorStateInfo(0);
+
+        if (currentStateInfo.IsName("ZombieAttack") && currentStateInfo.normalizedTime >= 1.0f)
+        {
+            _enemyAnimator.SetBool("isZombieAttack", false);
+        }
+    }
+
+    private void UpdateMovementAnimation(Vector2 movement)
+    {
+        if (movement.sqrMagnitude > 0.1f)
+        {
+            _enemyAnimator.SetFloat("E_Horizontal", movement.x);
+            _enemyAnimator.SetFloat("E_Vertical", movement.y);
+            _enemyAnimator.SetFloat("E_Speed", movement.magnitude);
+        }
+        else
+        {
+            _enemyAnimator.SetFloat("E_Speed", 0);
+        }
+    }
+
+    // Timer methods
+    private void UpdateStateTimer()
+    {
+        _changeStateTimer += Time.deltaTime;
     }
 }

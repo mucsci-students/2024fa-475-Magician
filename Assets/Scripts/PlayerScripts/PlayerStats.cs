@@ -9,7 +9,6 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] float _meleeDamage = 10f;
     [SerializeField] float _playerMoveSpeed = 1f;
     bool _isDead = false;
-    float _destroyTime = 10f;
 
     public void TakeDamage(float damageAmount)
     {
