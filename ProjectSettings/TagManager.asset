@@ -10,6 +10,7 @@ TagManager:
   - Obstacle
   - MeleeCone
   - Item
+  - MediumEnemy
   layers:
   - Default
   - TransparentFX
