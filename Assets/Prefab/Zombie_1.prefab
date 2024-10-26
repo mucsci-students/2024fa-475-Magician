@@ -147,7 +147,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 8510657868384080198}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 6ab0db1978387b240a01e75db8861fe9, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -167,7 +167,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -207,7 +207,7 @@ MonoBehaviour:
   moveTimeMin: 3
   moveTimeMax: 5
   _playerTransform: {fileID: 0}
-  detectionRadius: 1
+  detectionRadius: 2
 --- !u!114 &8419171709300522263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,4 +235,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gun: {fileID: 0}
-  _enemy: {fileID: 8510657868384080198}
+  _enemyAnimator: {fileID: 3602222769263613046}
