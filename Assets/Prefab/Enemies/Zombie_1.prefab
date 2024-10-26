@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 262629112188eb242b88a8b9cafefb0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyMoveSpeed: 1
+  _enemyMoveSpeed: 1.5
   _enemyRigidBody: {fileID: 249359470977093184}
   _enemyAnimator: {fileID: 3602222769263613046}
   _raycastDistance: 0.5
@@ -208,7 +208,7 @@ MonoBehaviour:
   moveTimeMax: 5
   _playerTransform: {fileID: 0}
   _player: {fileID: 0}
-  _detectionRadius: 2
+  _detectionRadius: 1.5
   _enemyAttackRate: 3
   _enemyChaseTime: 5
   _attackRange: 0.3
