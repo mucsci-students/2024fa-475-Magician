@@ -208,6 +208,7 @@ MonoBehaviour:
   moveTimeMax: 5
   _playerTransform: {fileID: 0}
   detectionRadius: 2
+  _player: {fileID: 0}
 --- !u!114 &8419171709300522263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,6 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03d14ff8481c9b64dac7c9f3e7262251, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyAnimator: {fileID: 3602222769263613046}
   _enemyHealth: 50
   _enemyDamage: 10
 --- !u!114 &4288689433189416786
