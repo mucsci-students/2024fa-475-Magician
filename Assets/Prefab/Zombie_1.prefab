@@ -207,8 +207,11 @@ MonoBehaviour:
   moveTimeMin: 3
   moveTimeMax: 5
   _playerTransform: {fileID: 0}
-  detectionRadius: 2
   _player: {fileID: 0}
+  _detectionRadius: 2
+  _enemyAttackRate: 3
+  _enemyChaseTime: 5
+  _attackRange: 0.3
 --- !u!114 &8419171709300522263
 MonoBehaviour:
   m_ObjectHideFlags: 0
