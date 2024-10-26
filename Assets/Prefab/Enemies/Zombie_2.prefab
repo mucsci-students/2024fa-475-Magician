@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 6437977280008158015}
   m_Layer: 7
   m_Name: Zombie_2
-  m_TagString: MediumEnemy
+  m_TagString: BigEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

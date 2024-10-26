@@ -11,6 +11,7 @@ TagManager:
   - MeleeCone
   - Item
   - MediumEnemy
+  - BigEnemy
   layers:
   - Default
   - TransparentFX

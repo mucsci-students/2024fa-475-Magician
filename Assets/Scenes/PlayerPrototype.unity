@@ -139,6 +139,10 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 699949194956518915, guid: 3073716bba5297f4296fa8995ac47557, type: 3}
+      propertyPath: _enemyChaseTime
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 699949194956518915, guid: 3073716bba5297f4296fa8995ac47557, type: 3}
       propertyPath: _detectionRadius
       value: 3
       objectReference: {fileID: 0}
@@ -2946,7 +2950,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 699949194956518915, guid: 3073716bba5297f4296fa8995ac47557, type: 3}
       propertyPath: _enemyAttackRate
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 699949194956518915, guid: 3073716bba5297f4296fa8995ac47557, type: 3}
       propertyPath: _playerTransform
@@ -10126,6 +10130,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2076257060}
     - target: {fileID: 1637337733785133015, guid: 7dc7ad8e50eefc4418d4557aa6c3b2e2, type: 3}
+      propertyPath: _attackRange
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1637337733785133015, guid: 7dc7ad8e50eefc4418d4557aa6c3b2e2, type: 3}
+      propertyPath: _enemyAttackRate
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1637337733785133015, guid: 7dc7ad8e50eefc4418d4557aa6c3b2e2, type: 3}
       propertyPath: _playerTransform
       value: 
       objectReference: {fileID: 1520806196}
@@ -11081,7 +11093,7 @@ PrefabInstance:
       objectReference: {fileID: 2076257060}
     - target: {fileID: 7184546491663268544, guid: 5f48cd17613900d469358d82c658a6dd, type: 3}
       propertyPath: _attackRange
-      value: 0.3
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7184546491663268544, guid: 5f48cd17613900d469358d82c658a6dd, type: 3}
       propertyPath: _detectionRadius
@@ -13545,6 +13557,10 @@ PrefabInstance:
       propertyPath: _player
       value: 
       objectReference: {fileID: 2076257060}
+    - target: {fileID: 1637337733785133015, guid: 7dc7ad8e50eefc4418d4557aa6c3b2e2, type: 3}
+      propertyPath: _attackRange
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 1637337733785133015, guid: 7dc7ad8e50eefc4418d4557aa6c3b2e2, type: 3}
       propertyPath: _playerTransform
       value: 
