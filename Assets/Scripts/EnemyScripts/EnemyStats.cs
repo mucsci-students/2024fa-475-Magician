@@ -7,7 +7,9 @@ public class EnemyStats : MonoBehaviour
     [SerializeField] Animator _enemyAnimator;
     [SerializeField] float _enemyHealth = 50f;
     [SerializeField] float _enemyDamage = 10f;
+    [SerializeField] GameObject[] _itemList; 
     bool _isDead = false;
+    bool _isDropItem = false;
     float _destroyTime = 10f;
 
     /**
@@ -31,11 +33,16 @@ public class EnemyStats : MonoBehaviour
         // Add death animations, sounds, or other effects here
         _enemyAnimator.SetTrigger("enemyDead");
         Collider2D _enemyCollider = gameObject.GetComponent<Collider2D>();
-        _enemyCollider.isTrigger = true;
+        _enemyCollider.enabled = false;
 
         Rigidbody2D _enemyRigidbody = gameObject.GetComponent<Rigidbody2D>();
         _enemyRigidbody.velocity = Vector2.zero;       // Stop linear movement
         _enemyRigidbody.isKinematic = true;            // Disable physics simulation
+        if (!_isDropItem)
+        {
+            GameObject coin = Instantiate(_itemList[0], gameObject.transform.position, Quaternion.identity);
+            _isDropItem = true;
+        }
 
         _isDead = true;
         Invoke("DestroyWrapper", _destroyTime);

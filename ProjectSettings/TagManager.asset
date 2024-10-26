@@ -9,6 +9,7 @@ TagManager:
   - Weapon
   - Obstacle
   - MeleeCone
+  - Item
   layers:
   - Default
   - TransparentFX
