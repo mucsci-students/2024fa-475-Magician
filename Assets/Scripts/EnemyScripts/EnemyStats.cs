@@ -7,6 +7,7 @@ public class EnemyStats : MonoBehaviour
     [SerializeField] Animator _enemyAnimator;
     [SerializeField] float _enemyHealth = 50f;
     [SerializeField] float _enemyDamage = 10f;
+    [SerializeField] float _enemyMoveSpeed = 1.5f;
     [SerializeField] GameObject[] _itemList; 
     bool _isDead = false;
     bool _isDropItem = false;
@@ -61,6 +62,16 @@ public class EnemyStats : MonoBehaviour
     public void SetIsDead(bool isDead)
     {
         _isDead = isDead;
+    }
+
+    public float GetEnemySpeed()
+    {
+        return _enemyMoveSpeed;
+    }
+
+    public void SetEnemySpeed(float speed)
+    {
+        _enemyMoveSpeed = speed;
     }
 
     public float GetEnemyHealth()

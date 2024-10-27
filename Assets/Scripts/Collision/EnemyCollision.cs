@@ -1,24 +1,47 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyCollision : MonoBehaviour
 {
-    [SerializeField] GameObject _gun;
-    [SerializeField] Animator _enemyAnimator;
+    [SerializeField] private Animator _enemyAnimator;
 
-    WeaponStat _weaponStat;
-    EnemyStats _enemyStat;
-    GroundEnemyActions _enemyActions;
-    float _gunDamage;
-    bool _isEnemyShot = false;
+    private WeaponStat _weaponStat;
+    private EnemyStats _enemyStat;
+    private float _gunDamage;
+    private bool _isEnemyShot = false;
 
     void Start()
     {
-        _weaponStat = _gun.GetComponent<WeaponStat>();
-        _enemyStat = gameObject.GetComponent<EnemyStats>();
-        _gunDamage = _weaponStat.GetWeaponDamage();
+        InitializeComponents();
+    }
+
+    private void InitializeComponents()
+    {
+        // Find the player by tag
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            // Find the WeaponStat component in the player's child objects
+            _weaponStat = player.GetComponentInChildren<WeaponStat>();
+            if (_weaponStat != null)
+            {
+                _gunDamage = _weaponStat.GetWeaponDamage();
+            }
+            else
+            {
+                Debug.LogError("WeaponStat component not found in children of Player");
+            }
+        }
+        else
+        {
+            Debug.LogError("Player object not found!");
+        }
+
+        // Get the EnemyStats component attached to this enemy
+        _enemyStat = GetComponent<EnemyStats>();
+        if (_enemyStat == null)
+        {
+            Debug.LogError("EnemyStats component not found on enemy!");
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

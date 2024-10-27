@@ -13,7 +13,6 @@ public class GroundEnemyActions : MonoBehaviour
     }
 
     [Header("Enemy Movement")]
-    [SerializeField] private float _enemyMoveSpeed = 5f;
     [SerializeField] private Rigidbody2D _enemyRigidBody;
     [SerializeField] private Animator _enemyAnimator;
     [SerializeField] private float _raycastDistance = 1f;
@@ -26,22 +25,24 @@ public class GroundEnemyActions : MonoBehaviour
     [Range(1f, 10f)][SerializeField] private float moveTimeMax = 5f;
 
     [Header("Player Detection")]
-    [SerializeField] private Transform _playerTransform;
-    [SerializeField] private GameObject _player;
     [SerializeField] private float _detectionRadius = 3f;
     [SerializeField] private float _enemyAttackRate = 3f;
     [SerializeField] private float _enemyChaseTime = 5f;
     [SerializeField] private float _attackRange = 0.1f;
 
+    // Components and References
+    private Transform _playerTransform;
     private PlayerStats _playerStats;
     private EnemyStats _enemyStats;
     private EnemyCollision _enemyCollision;
 
+    // State and Movement Variables
     private EnemyState _currentState;
     private Vector2 _movementDirection;
     private float _changeStateTimer = 0f;
     private float _currentStateDuration = 0f;
     private float _nextEnemyChaseTime = 0f;
+    private float _enemyMoveSpeed;
     private float _enemyDamage;
     private bool _isDead;
     private bool _isEnemyShot;
@@ -86,11 +87,33 @@ public class GroundEnemyActions : MonoBehaviour
     // Initialization methods
     private void InitializeComponents()
     {
-        _playerStats = _player.GetComponent<PlayerStats>();
+        // Find the player by tag
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            _playerStats = player.GetComponent<PlayerStats>();
+            _playerTransform = player.transform;
+
+            if (_playerStats == null)
+            {
+                Debug.LogError("PlayerStats component not found on Player!");
+            }
+        }
+        else
+        {
+            Debug.LogError("Player object not found!");
+        }
+
+        // Get the EnemyStats component attached to this enemy
         _enemyStats = GetComponent<EnemyStats>();
-        _enemyDamage = _enemyStats.GetEnemyDamage();
-        _isDead = _enemyStats.GetIsDead();
+        if (_enemyStats != null)
+        {
+            _enemyDamage = _enemyStats.GetEnemyDamage();
+            _isDead = _enemyStats.GetIsDead();
+        }
+        // Get the EnemyCollision component attached to this enemy
         _enemyCollision = GetComponent<EnemyCollision>();
+        _enemyMoveSpeed = _enemyStats.GetEnemySpeed();  
     }
 
     // Update methods
