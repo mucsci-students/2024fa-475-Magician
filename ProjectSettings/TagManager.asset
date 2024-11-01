@@ -49,3 +49,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 705050403
+    locked: 0
+  - name: Background2
+    uniqueID: 49439441
+    locked: 0
+  - name: Obstacles
+    uniqueID: 1089089959
+    locked: 0
+  - name: AbovePlayer
+    uniqueID: 3002040789
+    locked: 0
