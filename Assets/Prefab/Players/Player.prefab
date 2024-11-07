@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 7105190118199825445}
   - component: {fileID: 8775535976773638865}
   - component: {fileID: 5867123942105956093}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -34,7 +34,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.21, y: 0.04, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 7, y: 7, z: 7}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7692458566198883836}
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -343702119
-  m_SortingLayer: 9
+  m_SortingLayer: 8
   m_SortingOrder: 1
   m_Sprite: {fileID: -1706383988, guid: c9899583119b26d479379cf9ed5cce04, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -256,7 +256,7 @@ MonoBehaviour:
   _playerAnimator: {fileID: 4524164657484626787}
   _playerHealth: 100
   _meleeDamage: 10
-  _playerMoveSpeed: 3
+  _playerMoveSpeed: 10
 --- !u!114 &5867123942105956093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,7 +279,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7692458566198883836}
   - component: {fileID: 8368258794537184499}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Gun
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -313,6 +313,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 277cdb0c68ac1594cbf564e8641685ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ammoSpeed: 5
+  _ammoSpeed: 50
   _fireRate: 0.7
   _weaponDamage: 10
