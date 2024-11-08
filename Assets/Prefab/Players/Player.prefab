@@ -79,7 +79,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -343702119
-  m_SortingLayer: 8
+  m_SortingLayer: 9
   m_SortingOrder: 1
   m_Sprite: {fileID: -1706383988, guid: c9899583119b26d479379cf9ed5cce04, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -241,6 +241,11 @@ MonoBehaviour:
   _raycastDistanceRight: 0.3
   _raycastDistanceMiddle: 0.3
   _raycastAngleOffset: 30
+  _isPistol: 1
+  _isRocket: 0
+  _isRifle: 0
+  _isShotgun: 0
+  _isSniper: 0
 --- !u!114 &8775535976773638865
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -267,6 +267,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7105190118199825445, guid: 4ac40e259645007438cd00caf73f9754, type: 3}
+      propertyPath: _isPistol
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7105190118199825445, guid: 4ac40e259645007438cd00caf73f9754, type: 3}
+      propertyPath: _isRocket
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7105190118199825445, guid: 4ac40e259645007438cd00caf73f9754, type: 3}
+      propertyPath: _bulletPrefab.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7105190118199825445, guid: 4ac40e259645007438cd00caf73f9754, type: 3}
+      propertyPath: _bulletPrefab.Array.data[0]
+      value: 
+      objectReference: {fileID: 1618814606386977305, guid: c4e9e2872b28e234aa539ce5d4edb095, type: 3}
+    - target: {fileID: 7105190118199825445, guid: 4ac40e259645007438cd00caf73f9754, type: 3}
+      propertyPath: _bulletPrefab.Array.data[1]
+      value: 
+      objectReference: {fileID: 5355813672392042035, guid: f08c647a500b2174685f40df93790678, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
