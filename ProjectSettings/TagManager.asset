@@ -9,9 +9,14 @@ TagManager:
   - Weapon
   - Obstacle
   - MeleeCone
-  - Item
   - MediumEnemy
   - BigEnemy
+  - Coin
+  - HealthPack
+  - PistolAmmo
+  - RifleAmmo
+  - ShotgunAmmo
+  - SniperAmmo
   layers:
   - Default
   - TransparentFX
@@ -67,6 +72,9 @@ TagManager:
   - name: Obstacle
     uniqueID: 3072707235
     locked: 0
+  - name: Items
+    uniqueID: 3488026995
+    locked: 0
   - name: Enemy
     uniqueID: 262526277
     locked: 0
@@ -81,7 +89,4 @@ TagManager:
     locked: 0
   - name: Bullet
     uniqueID: 2524881379
-    locked: 0
-  - name: Items
-    uniqueID: 3488026995
     locked: 0

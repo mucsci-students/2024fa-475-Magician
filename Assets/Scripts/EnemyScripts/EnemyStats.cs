@@ -110,12 +110,30 @@ public class EnemyStats : MonoBehaviour
         }
 
         // Instantiate all dropped items with random scatter around the drop position
-        foreach (GameObject item in droppedItems)
+        foreach (GameObject itemPrefab in droppedItems)
         {
-            Vector3 randomOffset = Random.insideUnitCircle * _dropRadius;
-            Vector3 randomDropPosition = dropPosition + new Vector3(randomOffset.x, 0f, randomOffset.y);
-            Instantiate(item, randomDropPosition, Quaternion.identity);  // Spawn the item
+            // Generate a random point within a circle, using Random.insideUnitCircle
+            Vector2 randomOffset = Random.insideUnitCircle * _dropRadius;
+
+            // Convert the 2D random offset to a 3D position by adding it to the drop position
+            Vector3 randomDropPosition = dropPosition + new Vector3(randomOffset.x, randomOffset.y, 0f); // Assuming your game uses the XY plane
+
+            // Instantiate the item at the random position
+            GameObject item = Instantiate(itemPrefab, randomDropPosition, Quaternion.identity);
+
+            // Get the Animator component from the item and trigger the corresponding animation
+            Animator itemAnimator = item.GetComponent<Animator>();
+            if (itemAnimator != null)
+            {
+                if (item.CompareTag("Coin")) { itemAnimator.SetTrigger("isCoinDropped"); }
+                else if (item.CompareTag("HealthPack")) { itemAnimator.SetTrigger("isHealthPackDropped"); }
+                else if (item.CompareTag("PistolAmmo")) { itemAnimator.SetTrigger("isPistolAmmoDropped"); }
+                else if (item.CompareTag("RifleAmmo")) { itemAnimator.SetTrigger("isRifleAmmoDropped"); }
+                else if (item.CompareTag("ShotgunAmmo")) { itemAnimator.SetTrigger("isShotgunAmmoDropped"); }
+                else if (item.CompareTag("SniperAmmo")) { itemAnimator.SetTrigger("isSniperAmmoDropped"); }
+            }
         }
+
     }
 
     /**

@@ -6,10 +6,15 @@ public class PlayerCollision : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Item"))
+        if (collision.gameObject.CompareTag("Coin") 
+            || collision.gameObject.CompareTag("HealthPack")
+            || collision.gameObject.CompareTag("PistolAmmo")
+            || collision.gameObject.CompareTag("RifleAmmo")
+            || collision.gameObject.CompareTag("ShotgunAmmo")
+            || collision.gameObject.CompareTag("SniperAmmo"))
         {
             Destroy(collision.gameObject);
-            Debug.Log("Pick up one coin!");
+            Debug.Log($"Pick up {collision.gameObject.tag}!");
         }
     }
 }
