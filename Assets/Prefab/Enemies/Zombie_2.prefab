@@ -76,8 +76,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1089089959
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 335727238, guid: 3bc48c56d97903a4fa781c00f2af2a01, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -195,7 +195,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 262629112188eb242b88a8b9cafefb0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyMoveSpeed: 0.7
   _enemyRigidBody: {fileID: 8372220253765898786}
   _enemyAnimator: {fileID: 1406960657866588971}
   _raycastDistance: 0.7
@@ -206,12 +205,10 @@ MonoBehaviour:
   idleTimeMax: 3
   moveTimeMin: 3
   moveTimeMax: 5
-  _playerTransform: {fileID: 0}
-  _player: {fileID: 0}
-  _detectionRadius: 2.5
+  _detectionRadius: 10
   _enemyAttackRate: 8
   _enemyChaseTime: 5
-  _attackRange: 0.5
+  _attackRange: 0.85
 --- !u!114 &8624961858028318878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,6 +224,7 @@ MonoBehaviour:
   _enemyAnimator: {fileID: 1406960657866588971}
   _enemyHealth: 150
   _enemyDamage: 20
+  _enemyMoveSpeed: 1.5
   _itemList:
   - {fileID: 2344721306069954823, guid: 18443295679423441a030957bfd4c67c, type: 3}
 --- !u!114 &6437977280008158015
@@ -241,5 +239,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90a556caec4fe5b418cc2899d1beabd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gun: {fileID: 0}
   _enemyAnimator: {fileID: 1406960657866588971}
