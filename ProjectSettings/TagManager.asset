@@ -60,11 +60,11 @@ TagManager:
   - name: Background2
     uniqueID: 49439441
     locked: 0
-  - name: Obstacles
-    uniqueID: 1089089959
-    locked: 0
   - name: Ground
     uniqueID: 2410188705
+    locked: 0
+  - name: Obstacles
+    uniqueID: 1089089959
     locked: 0
   - name: Decorations
     uniqueID: 3894056009

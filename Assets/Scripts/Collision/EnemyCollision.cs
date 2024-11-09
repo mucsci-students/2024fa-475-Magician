@@ -39,10 +39,6 @@ public class EnemyCollision : MonoBehaviour
                 Debug.LogError("WeaponStat component not found in children of Player");
             }
         }
-        else
-        {
-            Debug.LogError("Player object not found!");
-        }
 
         // Get the EnemyStats component attached to this enemy
         _enemyStat = GetComponent<EnemyStats>();
