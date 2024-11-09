@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7420149991296324878}
   - component: {fileID: 6611979563821227973}
   - component: {fileID: 17469944112765054}
+  - component: {fileID: -2967203804673927983}
   m_Layer: 7
   m_Name: Zombie_3
   m_TagString: MediumEnemy
@@ -77,7 +78,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 262526277
-  m_SortingLayer: 7
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_Sprite: {fileID: -416693559, guid: 0c0079fb41ab6ab41a011c93a63b33ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -243,3 +244,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyAnimator: {fileID: 2244577372805923487}
+--- !u!114 &-2967203804673927983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7676088920888188645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 857e74af8bda43e4981ed7a4ab7e756a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
