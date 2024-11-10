@@ -113,10 +113,10 @@ TextureImporter:
       name: Wind_Turbine_1_48x48_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 336
-        height: 480
+        x: 49
+        y: 2
+        width: 271
+        height: 447
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,10 +134,10 @@ TextureImporter:
       name: Wind_Turbine_1_48x48_1
       rect:
         serializedVersion: 2
-        x: 336
-        y: 0
-        width: 336
-        height: 480
+        x: 364
+        y: 2
+        width: 261
+        height: 438
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,10 +155,10 @@ TextureImporter:
       name: Wind_Turbine_1_48x48_2
       rect:
         serializedVersion: 2
-        x: 672
-        y: 0
-        width: 336
-        height: 480
+        x: 686
+        y: 2
+        width: 243
+        height: 431
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -176,10 +176,10 @@ TextureImporter:
       name: Wind_Turbine_1_48x48_3
       rect:
         serializedVersion: 2
-        x: 1008
-        y: 0
-        width: 336
-        height: 480
+        x: 1010
+        y: 2
+        width: 276
+        height: 401
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -197,10 +197,10 @@ TextureImporter:
       name: Wind_Turbine_1_48x48_4
       rect:
         serializedVersion: 2
-        x: 1344
-        y: 0
-        width: 336
-        height: 480
+        x: 1349
+        y: 2
+        width: 291
+        height: 387
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -218,10 +218,10 @@ TextureImporter:
       name: Wind_Turbine_1_48x48_5
       rect:
         serializedVersion: 2
-        x: 1680
-        y: 0
-        width: 336
-        height: 480
+        x: 1703
+        y: 2
+        width: 299
+        height: 371
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -239,10 +239,10 @@ TextureImporter:
       name: Wind_Turbine_1_48x48_6
       rect:
         serializedVersion: 2
-        x: 2016
-        y: 0
-        width: 336
-        height: 480
+        x: 2084
+        y: 2
+        width: 270
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -260,10 +260,10 @@ TextureImporter:
       name: Wind_Turbine_1_48x48_7
       rect:
         serializedVersion: 2
-        x: 2352
-        y: 0
-        width: 336
-        height: 480
+        x: 2422
+        y: 2
+        width: 261
+        height: 438
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
