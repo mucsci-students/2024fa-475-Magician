@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1637337733785133015}
   - component: {fileID: 2566338243215592565}
   - component: {fileID: 5898544039762398918}
+  - component: {fileID: 4072947538060350490}
   m_Layer: 7
   m_Name: Zombie_4
   m_TagString: SmallEnemy
@@ -33,7 +34,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6, y: -2.86, z: 0.2853613}
-  m_LocalScale: {x: 0.66412, y: 0.66412, z: 0.66412}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,8 +77,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 262526277
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -232115742, guid: fe11f2ab4e688264b9103d331f7a94e8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -195,19 +196,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 262629112188eb242b88a8b9cafefb0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyMoveSpeed: 2.5
   _enemyRigidBody: {fileID: 3923730634866465348}
   _enemyAnimator: {fileID: 1215409566268756884}
-  _raycastDistance: 0.5
-  obstacleLayer:
+  _raycastDistance: 1.5
+  _obstacleLayer:
     serializedVersion: 2
     m_Bits: 8
   idleTimeMin: 2
   idleTimeMax: 3
   moveTimeMin: 3
   moveTimeMax: 5
-  _playerTransform: {fileID: 0}
-  _player: {fileID: 0}
   _detectionRadius: 3.3
   _enemyAttackRate: 5
   _enemyChaseTime: 15
@@ -227,8 +225,12 @@ MonoBehaviour:
   _enemyAnimator: {fileID: 1215409566268756884}
   _enemyHealth: 30
   _enemyDamage: 10
+  _enemyMoveSpeed: 5
   _itemList:
   - {fileID: 2344721306069954823, guid: 18443295679423441a030957bfd4c67c, type: 3}
+  _dropRates:
+  - 100
+  _dropRadius: 3
 --- !u!114 &5898544039762398918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,5 +243,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90a556caec4fe5b418cc2899d1beabd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gun: {fileID: 0}
   _enemyAnimator: {fileID: 1215409566268756884}
+--- !u!114 &4072947538060350490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7153911605349126066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7f314fbd3f4a3747b4b4db262c95be3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

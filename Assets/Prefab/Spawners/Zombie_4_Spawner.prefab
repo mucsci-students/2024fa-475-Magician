@@ -51,7 +51,7 @@ MonoBehaviour:
   _spawnAreaHeight: 2
   _firstEnemyNum: 15
   _secondEnemyNum: 20
-  _smallEnemyHealth: 20
+  _smallEnemyHealth: 30
   _mediumEnemyHealth: 0
   _bigEnemyHealth: 0
   _smallEnemySpeed: 2.5

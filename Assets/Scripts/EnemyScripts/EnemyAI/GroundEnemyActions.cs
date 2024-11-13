@@ -16,7 +16,7 @@ public class GroundEnemyActions : MonoBehaviour
     [SerializeField] private Rigidbody2D _enemyRigidBody;
     [SerializeField] private Animator _enemyAnimator;
     [SerializeField] private float _raycastDistance = 1f;
-    [SerializeField] private LayerMask obstacleLayer;
+    [SerializeField] private LayerMask _obstacleLayer;
 
     [Header("Idle and Movement Timers")]
     [Range(1f, 10f)][SerializeField] private float idleTimeMin = 1f;
@@ -330,7 +330,7 @@ public class GroundEnemyActions : MonoBehaviour
 
     private bool IsObstacleInPath()
     {
-        RaycastHit2D hit = Physics2D.Raycast(_enemyRigidBody.position, _movementDirection, _raycastDistance, obstacleLayer);
+        RaycastHit2D hit = Physics2D.Raycast(_enemyRigidBody.position, _movementDirection, _raycastDistance, _obstacleLayer);
         Debug.DrawRay(_enemyRigidBody.position, _movementDirection * _raycastDistance, Color.red);
         return hit.collider != null;
     }

@@ -6,22 +6,30 @@ public class EnemyCollision : MonoBehaviour
 
     private WeaponStat _weaponStat;
     private EnemyStats _enemyStat;
+    GameObject _player;
     private float _gunDamage;
     private bool _isEnemyShot = false;
 
     void Start()
     {
         InitializeComponents();
+        _player = GameObject.FindGameObjectWithTag("Player");
+        _weaponStat = _player.GetComponentInChildren<WeaponStat>();
+    }
+
+    void Update()
+    {
+        _gunDamage = _weaponStat.GetWeaponDamage();
     }
 
     private void InitializeComponents()
     {
         // Find the player by tag
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
+         
+        if (_player != null)
         {
             // Find the WeaponStat component in the player's child objects
-            _weaponStat = player.GetComponentInChildren<WeaponStat>();
+            
             if (_weaponStat != null)
             {
                 _gunDamage = _weaponStat.GetWeaponDamage();
@@ -30,10 +38,6 @@ public class EnemyCollision : MonoBehaviour
             {
                 Debug.LogError("WeaponStat component not found in children of Player");
             }
-        }
-        else
-        {
-            Debug.LogError("Player object not found!");
         }
 
         // Get the EnemyStats component attached to this enemy
