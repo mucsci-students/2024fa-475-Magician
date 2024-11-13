@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerActions : MonoBehaviour
 {
@@ -33,6 +34,8 @@ public class PlayerActions : MonoBehaviour
     float _playerMoveSpeed;
     bool _hasDealtMeleeDamage = false;
     bool _isDead;
+    Scene currentScene;
+    AudioSource[] gunshots;
 
     [SerializeField] bool _isPistol = false;
     [SerializeField] bool _isRocket = false;
@@ -51,6 +54,8 @@ public class PlayerActions : MonoBehaviour
         _isDead = _playerStat.GetIsDead();
         // Change the cursor to the crosshair and hide the default system cursor
         Cursor.SetCursor(_crosshairTexture, Vector2.zero, CursorMode.Auto);
+        currentScene = SceneManager.GetActiveScene();
+        gunshots = GetComponents<AudioSource>();
     }
 
     void Update()
@@ -62,6 +67,11 @@ public class PlayerActions : MonoBehaviour
             DetectEnemyWithRaycasts(); // Main raycast logic for melee attacks
         }
         _isDead = _playerStat.GetIsDead();
+        // When player dies call respawnOnDeath after waiting 3 sec (for anim to play)
+        if (_isDead)
+        {
+            Invoke("respawnOnDeath", 3);
+        }
     }
 
     /**
@@ -223,7 +233,10 @@ public class PlayerActions : MonoBehaviour
 
                 // Instantiate the bullet and get its Animator component
                 if (_isPistol)
+                {
                     _bullet = Instantiate(_bulletPrefab[0], _gun.position, Quaternion.identity);
+                    gunshots[0].Play();
+                }
                 else if (_isRocket)
                 {
                     _bullet = Instantiate(_bulletPrefab[1], _gun.position, Quaternion.identity);
@@ -239,6 +252,7 @@ public class PlayerActions : MonoBehaviour
                         _fireRate = _weaponStat.GetWeaponFireRate();
 
                         Debug.Log("Rocket damage set to: " + _gunDamage);
+                        gunshots[1].Play();
                     }
                     else
                     {
@@ -350,6 +364,11 @@ public class PlayerActions : MonoBehaviour
                 _playerAnimator.SetBool("isRocketDown", false);
             }
         }
+    }
+    // Respawns player and reloads scene
+    private void respawnOnDeath()
+    {
+        SceneManager.LoadScene(currentScene.name);
     }
 
 }
