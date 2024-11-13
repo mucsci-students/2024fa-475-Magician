@@ -15,10 +15,12 @@ public class EnemyStats : MonoBehaviour
     private Dictionary<GameObject, float> itemDropRateMap;
     bool _isDead = false;
     float _destroyTime = 10f;
+    AudioSource[] enemyAudio;
 
     void Start()
     {
         InitializeDropRateMap();  // Initialize drop rates
+        enemyAudio = GetComponents<AudioSource>();
     }
 
     /**
@@ -32,6 +34,7 @@ public class EnemyStats : MonoBehaviour
         {
             Die();  // Call the Die function if health is 0 or less
         }
+        enemyAudio[0].Play(); // Play the enemy injured audio
     }
 
     /**
