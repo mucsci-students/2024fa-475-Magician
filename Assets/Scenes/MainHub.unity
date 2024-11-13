@@ -3481,6 +3481,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2445898183514520811, guid: 1e102ce6329da4e4cb6c41f27d6bfff8, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 7727223177225788499, guid: 1e102ce6329da4e4cb6c41f27d6bfff8, type: 3}
       propertyPath: m_Name
       value: Grid

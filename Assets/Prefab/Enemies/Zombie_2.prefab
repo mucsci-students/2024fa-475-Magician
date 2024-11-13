@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 699949194956518915}
   - component: {fileID: 8624961858028318878}
   - component: {fileID: 6437977280008158015}
-  - component: {fileID: -2323255419458642703}
   m_Layer: 7
   m_Name: Zombie_2
   m_TagString: BigEnemy
@@ -252,15 +251,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyAnimator: {fileID: 1406960657866588971}
---- !u!114 &-2323255419458642703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5853221754252044766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b62cc6224c3533e45aed1540d8945492, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
