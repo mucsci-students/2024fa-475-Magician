@@ -24,6 +24,7 @@ public class EnemySpawn : MonoBehaviour
     [SerializeField] float _bossSpeed = 0.5f;
     [SerializeField] float _delayTime = 10f;
     [SerializeField] int _bossDamage = 50;
+    [SerializeField] bool _isRespawn = true; // New flag to control respawn behavior
 
     private List<EnemyData> enemyList = new List<EnemyData>();
     private int _maxEnemies = 0;
@@ -95,16 +96,19 @@ public class EnemySpawn : MonoBehaviour
         while (true)
         {
             // Wait for some time between checks
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(_delayTime);
 
-            // Loop through the enemy list
-            foreach (EnemyData enemyData in enemyList)
+            if (_isRespawn) // Check the _isRespawn flag before attempting to respawn
             {
-                if (enemyData._enemyInstance == null && !enemyData._isRespawning)
+                // Loop through the enemy list
+                foreach (EnemyData enemyData in enemyList)
                 {
-                    // The enemy has been destroyed, start respawn coroutine
-                    StartCoroutine(RespawnEnemyAfterDelay(enemyData, _delayTime)); // 5 minutes
-                    enemyData._isRespawning = true;
+                    if (enemyData._enemyInstance == null && !enemyData._isRespawning)
+                    {
+                        // The enemy has been destroyed, start respawn coroutine
+                        StartCoroutine(RespawnEnemyAfterDelay(enemyData, _delayTime));
+                        enemyData._isRespawning = true;
+                    }
                 }
             }
         }
@@ -114,38 +118,47 @@ public class EnemySpawn : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        Vector2 randomPosition = GetRandomSpawnPosition();
-        GameObject spawnedEnemy = Instantiate(enemyData._enemyPrefab, randomPosition, Quaternion.identity);
-
-        // Now modify the stats of the spawned enemy based on its tag
-        EnemyStats enemyStat = spawnedEnemy.GetComponent<EnemyStats>();
-
-        if (enemyStat != null)
+        if (_isRespawn) // Check the _isRespawn flag before respawning the enemy
         {
-            // Check the enemy tag and apply the appropriate stats
-            if (spawnedEnemy.CompareTag("SmallEnemy"))
-            {
-                enemyStat.SetEnemyHealth(_smallEnemyHealth);
-                enemyStat.SetEnemyDamage(_smallEnemyDamage);
-                enemyStat.SetEnemySpeed(_smallEnemySpeed);
-            }
-            else if (spawnedEnemy.CompareTag("MediumEnemy"))
-            {
-                enemyStat.SetEnemyHealth(_mediumEnemyHealth);
-                enemyStat.SetEnemyDamage(_mediumEnemyDamage);
-                enemyStat.SetEnemySpeed(_mediumEnemySpeed);
-            }
-            else if (spawnedEnemy.CompareTag("Boss"))
-            {
-                enemyStat.SetEnemyHealth(_bossHealth);
-                enemyStat.SetEnemyDamage(_bossDamage);
-                enemyStat.SetEnemySpeed(_bossSpeed);
-            }
-        }
+            Vector2 randomPosition = GetRandomSpawnPosition();
+            GameObject spawnedEnemy = Instantiate(enemyData._enemyPrefab, randomPosition, Quaternion.identity);
 
-        // Update the enemy instance in the list and reset _isRespawning
-        enemyData._enemyInstance = spawnedEnemy;
-        enemyData._isRespawning = false;
+            // Now modify the stats of the spawned enemy based on its tag
+            EnemyStats enemyStat = spawnedEnemy.GetComponent<EnemyStats>();
+
+            if (enemyStat != null)
+            {
+                // Check the enemy tag and apply the appropriate stats
+                if (spawnedEnemy.CompareTag("SmallEnemy"))
+                {
+                    enemyStat.SetEnemyHealth(_smallEnemyHealth);
+                    enemyStat.SetEnemyDamage(_smallEnemyDamage);
+                    enemyStat.SetEnemySpeed(_smallEnemySpeed);
+                }
+                else if (spawnedEnemy.CompareTag("MediumEnemy"))
+                {
+                    enemyStat.SetEnemyHealth(_mediumEnemyHealth);
+                    enemyStat.SetEnemyDamage(_mediumEnemyDamage);
+                    enemyStat.SetEnemySpeed(_mediumEnemySpeed);
+                }
+                else if (spawnedEnemy.CompareTag("BigEnemy"))
+                {
+                    enemyStat.SetEnemyHealth(_bigEnemyHealth);
+                    enemyStat.SetEnemyDamage(_bigEnemyDamage);
+                    enemyStat.SetEnemySpeed(_bigEnemySpeed);
+                }
+                else if (spawnedEnemy.CompareTag("Boss"))
+                {
+                    enemyStat.SetEnemyHealth(_bossHealth);
+                    enemyStat.SetEnemyDamage(_bossDamage);
+                    enemyStat.SetEnemySpeed(_bossSpeed);
+                }
+            }
+
+            // Update the enemy instance in the list and reset _isRespawning
+            enemyData._enemyInstance = spawnedEnemy;
+            enemyData._isRespawning = false;
+        }
     }
 
     Vector2 GetRandomSpawnPosition()

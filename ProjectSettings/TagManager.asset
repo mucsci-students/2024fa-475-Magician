@@ -17,6 +17,7 @@ TagManager:
   - RifleAmmo
   - ShotgunAmmo
   - SniperAmmo
+  - RocketAmmo
   layers:
   - Default
   - TransparentFX
@@ -63,17 +64,23 @@ TagManager:
   - name: Ground
     uniqueID: 2410188705
     locked: 0
+  - name: Ground2
+    uniqueID: 3729172459
+    locked: 0
   - name: Items
     uniqueID: 3488026995
-    locked: 0
-  - name: Enemy
-    uniqueID: 262526277
     locked: 0
   - name: Playground
     uniqueID: 1265905173
     locked: 0
   - name: BelowPlayer
     uniqueID: 3521370755
+    locked: 0
+  - name: Decorations
+    uniqueID: 3894056009
+    locked: 0
+  - name: Enemy
+    uniqueID: 262526277
     locked: 0
   - name: Player
     uniqueID: 3951265177
@@ -83,9 +90,6 @@ TagManager:
     locked: 0
   - name: AbovePlayer
     uniqueID: 3002040789
-    locked: 0
-  - name: Decorations
-    uniqueID: 3894056009
     locked: 0
   - name: Accommodation
     uniqueID: 1404939153

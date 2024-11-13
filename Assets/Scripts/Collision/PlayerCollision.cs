@@ -11,7 +11,8 @@ public class PlayerCollision : MonoBehaviour
             || collision.gameObject.CompareTag("PistolAmmo")
             || collision.gameObject.CompareTag("RifleAmmo")
             || collision.gameObject.CompareTag("ShotgunAmmo")
-            || collision.gameObject.CompareTag("SniperAmmo"))
+            || collision.gameObject.CompareTag("SniperAmmo")
+            || collision.gameObject.CompareTag("RocketAmmo"))
         {
             Destroy(collision.gameObject);
             Debug.Log($"Pick up {collision.gameObject.tag}!");
