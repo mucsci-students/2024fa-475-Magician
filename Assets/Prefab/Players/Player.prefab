@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 7105190118199825445}
   - component: {fileID: 8775535976773638865}
   - component: {fileID: 5867123942105956093}
-  - component: {fileID: -4859153173532252562}
   - component: {fileID: -5705863018175343302}
   - component: {fileID: 6585174993269004575}
   m_Layer: 9
@@ -250,7 +249,6 @@ MonoBehaviour:
   _isRocket: 0
   _isRifle: 0
   _isShotgun: 0
-  _isSniper: 0
 --- !u!114 &8775535976773638865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,18 +275,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14b378e2a01ee0646be534bff7bcde6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &-4859153173532252562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 779747059834511124}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ee662d7de53b3e48a9cb026f2f9dcf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!82 &-5705863018175343302

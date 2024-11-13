@@ -239,7 +239,7 @@ public class PlayerActions : MonoBehaviour
             {
                 _weaponStat.SetWeaponDamage(10f);
                 _weaponStat.SetWeaponFireRate(0.1f);
-                _weaponStat.SetAmmoSpeed(35f);
+                _weaponStat.SetAmmoSpeed(25f);
                 _gunDamage = _weaponStat.GetWeaponDamage();
                 _bulletSpeed = _weaponStat.GetAmmoSpeed();
                 _fireRate = _weaponStat.GetWeaponFireRate();
@@ -295,7 +295,7 @@ public class PlayerActions : MonoBehaviour
                         {
                             _weaponStat.SetWeaponDamage(10f);
                             _weaponStat.SetWeaponFireRate(1f);
-                            _weaponStat.SetAmmoSpeed(20f);
+                            _weaponStat.SetAmmoSpeed(15f);
                             _gunDamage = _weaponStat.GetWeaponDamage();
                             _bulletSpeed = _weaponStat.GetAmmoSpeed();
                             _fireRate = _weaponStat.GetWeaponFireRate();
@@ -318,7 +318,7 @@ public class PlayerActions : MonoBehaviour
                         {
                             _weaponStat.SetWeaponDamage(25f);
                             _weaponStat.SetWeaponFireRate(1.5f);
-                            _weaponStat.SetAmmoSpeed(30f);
+                            _weaponStat.SetAmmoSpeed(18f);
                             _gunDamage = _weaponStat.GetWeaponDamage();
                             _bulletSpeed = _weaponStat.GetAmmoSpeed();
                             _fireRate = _weaponStat.GetWeaponFireRate();
@@ -340,39 +340,60 @@ public class PlayerActions : MonoBehaviour
                     }
                     else if (_isShotgun)
                     {
-                        _bullet = Instantiate(_bulletPrefab[2], _gun.position, Quaternion.identity);
+                        int numberOfBullets = 5; // Number of bullets to shoot in a spread
+                        float spreadAngle = 15f; // Total angle spread between the bullets
 
-                        // Set weapon damage for the rocket
-                        if (_weaponStat != null)
+                        // Loop to create multiple bullets
+                        for (int i = 0; i < numberOfBullets; i++)
                         {
-                            _weaponStat.SetWeaponDamage(20f);
-                            _weaponStat.SetWeaponFireRate(1.2f);
-                            _weaponStat.SetAmmoSpeed(20f);
-                            _gunDamage = _weaponStat.GetWeaponDamage();
-                            _bulletSpeed = _weaponStat.GetAmmoSpeed();
-                            _fireRate = _weaponStat.GetWeaponFireRate();
+                            // Calculate the spread angle for each bullet
+                            float angleOffset = spreadAngle * (i - (numberOfBullets - 1) / 2f); // Spread evenly around the base direction
+                            Vector2 spreadDirection = Quaternion.Euler(0, 0, angleOffset) * direction; // Rotate the base direction to create spread
 
-                            Debug.Log("Shotgun damage set to: " + _gunDamage);
-                            gunshots[1].Play();
-                        }
-                        else
-                        {
-                            Debug.LogWarning("WeaponStat component not found on the _gun object!");
-                        }
+                            // Instantiate the bullet and set its position and rotation
+                            _bullet = Instantiate(_bulletPrefab[0], _gun.position, Quaternion.identity); // Use _bulletPrefab[0] for shotgun
 
-                        // Get the Animator component of the bullet
-                        Animator bulletAnimator = _bullet.GetComponent<Animator>();
-                        if (bulletAnimator != null)
-                        {
-                            bulletAnimator.SetBool("isRocket", false);
+                            if (_weaponStat != null)
+                            {
+                                _weaponStat.SetWeaponDamage(20f);
+                                _weaponStat.SetWeaponFireRate(1.2f);
+                                _weaponStat.SetAmmoSpeed(15f);
+                                _gunDamage = _weaponStat.GetWeaponDamage();
+                                _bulletSpeed = _weaponStat.GetAmmoSpeed();
+                                _fireRate = _weaponStat.GetWeaponFireRate();
+
+                                Debug.Log("Shotgun damage set to: " + _gunDamage);
+                                gunshots[1].Play();
+                            }
+                            else
+                            {
+                                Debug.LogWarning("WeaponStat component not found on the _gun object!");
+                            }
+
+                            // Get the Animator component of the bullet
+                            Animator bulletAnimator = _bullet.GetComponent<Animator>();
+                            if (bulletAnimator != null)
+                            {
+                                bulletAnimator.SetBool("isRocket", false);
+                            }
+
+                            // Set bullet velocity using the spread direction
+                            Rigidbody2D bulletRb = _bullet.GetComponent<Rigidbody2D>();
+                            if (bulletRb != null)
+                            {
+                                bulletRb.velocity = spreadDirection * _bulletSpeed; // Use the spread direction for bullet velocity
+                            }
                         }
                     }
 
-                    // Set bullet velocity
-                    Rigidbody2D bulletRb = _bullet.GetComponent<Rigidbody2D>();
-                    if (bulletRb != null)
+                    if (!_isShotgun)
                     {
-                        bulletRb.velocity = direction * _bulletSpeed;
+                        // Set bullet velocity
+                        Rigidbody2D bulletRb = _bullet.GetComponent<Rigidbody2D>();
+                        if (bulletRb != null)
+                        {
+                            bulletRb.velocity = direction * _bulletSpeed;
+                        }
                     }
                 }
                 _nextFireTime = Time.time + _fireRate;
