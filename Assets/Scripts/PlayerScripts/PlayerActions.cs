@@ -61,6 +61,11 @@ public class PlayerActions : MonoBehaviour
     {
         if (!_isDead)
         {
+            // Check if the left mouse button is held down and the rifle is equipped
+            if (_isRifle && Input.GetMouseButton(0))
+            {
+                FireRifle();
+            }
             UpdatePlayerAnimationStat();
             UpdateStats();
             DetectEnemyWithRaycasts(); // Main raycast logic for melee attacks
@@ -216,97 +221,164 @@ public class PlayerActions : MonoBehaviour
         }
     }
 
-    private void OnFire(InputValue inputValue)
+    private void FireRifle()
     {
         if (Time.time >= _nextFireTime)
         {
-            if (inputValue.isPressed)
+            // Shooting logic specifically for the rifle
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePosition.z = 0;
+
+            Vector2 direction = (mousePosition - transform.position).normalized;
+            RotatePlayerSprite(direction);
+
+            // Instantiate the rifle bullet
+            _bullet = Instantiate(_bulletPrefab[0], _gun.position, Quaternion.identity);
+
+            if (_weaponStat != null)
             {
-                // Handle shooting logic
-                Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                mousePosition.z = 0;
+                _weaponStat.SetWeaponDamage(10f);
+                _weaponStat.SetWeaponFireRate(0.1f);
+                _weaponStat.SetAmmoSpeed(35f);
+                _gunDamage = _weaponStat.GetWeaponDamage();
+                _bulletSpeed = _weaponStat.GetAmmoSpeed();
+                _fireRate = _weaponStat.GetWeaponFireRate();
 
-                Vector2 direction = (mousePosition - transform.position).normalized;
-
-                RotatePlayerSprite(direction);
-
-                // Instantiate the bullet and get its Animator component
-                if (_isPistol)
-                {
-                    _bullet = Instantiate(_bulletPrefab[0], _gun.position, Quaternion.identity);
-                    gunshots[0].Play();
-                }
-                else if (_isRocket)
-                {
-                    _bullet = Instantiate(_bulletPrefab[1], _gun.position, Quaternion.identity);
-
-                    // Set weapon damage for the rocket
-                    if (_weaponStat != null)
-                    {
-                        _weaponStat.SetWeaponDamage(25f);
-                        _weaponStat.SetWeaponFireRate(1.5f);
-                        _weaponStat.SetAmmoSpeed(30f);
-                        _gunDamage = _weaponStat.GetWeaponDamage();
-                        _bulletSpeed = _weaponStat.GetAmmoSpeed();
-                        _fireRate = _weaponStat.GetWeaponFireRate();
-
-                        Debug.Log("Rocket damage set to: " + _gunDamage);
-                        gunshots[1].Play();
-                    }
-                    else
-                    {
-                        Debug.LogWarning("WeaponStat component not found on the _gun object!");
-                    }
-
-                    // Get the Animator component of the bullet
-                    Animator bulletAnimator = _bullet.GetComponent<Animator>();
-                    if (bulletAnimator != null)
-                    {
-                        bulletAnimator.SetBool("isRocket", true);
-                    }
-                }
-                else if (_isRifle)
-                {
-                    _bullet = Instantiate(_bulletPrefab[1], _gun.position, Quaternion.identity);
-
-                    // Set weapon damage for the rocket
-                    if (_weaponStat != null)
-                    {
-                        _weaponStat.SetWeaponDamage(15f);
-                        _weaponStat.SetWeaponFireRate(0.5f);
-                        _weaponStat.SetAmmoSpeed(35f);
-                        _gunDamage = _weaponStat.GetWeaponDamage();
-                        _bulletSpeed = _weaponStat.GetAmmoSpeed();
-                        _fireRate = _weaponStat.GetWeaponFireRate();
-
-                        Debug.Log("Rifle damage set to: " + _gunDamage);
-                        gunshots[1].Play();
-                    }
-                    else
-                    {
-                        Debug.LogWarning("WeaponStat component not found on the _gun object!");
-                    }
-
-                    // Get the Animator component of the bullet
-                    Animator bulletAnimator = _bullet.GetComponent<Animator>();
-                    if (bulletAnimator != null)
-                    {
-                        bulletAnimator.SetBool("isRocket", false);
-                    }
-                }
-
-                    // Set bullet velocity
-                    Rigidbody2D bulletRb = _bullet.GetComponent<Rigidbody2D>();
-                if (bulletRb != null)
-                {
-                    bulletRb.velocity = direction * _bulletSpeed;
-                }
+                Debug.Log("Rifle damage set to: " + _gunDamage);
+                gunshots[1].Play();
             }
+            else
+            {
+                Debug.LogWarning("WeaponStat component not found on the _gun object!");
+            }
+
+            // Get the Animator component of the bullet
+            Animator bulletAnimator = _bullet.GetComponent<Animator>();
+            if (bulletAnimator != null)
+            {
+                bulletAnimator.SetBool("isRocket", false);
+            }
+
+            // Set bullet velocity
+            Rigidbody2D bulletRb = _bullet.GetComponent<Rigidbody2D>();
+            if (bulletRb != null)
+            {
+                bulletRb.velocity = direction * _bulletSpeed;
+            }
+
             _nextFireTime = Time.time + _fireRate;
         }
     }
 
+    private void OnFire(InputValue inputValue)
+    {
+        if (!_isRifle)
+        {
+            if (Time.time >= _nextFireTime)
+            {
+                if (inputValue.isPressed)
+                {
+                    // Handle shooting logic
+                    Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    mousePosition.z = 0;
 
+                    Vector2 direction = (mousePosition - transform.position).normalized;
+
+                    RotatePlayerSprite(direction);
+
+                    // Instantiate the bullet and get its Animator component
+                    if (_isPistol)
+                    {
+                        _bullet = Instantiate(_bulletPrefab[0], _gun.position, Quaternion.identity);
+                        // Set weapon damage for the rocket
+                        if (_weaponStat != null)
+                        {
+                            _weaponStat.SetWeaponDamage(10f);
+                            _weaponStat.SetWeaponFireRate(1.5f);
+                            _weaponStat.SetAmmoSpeed(20f);
+                            _gunDamage = _weaponStat.GetWeaponDamage();
+                            _bulletSpeed = _weaponStat.GetAmmoSpeed();
+                            _fireRate = _weaponStat.GetWeaponFireRate();
+
+                            Debug.Log("Pistol damage set to: " + _gunDamage);
+                            gunshots[0].Play();
+                        }
+                        else
+                        {
+                            Debug.LogWarning("WeaponStat component not found on the _gun object!");
+                        }
+                        
+                    }
+                    else if (_isRocket)
+                    {
+                        _bullet = Instantiate(_bulletPrefab[1], _gun.position, Quaternion.identity);
+
+                        // Set weapon damage for the rocket
+                        if (_weaponStat != null)
+                        {
+                            _weaponStat.SetWeaponDamage(25f);
+                            _weaponStat.SetWeaponFireRate(1.5f);
+                            _weaponStat.SetAmmoSpeed(30f);
+                            _gunDamage = _weaponStat.GetWeaponDamage();
+                            _bulletSpeed = _weaponStat.GetAmmoSpeed();
+                            _fireRate = _weaponStat.GetWeaponFireRate();
+
+                            Debug.Log("Rocket damage set to: " + _gunDamage);
+                            gunshots[1].Play();
+                        }
+                        else
+                        {
+                            Debug.LogWarning("WeaponStat component not found on the _gun object!");
+                        }
+
+                        // Get the Animator component of the bullet
+                        Animator bulletAnimator = _bullet.GetComponent<Animator>();
+                        if (bulletAnimator != null)
+                        {
+                            bulletAnimator.SetBool("isRocket", true);
+                        }
+                    }
+                    else if (_isShotgun)
+                    {
+                        _bullet = Instantiate(_bulletPrefab[2], _gun.position, Quaternion.identity);
+
+                        // Set weapon damage for the rocket
+                        if (_weaponStat != null)
+                        {
+                            _weaponStat.SetWeaponDamage(20f);
+                            _weaponStat.SetWeaponFireRate(1.2f);
+                            _weaponStat.SetAmmoSpeed(20f);
+                            _gunDamage = _weaponStat.GetWeaponDamage();
+                            _bulletSpeed = _weaponStat.GetAmmoSpeed();
+                            _fireRate = _weaponStat.GetWeaponFireRate();
+
+                            Debug.Log("Shotgun damage set to: " + _gunDamage);
+                            gunshots[1].Play();
+                        }
+                        else
+                        {
+                            Debug.LogWarning("WeaponStat component not found on the _gun object!");
+                        }
+
+                        // Get the Animator component of the bullet
+                        Animator bulletAnimator = _bullet.GetComponent<Animator>();
+                        if (bulletAnimator != null)
+                        {
+                            bulletAnimator.SetBool("isRocket", false);
+                        }
+                    }
+
+                    // Set bullet velocity
+                    Rigidbody2D bulletRb = _bullet.GetComponent<Rigidbody2D>();
+                    if (bulletRb != null)
+                    {
+                        bulletRb.velocity = direction * _bulletSpeed;
+                    }
+                }
+                _nextFireTime = Time.time + _fireRate;
+            }
+        }
+    }
 
     private void RotatePlayerSprite(Vector2 direction)
     {
@@ -323,6 +395,8 @@ public class PlayerActions : MonoBehaviour
                     _playerAnimator.SetBool("isRocketUp", true);
                 else if(_isRifle)
                     _playerAnimator.SetBool("isRifleUp", true);
+                else if (_isShotgun)
+                    _playerAnimator.SetBool("isShotgunUp", true);
             }
             else if (direction.y < 0)
             {
@@ -332,6 +406,8 @@ public class PlayerActions : MonoBehaviour
                     _playerAnimator.SetBool("isRocketDown", true);
                 else if (_isRifle)
                     _playerAnimator.SetBool("isRifleDown", true);
+                else if (_isShotgun)
+                    _playerAnimator.SetBool("isShotgunDown", true);
             }
         }
         else // Otherwise, prioritize horizontal movement
@@ -344,6 +420,8 @@ public class PlayerActions : MonoBehaviour
                     _playerAnimator.SetBool("isRocketRight", true);
                 else if (_isRifle)
                     _playerAnimator.SetBool("isRifleRight", true);
+                else if (_isShotgun)
+                    _playerAnimator.SetBool("isShotgunRight", true);
             }
             else if (direction.x < 0)
             {
@@ -353,6 +431,8 @@ public class PlayerActions : MonoBehaviour
                     _playerAnimator.SetBool("isRocketLeft", true);
                 else if (_isRifle)
                     _playerAnimator.SetBool("isRifleLeft", true);
+                else if (_isShotgun)
+                    _playerAnimator.SetBool("isShotgunLeft", true);
             }
         }
     }
@@ -419,6 +499,27 @@ public class PlayerActions : MonoBehaviour
             if (currentState.IsName("DownRifle") && currentState.normalizedTime >= 1.0f)
             {
                 _playerAnimator.SetBool("isRifleDown", false);
+            }
+        }
+
+        // Reset rocket shooting animations
+        if (_isShotgun)
+        {
+            if (currentState.IsName("ShotgunRight") && currentState.normalizedTime >= 1.0f)
+            {
+                _playerAnimator.SetBool("isShotgunRight", false);
+            }
+            if (currentState.IsName("ShotgunLeft") && currentState.normalizedTime >= 1.0f)
+            {
+                _playerAnimator.SetBool("isShotgunLeft", false);
+            }
+            if (currentState.IsName("ShotgunUp") && currentState.normalizedTime >= 1.0f)
+            {
+                _playerAnimator.SetBool("isShotgunUp", false);
+            }
+            if (currentState.IsName("ShotgunDown") && currentState.normalizedTime >= 1.0f)
+            {
+                _playerAnimator.SetBool("isShotgunDown", false);
             }
         }
     }

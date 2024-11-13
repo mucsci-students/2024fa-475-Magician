@@ -239,7 +239,7 @@ MonoBehaviour:
   - 5
   - 5
   - 2
-  _dropRadius: 3
+  _dropRadius: 1.5
 --- !u!114 &6437977280008158015
 MonoBehaviour:
   m_ObjectHideFlags: 0
