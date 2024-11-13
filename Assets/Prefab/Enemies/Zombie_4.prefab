@@ -206,10 +206,10 @@ MonoBehaviour:
   idleTimeMax: 3
   moveTimeMin: 3
   moveTimeMax: 5
-  _detectionRadius: 3.3
+  _detectionRadius: 14
   _enemyAttackRate: 5
   _enemyChaseTime: 15
-  _attackRange: 0.3
+  _attackRange: 1.3
 --- !u!114 &2566338243215592565
 MonoBehaviour:
   m_ObjectHideFlags: 0
