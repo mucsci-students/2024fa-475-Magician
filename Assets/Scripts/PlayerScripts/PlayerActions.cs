@@ -41,7 +41,6 @@ public class PlayerActions : MonoBehaviour
     [SerializeField] bool _isRocket = false;
     [SerializeField] bool _isRifle = false;
     [SerializeField] bool _isShotgun = false;
-    [SerializeField] bool _isSniper = false;
 
     void Start()
     {
@@ -266,9 +265,38 @@ public class PlayerActions : MonoBehaviour
                         bulletAnimator.SetBool("isRocket", true);
                     }
                 }
+                else if (_isRifle)
+                {
+                    _bullet = Instantiate(_bulletPrefab[1], _gun.position, Quaternion.identity);
 
-                // Set bullet velocity
-                Rigidbody2D bulletRb = _bullet.GetComponent<Rigidbody2D>();
+                    // Set weapon damage for the rocket
+                    if (_weaponStat != null)
+                    {
+                        _weaponStat.SetWeaponDamage(15f);
+                        _weaponStat.SetWeaponFireRate(0.5f);
+                        _weaponStat.SetAmmoSpeed(35f);
+                        _gunDamage = _weaponStat.GetWeaponDamage();
+                        _bulletSpeed = _weaponStat.GetAmmoSpeed();
+                        _fireRate = _weaponStat.GetWeaponFireRate();
+
+                        Debug.Log("Rifle damage set to: " + _gunDamage);
+                        gunshots[1].Play();
+                    }
+                    else
+                    {
+                        Debug.LogWarning("WeaponStat component not found on the _gun object!");
+                    }
+
+                    // Get the Animator component of the bullet
+                    Animator bulletAnimator = _bullet.GetComponent<Animator>();
+                    if (bulletAnimator != null)
+                    {
+                        bulletAnimator.SetBool("isRocket", false);
+                    }
+                }
+
+                    // Set bullet velocity
+                    Rigidbody2D bulletRb = _bullet.GetComponent<Rigidbody2D>();
                 if (bulletRb != null)
                 {
                     bulletRb.velocity = direction * _bulletSpeed;
@@ -293,6 +321,8 @@ public class PlayerActions : MonoBehaviour
                     _playerAnimator.SetBool("isShootingUp", true);
                 else if(_isRocket)
                     _playerAnimator.SetBool("isRocketUp", true);
+                else if(_isRifle)
+                    _playerAnimator.SetBool("isRifleUp", true);
             }
             else if (direction.y < 0)
             {
@@ -300,6 +330,8 @@ public class PlayerActions : MonoBehaviour
                     _playerAnimator.SetBool("isShootingDown", true);
                 else if (_isRocket)
                     _playerAnimator.SetBool("isRocketDown", true);
+                else if (_isRifle)
+                    _playerAnimator.SetBool("isRifleDown", true);
             }
         }
         else // Otherwise, prioritize horizontal movement
@@ -310,6 +342,8 @@ public class PlayerActions : MonoBehaviour
                     _playerAnimator.SetBool("isShootingRight", true);
                 else if (_isRocket)
                     _playerAnimator.SetBool("isRocketRight", true);
+                else if (_isRifle)
+                    _playerAnimator.SetBool("isRifleRight", true);
             }
             else if (direction.x < 0)
             {
@@ -317,6 +351,8 @@ public class PlayerActions : MonoBehaviour
                     _playerAnimator.SetBool("isShootingLeft", true);
                 else if (_isRocket)
                     _playerAnimator.SetBool("isRocketLeft", true);
+                else if (_isRifle)
+                    _playerAnimator.SetBool("isRifleLeft", true);
             }
         }
     }
@@ -362,6 +398,27 @@ public class PlayerActions : MonoBehaviour
             if (currentState.IsName("DownRocket") && currentState.normalizedTime >= 1.0f)
             {
                 _playerAnimator.SetBool("isRocketDown", false);
+            }
+        }
+
+        // Reset rocket shooting animations
+        if (_isRifle)
+        {
+            if (currentState.IsName("RightRifle") && currentState.normalizedTime >= 1.0f)
+            {
+                _playerAnimator.SetBool("isRifleRight", false);
+            }
+            if (currentState.IsName("LeftRifle") && currentState.normalizedTime >= 1.0f)
+            {
+                _playerAnimator.SetBool("isRifleLeft", false);
+            }
+            if (currentState.IsName("UpRifle") && currentState.normalizedTime >= 1.0f)
+            {
+                _playerAnimator.SetBool("isRifleUp", false);
+            }
+            if (currentState.IsName("DownRifle") && currentState.normalizedTime >= 1.0f)
+            {
+                _playerAnimator.SetBool("isRifleDown", false);
             }
         }
     }
