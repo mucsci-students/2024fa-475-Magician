@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
@@ -9,6 +10,8 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] float _meleeDamage = 10f;
     [SerializeField] float _playerMoveSpeed = 1f;
     bool _isDead = false;
+
+    
 
     public void TakeDamage(float damageAmount)
     {

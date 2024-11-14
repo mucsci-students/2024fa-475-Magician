@@ -228,7 +228,6 @@ MonoBehaviour:
   _enemyDamage: 15
   _enemyMoveSpeed: 5
   _itemList:
-  - {fileID: 2344721306069954823, guid: 18443295679423441a030957bfd4c67c, type: 3}
   - {fileID: 7021905603045148156, guid: 17bbc3ee27109e149b4e6541615e6f0c, type: 3}
   - {fileID: 7021905603045148156, guid: 17bbc3ee27109e149b4e6541615e6f0c, type: 3}
   - {fileID: 7021905603045148156, guid: 17bbc3ee27109e149b4e6541615e6f0c, type: 3}
@@ -241,7 +240,6 @@ MonoBehaviour:
   - {fileID: 8041808436415334367, guid: 9c884c7729a80db49997e45461a929f9, type: 3}
   - {fileID: 866235679378353703, guid: 984942a2314533f48a700a134ace92b1, type: 3}
   _dropRates:
-  - 100
   - 100
   - 100
   - 100

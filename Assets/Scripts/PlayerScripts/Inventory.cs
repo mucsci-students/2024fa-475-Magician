@@ -7,10 +7,12 @@ using UnityEngine.UI;
 public class Inventory : MonoBehaviour
 {
     PlayerActions actions;
+    PlayerStats playerStats;
     // Start is called before the first frame update
     void Start()
     {
         actions = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerActions>();
+        playerStats = actions.GetComponent<PlayerStats>();
     }
 
     // Update is called once per frame
@@ -66,6 +68,17 @@ public class Inventory : MonoBehaviour
                 actions.setShotgun(false);
                 actions.setPistol(false);
                 actions.setRocket(false);
+            }
+        }
+
+        else if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            Debug.Log("Number 5 key pressed!");
+            if(PlayerCollision.healthPackAmount > 0)
+            {
+                float currentHealth = playerStats.GetPlayerHealth();
+                playerStats.SetPlayerHealth(currentHealth + 15f);
+                --PlayerCollision.healthPackAmount;
             }
         }
     }
