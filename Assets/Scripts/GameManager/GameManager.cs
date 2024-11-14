@@ -5,8 +5,11 @@ public class GameManager : MonoBehaviour
     // Singleton instance
     public static GameManager Instance { get; private set; }
 
-    // Example variable to persist between scenes
-    public int playerScore = 0;
+    // Reference to the initial location in the main hub
+    [SerializeField] Transform _initialLocation;
+
+    // Reference to the player object
+    private GameObject _player;
 
     private void Awake()
     {
@@ -22,10 +25,22 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Method to increase player score (example functionality)
-    public void AddScore(int points)
+    private void Start()
     {
-        playerScore += points;
-        Debug.Log("Player Score: " + playerScore);
+        // Find the player object in the scene
+        _player = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    public void MovePlayerToHub()
+    {
+        if (_player != null && _initialLocation != null)
+        {
+            _player.transform.position = _initialLocation.position;
+            Debug.Log("Player moved to the main hub location.");
+        }
+        else
+        {
+            Debug.LogWarning("Player or initial location not set.");
+        }
     }
 }
