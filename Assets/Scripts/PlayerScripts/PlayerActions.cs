@@ -411,7 +411,7 @@ public class PlayerActions : MonoBehaviour
                         }
                     }
 
-                    if (!_isShotgun && ((PlayerCollision.shotgunAmmo > 0) || (PlayerCollision.rifleAmmo > 0) || (PlayerCollision.rocketAmmo > 0)))
+                    if (!_isShotgun)
                     {
                         // Set bullet velocity
                         Rigidbody2D bulletRb = _bullet.GetComponent<Rigidbody2D>();

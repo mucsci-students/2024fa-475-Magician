@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -27,6 +28,19 @@ public class GameManager : MonoBehaviour
     }
 
     private void Start()
+    {
+        InitializeReferences();
+        // Subscribe to the sceneLoaded event
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    // Called every time a new scene is loaded
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        InitializeReferences();
+    }
+
+    private void InitializeReferences()
     {
         // Find the player object in the scene
         _player = GameObject.FindGameObjectWithTag("Player");
@@ -78,5 +92,11 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogWarning("Player or initial location not set.");
         }
+    }
+
+    private void OnDestroy()
+    {
+        // Unsubscribe from the sceneLoaded event to prevent memory leaks
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }

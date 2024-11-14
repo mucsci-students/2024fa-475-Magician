@@ -1,24 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MAINMENU : MonoBehaviour
+public class MainMenu : MonoBehaviour
 {
-    public void PlayGame(){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    // Method to start the game (load the next scene)
+    public void StartGame()
+    {
+        // Assuming your game scene is at index 1 in the Build Settings
+        SceneManager.LoadScene("MainHub");
     }
 
-    
-    public void GoToSettingsMenu(){
-        SceneManager.LoadScene("OptionsMenu");
-    }
-
-    public void GoToMainMenu(){
-        SceneManager.LoadScene("MainMenu");
-    }
+    // Method to quit the game
     public void QuitGame()
     {
+        // This will only work in a built version of the game, not in the editor
+        Debug.Log("Quit Game");
         Application.Quit();
     }
 }
