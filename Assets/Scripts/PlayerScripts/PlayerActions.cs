@@ -37,7 +37,7 @@ public class PlayerActions : MonoBehaviour
     Scene currentScene;
     AudioSource[] gunshots;
 
-    [SerializeField] bool _isPistol = false;
+    [SerializeField] bool _isPistol = true;
     bool _isPistolAcquired = true;
 
     [SerializeField] bool _isRocket = false;
@@ -103,7 +103,7 @@ public class PlayerActions : MonoBehaviour
     /**
     * Keep updating player's speed, direction for movement and idle
     */
-    void UpdatePlayerAnimationStat()
+    public void UpdatePlayerAnimationStat()
     {
         if (_playerAnimator != null)
         {
@@ -504,7 +504,7 @@ public class PlayerActions : MonoBehaviour
         }
 
         // Reset rocket shooting animations
-        if (_isRocket)
+        else if (_isRocket)
         {
             if (currentState.IsName("RightRocket") && currentState.normalizedTime >= 1.0f)
             {
@@ -525,7 +525,7 @@ public class PlayerActions : MonoBehaviour
         }
 
         // Reset rocket shooting animations
-        if (_isRifle)
+        else if(_isRifle)
         {
             if (currentState.IsName("RightRifle") && currentState.normalizedTime >= 1.0f)
             {
@@ -546,7 +546,7 @@ public class PlayerActions : MonoBehaviour
         }
 
         // Reset rocket shooting animations
-        if (_isShotgun)
+        else if(_isShotgun)
         {
             if (currentState.IsName("ShotgunRight") && currentState.normalizedTime >= 1.0f)
             {
@@ -571,7 +571,30 @@ public class PlayerActions : MonoBehaviour
     {
         SceneManager.LoadScene(currentScene.name);
     }
+
+    // Methods that set weapon the player wants to use
+    public void setPistol(bool usePistol)
+    {
+        _isPistol = usePistol;
+    }
+    public void setRifle(bool useRifle)
+    {
+        _isRifle = useRifle;
+    }
+    public void setShotgun(bool useShotgun)
+    {
+        _isShotgun = useShotgun;
+    }
+    public void setRocket(bool useRocket)
+    {
+        _isRocket = useRocket;
+    }
+
     // Methods that return if player has a weapon
+    public bool hasPistol()
+    {
+        return _isPistolAcquired;
+    }
     public bool hasRifle()
     {
         return _isRifleAcquired;
