@@ -47,10 +47,10 @@ MonoBehaviour:
   __enemyPrefabs:
   - {fileID: 7676088920888188645, guid: 89e1479bb052cb9468e4a255429c1088, type: 3}
   _spawnArea: {fileID: 7234827624832483320}
-  _spawnAreaWidth: 2
-  _spawnAreaHeight: 2
-  _firstEnemyNum: 10
-  _secondEnemyNum: 15
+  _spawnAreaWidth: 20
+  _spawnAreaHeight: 20
+  _firstEnemyNum: 25
+  _secondEnemyNum: 30
   _smallEnemyHealth: 0
   _mediumEnemyHealth: 100
   _bigEnemyHealth: 0
@@ -64,3 +64,4 @@ MonoBehaviour:
   _bossSpeed: 0
   _delayTime: 10
   _bossDamage: 0
+  _isRespawn: 0

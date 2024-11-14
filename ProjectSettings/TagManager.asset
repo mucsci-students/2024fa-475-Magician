@@ -18,6 +18,7 @@ TagManager:
   - ShotgunAmmo
   - SniperAmmo
   - RocketAmmo
+  - Boss
   layers:
   - Default
   - TransparentFX
