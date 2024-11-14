@@ -38,9 +38,16 @@ public class PlayerActions : MonoBehaviour
     AudioSource[] gunshots;
 
     [SerializeField] bool _isPistol = false;
+    bool _isPistolAcquired = true;
+
     [SerializeField] bool _isRocket = false;
+    bool _isRocketAcquired = false;
+
     [SerializeField] bool _isRifle = false;
+    bool _isRifleAcquired = false;
+
     [SerializeField] bool _isShotgun = false;
+    bool _isShotgunAcquired = false;
 
     void Start()
     {
@@ -62,7 +69,7 @@ public class PlayerActions : MonoBehaviour
         if (!_isDead)
         {
             // Check if the left mouse button is held down and the rifle is equipped
-            if (_isRifle && Input.GetMouseButton(0))
+            if (_isRifle && _isRifleAcquired && Input.GetMouseButton(0))
             {
                 FireRifle();
             }
@@ -76,6 +83,21 @@ public class PlayerActions : MonoBehaviour
         {
             Invoke("respawnOnDeath", 3);
         }
+    }
+
+    public void SetShotgunAqquire(bool isShotgunAcquired)
+    {
+        _isShotgunAcquired = isShotgunAcquired;
+    }
+
+    public void SetRifleAqquire(bool isRifleAcquired)
+    {
+        _isRifleAcquired = isRifleAcquired;
+    }
+
+    public void SetRocketAqquire(bool isRocketAcquired)
+    {
+        _isRocketAcquired = isRocketAcquired;
     }
 
     /**
@@ -287,7 +309,7 @@ public class PlayerActions : MonoBehaviour
                     RotatePlayerSprite(direction);
 
                     // Instantiate the bullet and get its Animator component
-                    if (_isPistol)
+                    if (_isPistol && _isPistolAcquired)
                     {
                         _bullet = Instantiate(_bulletPrefab[0], _gun.position, Quaternion.identity);
                         // Set weapon damage for the rocket
@@ -309,7 +331,7 @@ public class PlayerActions : MonoBehaviour
                         }
                         
                     }
-                    else if (_isRocket)
+                    else if (_isRocket && _isRocketAcquired)
                     {
                         _bullet = Instantiate(_bulletPrefab[1], _gun.position, Quaternion.identity);
 
@@ -338,7 +360,7 @@ public class PlayerActions : MonoBehaviour
                             bulletAnimator.SetBool("isRocket", true);
                         }
                     }
-                    else if (_isShotgun)
+                    else if (_isShotgun && _isShotgunAcquired)
                     {
                         int numberOfBullets = 5; // Number of bullets to shoot in a spread
                         float spreadAngle = 15f; // Total angle spread between the bullets

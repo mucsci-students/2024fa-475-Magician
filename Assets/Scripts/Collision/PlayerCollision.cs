@@ -17,5 +17,26 @@ public class PlayerCollision : MonoBehaviour
             Destroy(collision.gameObject);
             Debug.Log($"Pick up {collision.gameObject.tag}!");
         }
+
+        PlayerActions playerAction = GetComponentInChildren<PlayerActions>();
+
+        if (collision.gameObject.CompareTag("Shotgun"))
+        {
+            playerAction.SetShotgunAqquire(true);
+            Destroy(collision.gameObject);
+            Debug.Log($"Pick up {collision.gameObject.tag}!");
+        }
+        else if (collision.gameObject.CompareTag("Rifle"))
+        {
+            playerAction.SetRifleAqquire(true);
+            Destroy(collision.gameObject);
+            Debug.Log($"Pick up {collision.gameObject.tag}!");
+        }
+        else if (collision.gameObject.CompareTag("Rocket"))
+        {
+            playerAction.SetRocketAqquire(true);
+            Destroy(collision.gameObject);
+            Debug.Log($"Pick up {collision.gameObject.tag}!");
+        }
     }
 }
