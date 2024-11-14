@@ -68,6 +68,5 @@ public class Inventory : MonoBehaviour
                 actions.setRocket(false);
             }
         }
-        actions.UpdatePlayerAnimationStat();
     }
 }

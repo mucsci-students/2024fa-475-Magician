@@ -572,21 +572,51 @@ public class PlayerActions : MonoBehaviour
         SceneManager.LoadScene(currentScene.name);
     }
 
-    // Methods that set weapon the player wants to use
+    private void ResetAllShootingAnimations()
+    {
+        if (_playerAnimator == null) return;
+
+        // Reset all shooting animation parameters
+        _playerAnimator.SetBool("isShootingRight", false);
+        _playerAnimator.SetBool("isShootingLeft", false);
+        _playerAnimator.SetBool("isShootingUp", false);
+        _playerAnimator.SetBool("isShootingDown", false);
+        _playerAnimator.SetBool("isRocketRight", false);
+        _playerAnimator.SetBool("isRocketLeft", false);
+        _playerAnimator.SetBool("isRocketUp", false);
+        _playerAnimator.SetBool("isRocketDown", false);
+        _playerAnimator.SetBool("isRifleRight", false);
+        _playerAnimator.SetBool("isRifleLeft", false);
+        _playerAnimator.SetBool("isRifleUp", false);
+        _playerAnimator.SetBool("isRifleDown", false);
+        _playerAnimator.SetBool("isShotgunRight", false);
+        _playerAnimator.SetBool("isShotgunLeft", false);
+        _playerAnimator.SetBool("isShotgunUp", false);
+        _playerAnimator.SetBool("isShotgunDown", false);
+    }
+
+    // Modified methods to switch weapons
     public void setPistol(bool usePistol)
     {
+        ResetAllShootingAnimations(); // Reset animations before switching
         _isPistol = usePistol;
     }
+
     public void setRifle(bool useRifle)
     {
+        ResetAllShootingAnimations(); // Reset animations before switching
         _isRifle = useRifle;
     }
+
     public void setShotgun(bool useShotgun)
     {
+        ResetAllShootingAnimations(); // Reset animations before switching
         _isShotgun = useShotgun;
     }
+
     public void setRocket(bool useRocket)
     {
+        ResetAllShootingAnimations(); // Reset animations before switching
         _isRocket = useRocket;
     }
 
