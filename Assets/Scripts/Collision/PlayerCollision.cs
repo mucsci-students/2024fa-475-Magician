@@ -12,11 +12,29 @@ public class PlayerCollision : MonoBehaviour
             || collision.gameObject.CompareTag("RifleAmmo")
             || collision.gameObject.CompareTag("ShotgunAmmo")
             || collision.gameObject.CompareTag("SniperAmmo")
-            || collision.gameObject.CompareTag("RocketAmmo")
-            || collision.gameObject.CompareTag("Shotgun")
-            || collision.gameObject.CompareTag("Rifle")
-            || collision.gameObject.CompareTag("Rocket"))
+            || collision.gameObject.CompareTag("RocketAmmo"))
         {
+            Destroy(collision.gameObject);
+            Debug.Log($"Pick up {collision.gameObject.tag}!");
+        }
+
+        PlayerActions playerAction = GetComponentInChildren<PlayerActions>();
+
+        if (collision.gameObject.CompareTag("Shotgun"))
+        {
+            playerAction.SetShotgunAqquire(true);
+            Destroy(collision.gameObject);
+            Debug.Log($"Pick up {collision.gameObject.tag}!");
+        }
+        else if (collision.gameObject.CompareTag("Rifle"))
+        {
+            playerAction.SetRifleAqquire(true);
+            Destroy(collision.gameObject);
+            Debug.Log($"Pick up {collision.gameObject.tag}!");
+        }
+        else if (collision.gameObject.CompareTag("Rocket"))
+        {
+            playerAction.SetRocketAqquire(true);
             Destroy(collision.gameObject);
             Debug.Log($"Pick up {collision.gameObject.tag}!");
         }
