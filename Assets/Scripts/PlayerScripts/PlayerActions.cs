@@ -316,7 +316,7 @@ public class PlayerActions : MonoBehaviour
                         if (_weaponStat != null)
                         {
                             _weaponStat.SetWeaponDamage(10f);
-                            _weaponStat.SetWeaponFireRate(1f);
+                            _weaponStat.SetWeaponFireRate(0.75f);
                             _weaponStat.SetAmmoSpeed(15f);
                             _gunDamage = _weaponStat.GetWeaponDamage();
                             _bulletSpeed = _weaponStat.GetAmmoSpeed();

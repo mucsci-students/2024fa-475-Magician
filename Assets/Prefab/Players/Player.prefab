@@ -247,9 +247,9 @@ MonoBehaviour:
   _raycastDistanceRight: 0.3
   _raycastDistanceMiddle: 0.3
   _raycastAngleOffset: 30
-  _isPistol: 0
+  _isPistol: 1
   _isRocket: 0
-  _isRifle: 1
+  _isRifle: 0
   _isShotgun: 0
 --- !u!114 &8775535976773638865
 MonoBehaviour:
@@ -279,6 +279,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14b378e2a01ee0646be534bff7bcde6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rifle: {fileID: 2482736891847034122, guid: 588014c68cf74134b99c54b3142ebff6, type: 3}
+  shotgun: {fileID: 866235679378353703, guid: 984942a2314533f48a700a134ace92b1, type: 3}
+  rocket: {fileID: 2062046254077285016, guid: 9a77e806733339646b7d8a915c0e8268, type: 3}
 --- !u!82 &-5705863018175343302
 AudioSource:
   m_ObjectHideFlags: 0

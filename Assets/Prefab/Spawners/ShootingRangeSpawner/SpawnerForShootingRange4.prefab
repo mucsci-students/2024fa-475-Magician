@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5822319071265992049}
   m_Layer: 0
   m_Name: SpawnerForShootingRange4
-  m_TagString: Untagged
+  m_TagString: Spawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64,3 +64,4 @@ MonoBehaviour:
   _bossSpeed: 0
   _delayTime: 5
   _bossDamage: 0
+  _isRespawn: 1

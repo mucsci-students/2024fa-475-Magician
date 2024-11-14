@@ -22,6 +22,10 @@ TagManager:
   - Shotgun
   - Rifle
   - Rocket
+  - Level1
+  - Level2
+  - Level3
+  - Spawner
   layers:
   - Default
   - TransparentFX
