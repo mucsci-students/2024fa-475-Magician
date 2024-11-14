@@ -12,9 +12,16 @@ public class PlayerCollision : MonoBehaviour
     [SerializeField] private GameObject rocket;
     [SerializeField] private GameObject healthPack;
     const int maxhealthPackAmount = 10;
+    const int healthPackAdded = 1;
+
     const int maxshotgunAmmo = 80;
-    const int maxrocketAmmo = 12;
-    const int maxrifleAmmo = 250;
+    const int shotgunAmmoAdded = 20;
+
+    const int maxrocketAmmo = 10;
+    const int rocketAmmoAdded = 2;
+
+    const int maxrifleAmmo = 300;
+    const int rifleAmmoAdded = 50;
 
     public static int healthPackAmount = 0;
     public static int shotgunAmmo = 0;
@@ -56,44 +63,75 @@ public class PlayerCollision : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("ShotgunAmmo"))
         {
-            shotgun.SetActive(true);
-            Destroy(collision.gameObject);
-            shotgunAmmo += 20;
+            if (shotgunAmmo < maxshotgunAmmo && (maxshotgunAmmo - shotgunAmmo) >= shotgunAmmoAdded)
+            {
+                shotgunAmmo += shotgunAmmoAdded;
+                Destroy(collision.gameObject);
+            }
+            else if (shotgunAmmo < maxshotgunAmmo && (maxshotgunAmmo - shotgunAmmo) < shotgunAmmoAdded)
+            {
+                shotgunAmmo += (maxshotgunAmmo - shotgunAmmo);
+                Destroy(collision.gameObject);
+            }
+
             Debug.Log($"Pick up {collision.gameObject.tag}!");
         }
 
         if (collision.gameObject.CompareTag("RocketAmmo"))
         {
-            rocket.SetActive(true);
-            Destroy(collision.gameObject);
-            rocketAmmo += 2;
+            if (rocketAmmo < maxrocketAmmo && (maxrocketAmmo - rocketAmmo) >= rocketAmmoAdded)
+            {
+                rocketAmmo += rocketAmmoAdded;
+                Destroy(collision.gameObject);
+            }
+            else if (rocketAmmo < maxrocketAmmo && (maxrocketAmmo - rocketAmmo) < rocketAmmoAdded)
+            {
+                rocketAmmo += (maxrocketAmmo - rocketAmmo);
+                Destroy(collision.gameObject);
+            }
+            
             Debug.Log($"Pick up {collision.gameObject.tag}!");
         }
 
         if (collision.gameObject.CompareTag("RifleAmmo"))
         {
-            rifle.SetActive(true);
-            Destroy(collision.gameObject);
-            rifleAmmo += 50;
+            if (rifleAmmo < maxrifleAmmo && (maxrifleAmmo - rifleAmmo) >= rifleAmmoAdded)
+            {
+                rifleAmmo += rifleAmmoAdded;
+                Destroy(collision.gameObject);
+            }
+            else if (rifleAmmo < maxrifleAmmo && (maxrifleAmmo - rifleAmmo) < rifleAmmoAdded)
+            {
+                rifleAmmo += (maxrifleAmmo - rifleAmmo);
+                Destroy(collision.gameObject);
+            }
+
             Debug.Log($"Pick up {collision.gameObject.tag}!");
         }
 
         if (collision.gameObject.CompareTag("HealthPack"))
         {
+            if (healthPackAmount < maxhealthPackAmount )
+            {
+                healthPackAmount += healthPackAdded;
+                Destroy(collision.gameObject);
+            }
+
             healthPack.SetActive(true);
-            Destroy(collision.gameObject);
-            ++healthPackAmount;
+            
             Debug.Log($"Pick up {collision.gameObject.tag}!");
         }
 
         if (collision.gameObject.CompareTag("Level1"))
         {
             SceneManager.LoadScene("Map1");
+            GameManager.Instance.MovePlayerToRespawnPosition();
         }
 
         if (collision.gameObject.CompareTag("Level2") && playerAction.hasShotgun())
         {
             SceneManager.LoadScene("Map2");
+            GameManager.Instance.MovePlayerToRespawnPosition();
         }
         else if (collision.gameObject.CompareTag("Level2"))
         {
@@ -103,6 +141,7 @@ public class PlayerCollision : MonoBehaviour
         if (collision.gameObject.CompareTag("Level3") && playerAction.hasRocket())
         {
             SceneManager.LoadScene("Map3");
+            GameManager.Instance.MovePlayerToRespawnPosition();
         }
         else if (collision.gameObject.CompareTag("Level3"))
         {

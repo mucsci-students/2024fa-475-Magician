@@ -26,7 +26,7 @@ public class PlayerStats : MonoBehaviour
     private void Die()
     {
         // Add death animations, sounds, or other effects here
-        _playerAnimator.SetTrigger("playerDead");
+        _playerAnimator.SetBool("isDead", true);
         Collider2D _playerCollider = gameObject.GetComponent<Collider2D>();
         _playerCollider.isTrigger = true;
 

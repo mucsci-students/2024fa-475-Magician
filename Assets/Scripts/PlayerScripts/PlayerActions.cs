@@ -69,7 +69,7 @@ public class PlayerActions : MonoBehaviour
         if (!_isDead)
         {
             // Check if the left mouse button is held down and the rifle is equipped
-            if (_isRifle && _isRifleAcquired && Input.GetMouseButton(0))
+            if (_isRifle && _isRifleAcquired && Input.GetMouseButton(0) && PlayerCollision.rifleAmmo > 0)
             {
                 FireRifle();
             }
@@ -256,6 +256,8 @@ public class PlayerActions : MonoBehaviour
 
             // Instantiate the rifle bullet
             _bullet = Instantiate(_bulletPrefab[0], _gun.position, Quaternion.identity);
+            if (PlayerCollision.rifleAmmo > 0)
+                --PlayerCollision.rifleAmmo;
 
             if (_weaponStat != null)
             {
@@ -294,7 +296,7 @@ public class PlayerActions : MonoBehaviour
 
     private void OnFire(InputValue inputValue)
     {
-        if (!_isRifle)
+        if (!_isRifle && !_isDead)
         {
             if (Time.time >= _nextFireTime)
             {
@@ -331,14 +333,15 @@ public class PlayerActions : MonoBehaviour
                         }
                         
                     }
-                    else if (_isRocket && _isRocketAcquired)
+                    else if (_isRocket && _isRocketAcquired && PlayerCollision.rocketAmmo > 0)
                     {
                         _bullet = Instantiate(_bulletPrefab[1], _gun.position, Quaternion.identity);
+                        --PlayerCollision.rocketAmmo;
 
                         // Set weapon damage for the rocket
                         if (_weaponStat != null)
                         {
-                            _weaponStat.SetWeaponDamage(25f);
+                            _weaponStat.SetWeaponDamage(50f);
                             _weaponStat.SetWeaponFireRate(1.5f);
                             _weaponStat.SetAmmoSpeed(18f);
                             _gunDamage = _weaponStat.GetWeaponDamage();
@@ -360,7 +363,7 @@ public class PlayerActions : MonoBehaviour
                             bulletAnimator.SetBool("isRocket", true);
                         }
                     }
-                    else if (_isShotgun && _isShotgunAcquired)
+                    else if (_isShotgun && _isShotgunAcquired && PlayerCollision.shotgunAmmo > 0)
                     {
                         int numberOfBullets = 5; // Number of bullets to shoot in a spread
                         float spreadAngle = 15f; // Total angle spread between the bullets
@@ -374,7 +377,7 @@ public class PlayerActions : MonoBehaviour
 
                             // Instantiate the bullet and set its position and rotation
                             _bullet = Instantiate(_bulletPrefab[0], _gun.position, Quaternion.identity); // Use _bulletPrefab[0] for shotgun
-
+                            --PlayerCollision.shotgunAmmo;
                             if (_weaponStat != null)
                             {
                                 _weaponStat.SetWeaponDamage(10f);
@@ -408,7 +411,7 @@ public class PlayerActions : MonoBehaviour
                         }
                     }
 
-                    if (!_isShotgun)
+                    if (!_isShotgun && ((PlayerCollision.shotgunAmmo > 0) || (PlayerCollision.rifleAmmo > 0) || (PlayerCollision.rocketAmmo > 0)))
                     {
                         // Set bullet velocity
                         Rigidbody2D bulletRb = _bullet.GetComponent<Rigidbody2D>();
@@ -569,7 +572,18 @@ public class PlayerActions : MonoBehaviour
     // Respawns player and reloads scene
     private void respawnOnDeath()
     {
-        SceneManager.LoadScene(currentScene.name);
+        _playerStat.SetPlayerHealth(200f);
+        _playerStat.SetIsDead(false);
+        _playerAnimator.SetBool("isDead", false);
+        
+        Collider2D _playerCollider = gameObject.GetComponent<Collider2D>();
+        _playerCollider.isTrigger = false;
+
+        Rigidbody2D _playerRigidbody = gameObject.GetComponent<Rigidbody2D>();
+        _playerRigidbody.velocity = Vector2.zero;       // Stop linear movement
+        _playerRigidbody.isKinematic = false;
+
+        GameManager.Instance.MovePlayerToRespawnPosition();
     }
 
     private void ResetAllShootingAnimations()

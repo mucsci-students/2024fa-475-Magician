@@ -790,7 +790,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b121f438273c3064db25df8b2b621371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _initialLocation: {fileID: 0}
 --- !u!1 &7131032192829121727
 GameObject:
   m_ObjectHideFlags: 0
@@ -1457,11 +1456,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1534983557924759941, guid: 958f5d9036015f84eb3013dfe7fe3b28, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -94.00513
+      value: 58.09488
       objectReference: {fileID: 0}
     - target: {fileID: 1534983557924759941, guid: 958f5d9036015f84eb3013dfe7fe3b28, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 99.67418
+      value: 84.17419
       objectReference: {fileID: 0}
     - target: {fileID: 1646355182406498877, guid: 958f5d9036015f84eb3013dfe7fe3b28, type: 3}
       propertyPath: m_Name
@@ -1473,11 +1472,11 @@ PrefabInstance:
       objectReference: {fileID: 4084595755369294796}
     - target: {fileID: 6949601395819932543, guid: 958f5d9036015f84eb3013dfe7fe3b28, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -94.00513
+      value: 58.09488
       objectReference: {fileID: 0}
     - target: {fileID: 6949601395819932543, guid: 958f5d9036015f84eb3013dfe7fe3b28, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 99.67418
+      value: 84.17419
       objectReference: {fileID: 0}
     - target: {fileID: 8301846284624804252, guid: 958f5d9036015f84eb3013dfe7fe3b28, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1563,11 +1562,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2439006301850028522, guid: 4ac40e259645007438cd00caf73f9754, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -168.6
+      value: -16.5
       objectReference: {fileID: 0}
     - target: {fileID: 2439006301850028522, guid: 4ac40e259645007438cd00caf73f9754, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 78.7
+      value: 63.2
       objectReference: {fileID: 0}
     - target: {fileID: 2439006301850028522, guid: 4ac40e259645007438cd00caf73f9754, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1641,6 +1640,10 @@ PrefabInstance:
       propertyPath: shotgunAmmoText
       value: 
       objectReference: {fileID: 8980530070708085610}
+    - target: {fileID: 8775535976773638865, guid: 4ac40e259645007438cd00caf73f9754, type: 3}
+      propertyPath: _playerHealth
+      value: 200
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

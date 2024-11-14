@@ -6,7 +6,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     // Reference to the initial location in the main hub
-    [SerializeField] Transform _initialLocation;
+    private Transform _initialLocation;
+    private Transform _respawnPosition;
 
     // Reference to the player object
     private GameObject _player;
@@ -29,6 +30,41 @@ public class GameManager : MonoBehaviour
     {
         // Find the player object in the scene
         _player = GameObject.FindGameObjectWithTag("Player");
+
+        // Find the initial location and respawn position objects in the scene
+        GameObject initialLocationObj = GameObject.Find("InitialPosition");
+        GameObject respawnPositionObj = GameObject.Find("RespawnPosition");
+
+        if (initialLocationObj != null)
+        {
+            _initialLocation = initialLocationObj.transform;
+        }
+        else
+        {
+            Debug.LogWarning("InitialLocation object not found in the scene.");
+        }
+
+        if (respawnPositionObj != null)
+        {
+            _respawnPosition = respawnPositionObj.transform;
+        }
+        else
+        {
+            Debug.LogWarning("RespawnPosition object not found in the scene.");
+        }
+    }
+
+    public void MovePlayerToRespawnPosition()
+    {
+        if (_player != null && _respawnPosition != null)
+        {
+            _player.transform.position = _respawnPosition.position;
+            Debug.Log("Player moved to the respawn position.");
+        }
+        else
+        {
+            Debug.LogWarning("Player or respawn position not set.");
+        }
     }
 
     public void MovePlayerToHub()
