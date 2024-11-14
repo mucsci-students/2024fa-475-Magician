@@ -571,5 +571,17 @@ public class PlayerActions : MonoBehaviour
     {
         SceneManager.LoadScene(currentScene.name);
     }
-
+    // Methods that return if player has a weapon
+    public bool hasRifle()
+    {
+        return _isRifleAcquired;
+    }
+    public bool hasShotgun()
+    {
+        return _isShotgunAcquired;
+    }
+    public bool hasRocket()
+    {
+        return _isRocketAcquired;
+    }
 }
