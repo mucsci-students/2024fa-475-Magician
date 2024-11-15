@@ -70,8 +70,8 @@ public class BulletinBoard : MonoBehaviour
             "Shooting\n- Use the Left Mouse Button to shoot your currently equipped weapon.\n\n" +
             "Weapons and Items\n- You have 5 slots for different weapons and a health pack:\n" +
             "  - 1: Pistol (unlimited ammo)\n" +
-            "  - 2: Shotgun\n" +
-            "  - 3: Rocket Launcher\n" +
+            "  - 2: Shotgun (bullet will spread)\n" +
+            "  - 3: Rocket Launcher (has area damage, we can lure multiple enemies and shoot all of them)\n" +
             "  - 4: Auto-Rifle\n" +
             "  - 5: Health Pack\n" +
             "Switching Items: Press 1, 2, 3, 4, or 5 to select the corresponding weapon or health pack.\n\n" +
