@@ -26,6 +26,7 @@ TagManager:
   - Level2
   - Level3
   - Spawner
+  - BulletinBoard
   layers:
   - Default
   - TransparentFX
@@ -104,4 +105,7 @@ TagManager:
     locked: 0
   - name: Bullet
     uniqueID: 2524881379
+    locked: 0
+  - name: BulletinBoard
+    uniqueID: 510609587
     locked: 0
