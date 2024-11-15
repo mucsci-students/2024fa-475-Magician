@@ -4,6 +4,8 @@ using TMPro; // Use this if you're using TextMeshPro
 public class BulletinBoard : MonoBehaviour
 {
     [SerializeField] private GameObject bulletinBoardUI; // Reference to the bulletin board UI (Pop-Up Panel)
+    [SerializeField] private GameObject storyScrollView; // Scroll View for the Story
+    [SerializeField] private GameObject tutorialsScrollView; // Scroll View for the Tutorials
     [SerializeField] private TMP_Text storyText;         // Reference to the Text component for the story
     [SerializeField] private TMP_Text tutorialsText;     // Reference to the Text component for the tutorials
 
@@ -11,10 +13,10 @@ public class BulletinBoard : MonoBehaviour
 
     void Start()
     {
-        // Ensure the bulletin board UI and texts are hidden at the start
+        // Ensure the bulletin board UI and all scroll views are hidden at the start
         bulletinBoardUI.SetActive(false);
-        storyText.gameObject.SetActive(false);
-        tutorialsText.gameObject.SetActive(false);
+        storyScrollView.SetActive(false);
+        tutorialsScrollView.SetActive(false);
     }
 
     void Update()
@@ -22,6 +24,7 @@ public class BulletinBoard : MonoBehaviour
         // Check if the player is near and presses the "E" key
         if (playerIsNear && Input.GetKeyDown(KeyCode.E))
         {
+            Time.timeScale = 0f;
             ShowBulletinBoardUI();
         }
     }
@@ -30,23 +33,22 @@ public class BulletinBoard : MonoBehaviour
     private void ShowBulletinBoardUI()
     {
         bulletinBoardUI.SetActive(true); // Show the bulletin board UI
-        Time.timeScale = 0f;             // Pause the game while the UI is open
     }
 
     // Method to close the bulletin board UI
     public void CloseBulletinBoard()
     {
-        bulletinBoardUI.SetActive(false); // Hide the bulletin board UI
-        storyText.gameObject.SetActive(false);
-        tutorialsText.gameObject.SetActive(false);
-        Time.timeScale = 1f;              // Resume the game
+        bulletinBoardUI.SetActive(false);      // Hide the bulletin board UI
+        storyScrollView.SetActive(false);      // Hide the story scroll view
+        tutorialsScrollView.SetActive(false);  // Hide the tutorials scroll view
+        Time.timeScale = 1f;                   // Resume the game
     }
 
     // Method to display the story
     public void ShowStory()
     {
-        storyText.gameObject.SetActive(true); // Show the story text
-        tutorialsText.gameObject.SetActive(false); // Hide the tutorials text
+        storyScrollView.SetActive(true);       // Show the story scroll view
+        tutorialsScrollView.SetActive(false);  // Hide the tutorials scroll view
         storyText.text = "In a post-apocalyptic world ravaged by a mysterious and deadly disease, " +
             "humanity is on the brink of extinction. The disease has turned people into mindless, " +
             "flesh-eating zombies, and the few survivors left must fight to stay alive. " +
@@ -58,8 +60,8 @@ public class BulletinBoard : MonoBehaviour
     // Method to display the tutorials
     public void ShowTutorials()
     {
-        tutorialsText.gameObject.SetActive(true); // Show the tutorials text
-        storyText.gameObject.SetActive(false);    // Hide the story text
+        tutorialsScrollView.SetActive(true);  // Show the tutorials scroll view
+        storyScrollView.SetActive(false);     // Hide the story scroll view
         tutorialsText.text = "Tutorials\n\n" +
             "Movement\n- Use WASD keys to move your character in different directions.\n\n" +
             "Shooting\n- Use the Left Mouse Button to shoot your currently equipped weapon.\n\n" +
