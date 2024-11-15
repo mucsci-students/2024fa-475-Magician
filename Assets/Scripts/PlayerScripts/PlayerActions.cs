@@ -313,8 +313,8 @@ public class PlayerActions : MonoBehaviour
                     // Instantiate the bullet and get its Animator component
                     if (_isPistol && _isPistolAcquired)
                     {
+                        // Pistol has unlimited ammo, so no need to check for ammo
                         _bullet = Instantiate(_bulletPrefab[0], _gun.position, Quaternion.identity);
-                        // Set weapon damage for the rocket
                         if (_weaponStat != null)
                         {
                             _weaponStat.SetWeaponDamage(10f);
@@ -331,14 +331,13 @@ public class PlayerActions : MonoBehaviour
                         {
                             Debug.LogWarning("WeaponStat component not found on the _gun object!");
                         }
-                        
                     }
                     else if (_isRocket && _isRocketAcquired && PlayerCollision.rocketAmmo > 0)
                     {
+                        // Check if there is rocket ammo before creating a rocket bullet
                         _bullet = Instantiate(_bulletPrefab[1], _gun.position, Quaternion.identity);
                         --PlayerCollision.rocketAmmo;
 
-                        // Set weapon damage for the rocket
                         if (_weaponStat != null)
                         {
                             _weaponStat.SetWeaponDamage(50f);
@@ -356,7 +355,6 @@ public class PlayerActions : MonoBehaviour
                             Debug.LogWarning("WeaponStat component not found on the _gun object!");
                         }
 
-                        // Get the Animator component of the bullet
                         Animator bulletAnimator = _bullet.GetComponent<Animator>();
                         if (bulletAnimator != null)
                         {
@@ -365,19 +363,21 @@ public class PlayerActions : MonoBehaviour
                     }
                     else if (_isShotgun && _isShotgunAcquired && PlayerCollision.shotgunAmmo > 0)
                     {
+                        // Check if there is shotgun ammo before creating shotgun bullets
                         int numberOfBullets = 5; // Number of bullets to shoot in a spread
                         float spreadAngle = 15f; // Total angle spread between the bullets
 
-                        // Loop to create multiple bullets
                         for (int i = 0; i < numberOfBullets; i++)
                         {
-                            // Calculate the spread angle for each bullet
-                            float angleOffset = spreadAngle * (i - (numberOfBullets - 1) / 2f); // Spread evenly around the base direction
-                            Vector2 spreadDirection = Quaternion.Euler(0, 0, angleOffset) * direction; // Rotate the base direction to create spread
+                            if (PlayerCollision.shotgunAmmo <= 0)
+                                break; // Stop creating bullets if there's no more ammo
 
-                            // Instantiate the bullet and set its position and rotation
-                            _bullet = Instantiate(_bulletPrefab[0], _gun.position, Quaternion.identity); // Use _bulletPrefab[0] for shotgun
+                            float angleOffset = spreadAngle * (i - (numberOfBullets - 1) / 2f);
+                            Vector2 spreadDirection = Quaternion.Euler(0, 0, angleOffset) * direction;
+
+                            _bullet = Instantiate(_bulletPrefab[0], _gun.position, Quaternion.identity);
                             --PlayerCollision.shotgunAmmo;
+
                             if (_weaponStat != null)
                             {
                                 _weaponStat.SetWeaponDamage(10f);
@@ -395,29 +395,29 @@ public class PlayerActions : MonoBehaviour
                                 Debug.LogWarning("WeaponStat component not found on the _gun object!");
                             }
 
-                            // Get the Animator component of the bullet
                             Animator bulletAnimator = _bullet.GetComponent<Animator>();
                             if (bulletAnimator != null)
                             {
                                 bulletAnimator.SetBool("isRocket", false);
                             }
 
-                            // Set bullet velocity using the spread direction
                             Rigidbody2D bulletRb = _bullet.GetComponent<Rigidbody2D>();
                             if (bulletRb != null)
                             {
-                                bulletRb.velocity = spreadDirection * _bulletSpeed; // Use the spread direction for bullet velocity
+                                bulletRb.velocity = spreadDirection * _bulletSpeed;
                             }
                         }
                     }
 
-                    if (!_isShotgun)
+                    if (_bullet != null) // Check if _bullet is not null
                     {
-                        // Set bullet velocity
-                        Rigidbody2D bulletRb = _bullet.GetComponent<Rigidbody2D>();
-                        if (bulletRb != null)
+                        if (!_isShotgun)
                         {
-                            bulletRb.velocity = direction * _bulletSpeed;
+                            Rigidbody2D bulletRb = _bullet.GetComponent<Rigidbody2D>();
+                            if (bulletRb != null)
+                            {
+                                bulletRb.velocity = direction * _bulletSpeed;
+                            }
                         }
                     }
                 }
@@ -425,6 +425,7 @@ public class PlayerActions : MonoBehaviour
             }
         }
     }
+
 
     private void RotatePlayerSprite(Vector2 direction)
     {

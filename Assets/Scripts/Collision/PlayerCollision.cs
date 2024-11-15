@@ -183,9 +183,9 @@ public class PlayerCollision : MonoBehaviour
             playerAction.SetRocketAqquire(true);
             Destroy(collision.gameObject);
             Debug.Log($"Picked up {collision.gameObject.tag}!");
-            // Move the player to the hub location
-            GameManager.Instance.MovePlayerToHub();
-            SceneManager.LoadScene("MainHub");
+            //// Move the player to the hub location
+            //GameManager.Instance.MovePlayerToHub();
+            //SceneManager.LoadScene("MainHub");
         }
         else if (collision.gameObject.CompareTag("Cure"))
         {

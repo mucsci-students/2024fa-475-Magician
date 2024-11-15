@@ -28,6 +28,7 @@ TagManager:
   - Spawner
   - BulletinBoard
   - Cure
+  - RocketBullet
   layers:
   - Default
   - TransparentFX

@@ -50,9 +50,8 @@ public class EnemyCollision : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Ammo"))
+        if (collision.gameObject.CompareTag("Ammo") || collision.gameObject.CompareTag("RocketBullet"))
         {
-            Destroy(collision.gameObject);
             _enemyStat.TakeDamage(_gunDamage);
             _isEnemyShot = true;
         }
