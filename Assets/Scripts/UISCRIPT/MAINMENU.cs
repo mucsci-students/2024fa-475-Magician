@@ -6,9 +6,13 @@ public class MainMenu : MonoBehaviour
     // Method to start the game (load the next scene)
     public void StartGame()
     {
-        ResetStats();
-        // Move the player to the hub location
-        GameManager.Instance.MovePlayerToHub();
+        GameObject manager = GameObject.Find("GameManager");
+        if (manager)
+        {
+            ResetStats();
+            // Move the player to the hub location
+            GameManager.Instance.MovePlayerToHub();
+        }
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainHub");
     }
