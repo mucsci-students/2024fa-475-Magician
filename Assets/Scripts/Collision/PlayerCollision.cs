@@ -191,7 +191,7 @@ public class PlayerCollision : MonoBehaviour
         {
             Destroy(collision.gameObject);
             Debug.Log($"Picked up {collision.gameObject.tag}!");
-            Invoke("LoadWinningSceneWrapper", 1f);
+            Invoke("LoadWinningSceneWrapper", 5f);
         }
     }
 
