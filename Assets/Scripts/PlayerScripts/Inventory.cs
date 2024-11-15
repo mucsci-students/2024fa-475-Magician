@@ -8,11 +8,33 @@ public class Inventory : MonoBehaviour
 {
     PlayerActions actions;
     PlayerStats playerStats;
+    GameObject healFXObj;
+    Animator healFXAnimator;
     // Start is called before the first frame update
     void Start()
     {
-        actions = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerActions>();
-        playerStats = actions.GetComponent<PlayerStats>();
+        // Find the "Player" GameObject first
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            actions = player.GetComponent<PlayerActions>();
+            playerStats = actions.GetComponent<PlayerStats>();
+            // Then, search for the "HealFx" child within the player's hierarchy
+            healFXObj = player.transform.Find("HealFx").gameObject;
+
+            if (healFXObj != null)
+            {
+                healFXAnimator = healFXObj.GetComponent<Animator>();
+            }
+            else
+            {
+                Debug.LogError("HealFx object not found as a child of Player!");
+            }
+        }
+        else
+        {
+            Debug.LogError("Player object not found!");
+        }
     }
 
     // Update is called once per frame
@@ -76,10 +98,19 @@ public class Inventory : MonoBehaviour
             Debug.Log("Number 5 key pressed!");
             if(PlayerCollision.healthPackAmount > 0)
             {
+                healFXObj.SetActive(true);
                 float currentHealth = playerStats.GetPlayerHealth();
                 playerStats.SetPlayerHealth(currentHealth + 15f);
                 --PlayerCollision.healthPackAmount;
+                healFXAnimator.SetBool("isHeal", true);
+                Invoke("ResetHealAnimationWrapper", 1f);
             }
         }
+    }
+
+    void ResetHealAnimationWrapper()
+    {
+        healFXAnimator.SetBool("isHeal", false);
+        healFXObj.SetActive(false);
     }
 }

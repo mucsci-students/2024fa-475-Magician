@@ -29,6 +29,7 @@ TagManager:
   - BulletinBoard
   - Cure
   - RocketBullet
+  - HealFx
   layers:
   - Default
   - TransparentFX
