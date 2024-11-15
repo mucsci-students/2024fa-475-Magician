@@ -5,6 +5,5 @@
 # https://docs.google.com/spreadsheets/d/12fRenyYTGcyvM7oIM78Z3_EEb8mtJ1GdRZah0WV70IQ/edit?usp=sharing
 
 # Game Name: Muerto
-# Use 'E' to interact with the bulletun board and get the tutorial and quests
-# Set in a world overrun by zombies the player must complete levels collecting weapons and defeating boss
-# zombies ultimately culminating in finding the cure for the zombie virus.
+- Press 'E' to interact with the bulletin board to access the tutorial.
+- Set in a world overrun by zombies, the player must progress through levels, collect weapons, and defeat boss zombies, ultimately culminating in discovering the cure for the zombie virus.
