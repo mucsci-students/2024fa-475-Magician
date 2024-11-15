@@ -75,9 +75,9 @@ public class BulletinBoard : MonoBehaviour
             "Health Recovery\n- To recover health, press 5 to use a health pack. Each health pack restores 15 HP.\n\n" +
             "Melee Attack\n- Press Space to perform a melee attack, useful when enemies are too close or if you run out of ammo.\n\n" +
             "Level Progression\n- There are 3 levels in the game:\n" +
-            "  1. In Level 1, defeat the first boss to obtain the Shotgun.\n" +
-            "  2. In Level 2, defeat the second boss to acquire the Rocket Launcher.\n" +
-            "  3. In the Final Level, explore the map to locate the Auto-Rifle and prepare to face the ultimate zombie boss.\n\n" +
+            "  1. In Level 1 (Go to North Gate), defeat the first boss to obtain the Shotgun.\n" +
+            "  2. In Level 2 (Go to West Gate), defeat the second boss to acquire the Rocket Launcher.\n" +
+            "  3. In the Final Level (Go to South Gate), explore the map to locate the Auto-Rifle and prepare to face the ultimate zombie boss.\n\n" +
             "Use your skills wisely, stay alert, and good luck on your mission to end the zombie apocalypse!";
     }
 
