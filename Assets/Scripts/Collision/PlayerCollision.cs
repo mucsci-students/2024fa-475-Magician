@@ -50,6 +50,15 @@ public class PlayerCollision : MonoBehaviour
         UpdateUI();
     }
 
+    // Reset Inventory
+    public void ResetInventory()
+    {
+        healthPack.SetActive(false);
+        shotgun.SetActive(false);
+        rifle.SetActive(false);
+        rocket.SetActive(false);
+    }
+
     // Method to update the UI text
     private void UpdateUI()
     {
@@ -178,6 +187,20 @@ public class PlayerCollision : MonoBehaviour
             GameManager.Instance.MovePlayerToHub();
             SceneManager.LoadScene("MainHub");
         }
+        else if (collision.gameObject.CompareTag("Cure"))
+        {
+            Destroy(collision.gameObject);
+            Debug.Log($"Picked up {collision.gameObject.tag}!");
+            Invoke("LoadWinningSceneWrapper", 1f);
+        }
+    }
+
+    private void LoadWinningSceneWrapper()
+    {
+        // Move the player to the hub location
+        GameManager.Instance.MovePlayerToHub();
+        SceneManager.LoadScene("WinningScene");
+        Time.timeScale = 0f;
     }
 
     // Method to show the pop-up message

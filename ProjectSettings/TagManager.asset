@@ -27,6 +27,7 @@ TagManager:
   - Level3
   - Spawner
   - BulletinBoard
+  - Cure
   layers:
   - Default
   - TransparentFX

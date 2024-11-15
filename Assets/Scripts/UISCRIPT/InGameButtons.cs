@@ -27,7 +27,7 @@ public class InGameButtons : MonoBehaviour
     // Method to return to the main menu
     public void MainMenu()
     {
-        Time.timeScale = 1f;                // Reset time scale to ensure the game isn't paused
+        Time.timeScale = 0f;                // Reset time scale to ensure the game isn't paused
         GameIsPaused = false;               // Reset the game paused state (fixed here)
         SceneManager.LoadScene("MainMenu"); // Load the main menu scene
     }

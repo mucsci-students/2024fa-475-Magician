@@ -49,12 +49,15 @@ public class BulletinBoard : MonoBehaviour
     {
         storyScrollView.SetActive(true);       // Show the story scroll view
         tutorialsScrollView.SetActive(false);  // Hide the tutorials scroll view
-        storyText.text = "In a post-apocalyptic world ravaged by a mysterious and deadly disease, " +
-            "humanity is on the brink of extinction. The disease has turned people into mindless, " +
-            "flesh-eating zombies, and the few survivors left must fight to stay alive. " +
-            "You are one of these survivors, determined to uncover the origins of the virus and put an end to the nightmare. " +
-            "Your journey will lead you through desolate cities and abandoned facilities, where you’ll battle hordes of zombies and face monstrous bosses. " +
-            "Your ultimate mission is to find and defeat the final zombie boss, the source of the disease, and save humanity from its doom.";
+        storyText.text = "In a post-apocalyptic world ravaged by a deadly disease unleashed by a secretive government experiment, " +
+    "humanity teeters on the brink of extinction. The virus, a result of a failed scientific endeavor, has turned people into mindless, " +
+    "flesh-eating zombies, leaving only a few survivors struggling to stay alive. " +
+    "You are one of these survivors, determined to uncover the truth behind the outbreak and put an end to the nightmare. " +
+    "Your journey will lead you through desolate cities, abandoned government labs, and fortified research facilities underground, " +
+    "where you’ll battle hordes of zombies and confront monstrous bosses. " +
+    "Your ultimate mission is to find and defeat the final zombie boss—the former chief scientist who holds the secret to the cure but has succumbed to the disease himself. " +
+    "Only by defeating him and recovering the cure can you save humanity from its impending doom.";
+
     }
 
     // Method to display the tutorials
