@@ -154,7 +154,7 @@ public class PlayerCollision : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Level3"))
         {
-            ShowPopUp("You must complete Level 2 in the West Gate first.");
+            ShowPopUp("You must complete Level 2 in the East Gate first.");
         }
 
         if (collision.gameObject.CompareTag("Shotgun"))
