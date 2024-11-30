@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class ButtonManager : MonoBehaviour
 {
-    public static bool GameIsPaused = false;
+    public static bool GameIsPaused = true;
 
     [SerializeField] private GameObject pauseMenuUI;    // Reference to the Pause Menu UI
     [SerializeField] private GameObject previousCanvas;  // Reference to the previous UI Canvas (e.g., HUD)
@@ -36,6 +36,7 @@ public class ButtonManager : MonoBehaviour
         }
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainHub");
+        GameIsPaused = false;
     }
 
     // Method to quit the game
