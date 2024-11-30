@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 public class ButtonManager : MonoBehaviour
 {
     public static bool GameIsPaused = true;
-    Scene _currentScene;
 
     [SerializeField] private GameObject mainMenuCanvas;
     [SerializeField] private GameObject pauseMenuUI;    // Reference to the Pause Menu UI
@@ -19,15 +18,15 @@ public class ButtonManager : MonoBehaviour
     void Update()
     {
         // Check if the player presses the Escape key to toggle the pause menu
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name != "MainMenu")
         {
-            if (GameIsPaused)
+            if (!GameIsPaused)
             {
-                Resume();
+                Pause();
             }
             else
             {
-                Pause();
+                Resume();
             }
         }
     }
@@ -89,6 +88,7 @@ public class ButtonManager : MonoBehaviour
         SceneManager.LoadScene("MainMenu"); // Load the main menu scene
         mainMenuCanvas.SetActive(true);
         otherCanvas.SetActive(false);
+        pauseMenuUI.SetActive(false);
     }
 
     // Method to resume the game
