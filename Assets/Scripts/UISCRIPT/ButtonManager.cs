@@ -8,11 +8,12 @@ public class ButtonManager : MonoBehaviour
 
     [SerializeField] private GameObject mainMenuCanvas;
     [SerializeField] private GameObject pauseMenuUI;    // Reference to the Pause Menu UI
-    [SerializeField] private GameObject previousCanvas;  // Reference to the previous UI Canvas (e.g., HUD)
+    [SerializeField] private GameObject otherCanvas;  // Reference to the previous UI Canvas (e.g., HUD)
 
     private void Start()
     {
         mainMenuCanvas.SetActive(true);
+        otherCanvas.SetActive(false);
     }
 
     void Update()
@@ -45,6 +46,7 @@ public class ButtonManager : MonoBehaviour
         SceneManager.LoadScene("MainHub");
         GameIsPaused = false;
         mainMenuCanvas.SetActive(false);
+        otherCanvas.SetActive(true);
     }
 
     // Method to quit the game
@@ -64,16 +66,19 @@ public class ButtonManager : MonoBehaviour
         PlayerCollision.rifleAmmo = 0;
         GameObject _player = GameObject.FindGameObjectWithTag("Player");
 
-        PlayerStats _playerStat = _player.GetComponent<PlayerStats>();
-        _playerStat.SetPlayerHealth(200f);
+       if (_player != null)
+        {
+            PlayerStats _playerStat = _player.GetComponent<PlayerStats>();
+            _playerStat.SetPlayerHealth(200f);
 
-        PlayerActions _playerAction = _player.GetComponent<PlayerActions>();
-        _playerAction.SetRifleAqquire(false);
-        _playerAction.SetRocketAqquire(false);
-        _playerAction.SetShotgunAqquire(false);
+            PlayerActions _playerAction = _player.GetComponent<PlayerActions>();
+            _playerAction.SetRifleAqquire(false);
+            _playerAction.SetRocketAqquire(false);
+            _playerAction.SetShotgunAqquire(false);
 
-        PlayerCollision _playerCollision = _player.GetComponent<PlayerCollision>();
-        _playerCollision.ResetInventory();
+            PlayerCollision _playerCollision = _player.GetComponent<PlayerCollision>();
+            _playerCollision.ResetInventory();
+        }
     }
 
     // Method to return to the main menu
@@ -83,13 +88,14 @@ public class ButtonManager : MonoBehaviour
         GameIsPaused = false;               // Reset the game paused state (fixed here)
         SceneManager.LoadScene("MainMenu"); // Load the main menu scene
         mainMenuCanvas.SetActive(true);
+        otherCanvas.SetActive(false);
     }
 
     // Method to resume the game
     public void Resume()
     {
         pauseMenuUI.SetActive(false);       // Hide the pause menu
-        previousCanvas.SetActive(true);     // Show the previous canvas (e.g., HUD)
+        otherCanvas.SetActive(true);     // Show the previous canvas (e.g., HUD)
         Time.timeScale = 1f;                // Resume the game
         GameIsPaused = false;
         mainMenuCanvas.SetActive(false);
@@ -99,7 +105,6 @@ public class ButtonManager : MonoBehaviour
     public void Pause()
     {
         pauseMenuUI.SetActive(true);        // Show the pause menu
-        previousCanvas.SetActive(false);    // Hide the previous canvas (e.g., HUD)
         Time.timeScale = 0f;                // Pause the game
         GameIsPaused = true;
         mainMenuCanvas.SetActive(false);
