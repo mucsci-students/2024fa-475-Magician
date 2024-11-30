@@ -4,9 +4,11 @@ using UnityEngine.SceneManagement;
 public class ButtonManager : MonoBehaviour
 {
     public static bool GameIsPaused = true;
+    Scene _currentScene;
 
     [SerializeField] private GameObject pauseMenuUI;    // Reference to the Pause Menu UI
     [SerializeField] private GameObject previousCanvas;  // Reference to the previous UI Canvas (e.g., HUD)
+
 
     void Update()
     {
