@@ -28,6 +28,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        AudioManager.Instance.PlayThemeMusic("ThemeAudio");
+    }
+
     private void Update()
     {
         if(SceneManager.GetActiveScene().name == "MainHub")

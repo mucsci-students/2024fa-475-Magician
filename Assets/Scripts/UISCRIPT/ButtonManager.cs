@@ -10,6 +10,13 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] private GameObject pauseMenuUI;    // Reference to the Pause Menu UI
     [SerializeField] private GameObject otherCanvas;  // Reference to the previous UI Canvas (e.g., HUD)
 
+    [Header("Inactive Panels")]
+    [SerializeField] private GameObject _masterVolumeInactive;
+    [SerializeField] private GameObject _sfxVolumeInactive;
+
+    private bool _isMasterVolumeInactive = false;
+    private bool _isSfxVolumeInactive = false;
+
     private void Start()
     {
         mainMenuCanvas.SetActive(true);
@@ -122,5 +129,19 @@ public class ButtonManager : MonoBehaviour
         GameIsPaused = true;
         mainMenuCanvas.SetActive(false);
         settingMenuCanvas.SetActive(false);
+    }
+
+    public void ToggleThemeMusic()
+    {
+        AudioManager.Instance._themeAudioSource.mute = !AudioManager.Instance._themeAudioSource.mute;
+        _isMasterVolumeInactive = !_isMasterVolumeInactive;
+        //_masterVolumeInactive.SetActive(_isMasterVolumeInactive);
+    }
+
+    public void ToggleSFX()
+    {
+        AudioManager.Instance._sfxAudioSource.mute = !AudioManager.Instance._sfxAudioSource.mute;
+        _isSfxVolumeInactive = !_isSfxVolumeInactive;
+        //_sfxVolumeInactive.SetActive(_isSfxVolumeInactive);
     }
 }
