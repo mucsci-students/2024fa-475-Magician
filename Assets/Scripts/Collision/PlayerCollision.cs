@@ -134,13 +134,13 @@ public class PlayerCollision : MonoBehaviour
         if (collision.gameObject.CompareTag("Level1"))
         {
             SceneManager.LoadScene("Map1");
-            GameManager.Instance.MovePlayerToRespawnPosition();
+            GameManager.Instance.MovePlayerToRespawnPosition(2);
         }
 
         if (collision.gameObject.CompareTag("Level2") && playerAction.hasShotgun())
         {
             SceneManager.LoadScene("Map2");
-            GameManager.Instance.MovePlayerToRespawnPosition();
+            GameManager.Instance.MovePlayerToRespawnPosition(3);
         }
         else if (collision.gameObject.CompareTag("Level2"))
         {
@@ -150,7 +150,7 @@ public class PlayerCollision : MonoBehaviour
         if (collision.gameObject.CompareTag("Level3") && playerAction.hasRocket())
         {
             SceneManager.LoadScene("Map3");
-            GameManager.Instance.MovePlayerToRespawnPosition();
+            GameManager.Instance.MovePlayerToRespawnPosition(4);
         }
         else if (collision.gameObject.CompareTag("Level3"))
         {

@@ -584,7 +584,7 @@ public class PlayerActions : MonoBehaviour
         _playerRigidbody.velocity = Vector2.zero;       // Stop linear movement
         _playerRigidbody.isKinematic = false;
 
-        GameManager.Instance.MovePlayerToRespawnPosition();
+        GameManager.Instance.MovePlayerToRespawnPosition(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void ResetAllShootingAnimations()
