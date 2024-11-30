@@ -35,7 +35,6 @@ public class PlayerActions : MonoBehaviour
     bool _hasDealtMeleeDamage = false;
     bool _isDead;
     Scene currentScene;
-    AudioSource[] gunshots;
 
     [SerializeField] bool _isPistol = true;
     bool _isPistolAcquired = true;
@@ -61,7 +60,6 @@ public class PlayerActions : MonoBehaviour
         // Change the cursor to the crosshair and hide the default system cursor
         Cursor.SetCursor(_crosshairTexture, Vector2.zero, CursorMode.Auto);
         currentScene = SceneManager.GetActiveScene();
-        gunshots = GetComponents<AudioSource>();
     }
 
     void Update()
@@ -269,7 +267,7 @@ public class PlayerActions : MonoBehaviour
                 _fireRate = _weaponStat.GetWeaponFireRate();
 
                 Debug.Log("Rifle damage set to: " + _gunDamage);
-                gunshots[1].Play();
+                AudioManager.Instance.PlaySFX("Pistol");
             }
             else
             {
@@ -325,7 +323,7 @@ public class PlayerActions : MonoBehaviour
                             _fireRate = _weaponStat.GetWeaponFireRate();
 
                             Debug.Log("Pistol damage set to: " + _gunDamage);
-                            gunshots[0].Play();
+                            AudioManager.Instance.PlaySFX("Pistol");
                         }
                         else
                         {
@@ -348,7 +346,7 @@ public class PlayerActions : MonoBehaviour
                             _fireRate = _weaponStat.GetWeaponFireRate();
 
                             Debug.Log("Rocket damage set to: " + _gunDamage);
-                            gunshots[1].Play();
+                            AudioManager.Instance.PlaySFX("RocketLauncherFire");
                         }
                         else
                         {
@@ -388,7 +386,7 @@ public class PlayerActions : MonoBehaviour
                                 _fireRate = _weaponStat.GetWeaponFireRate();
 
                                 Debug.Log("Shotgun damage set to: " + _gunDamage);
-                                gunshots[1].Play();
+                                AudioManager.Instance.PlaySFX("RocketLauncherFire");
                             }
                             else
                             {

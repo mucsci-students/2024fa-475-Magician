@@ -6,13 +6,22 @@ public class ButtonManager : MonoBehaviour
     public static bool GameIsPaused = true;
 
     [SerializeField] private GameObject mainMenuCanvas;
+    [SerializeField] private GameObject settingMenuCanvas;
     [SerializeField] private GameObject pauseMenuUI;    // Reference to the Pause Menu UI
     [SerializeField] private GameObject otherCanvas;  // Reference to the previous UI Canvas (e.g., HUD)
+
+    [Header("Inactive Panels")]
+    [SerializeField] private GameObject _masterVolumeInactive;
+    [SerializeField] private GameObject _sfxVolumeInactive;
+
+    private bool _isMasterVolumeInactive = false;
+    private bool _isSfxVolumeInactive = false;
 
     private void Start()
     {
         mainMenuCanvas.SetActive(true);
         otherCanvas.SetActive(false);
+        settingMenuCanvas.SetActive(false);
     }
 
     void Update()
@@ -45,6 +54,7 @@ public class ButtonManager : MonoBehaviour
         SceneManager.LoadScene("MainHub");
         GameIsPaused = false;
         mainMenuCanvas.SetActive(false);
+        settingMenuCanvas.SetActive(false);
         otherCanvas.SetActive(true);
     }
 
@@ -54,6 +64,14 @@ public class ButtonManager : MonoBehaviour
         // This will only work in a built version of the game, not in the editor
         Debug.Log("Quit Game");
         Application.Quit();
+    }
+
+    public void SettingMenu()
+    {
+        mainMenuCanvas.SetActive(false);
+        otherCanvas.SetActive(false);
+        pauseMenuUI.SetActive(false);
+        settingMenuCanvas.SetActive(true);
     }
 
     // Reset stats
@@ -84,11 +102,12 @@ public class ButtonManager : MonoBehaviour
     public void MainMenu()
     {
         Time.timeScale = 0f;                // Reset time scale to ensure the game isn't paused
-        GameIsPaused = false;               // Reset the game paused state (fixed here)
+        GameIsPaused = true;               // Reset the game paused state (fixed here)
         SceneManager.LoadScene("MainMenu"); // Load the main menu scene
         mainMenuCanvas.SetActive(true);
         otherCanvas.SetActive(false);
         pauseMenuUI.SetActive(false);
+        settingMenuCanvas.SetActive(false);
     }
 
     // Method to resume the game
@@ -99,6 +118,7 @@ public class ButtonManager : MonoBehaviour
         Time.timeScale = 1f;                // Resume the game
         GameIsPaused = false;
         mainMenuCanvas.SetActive(false);
+        settingMenuCanvas.SetActive(false);
     }
 
     // Method to pause the game
@@ -108,5 +128,20 @@ public class ButtonManager : MonoBehaviour
         Time.timeScale = 0f;                // Pause the game
         GameIsPaused = true;
         mainMenuCanvas.SetActive(false);
+        settingMenuCanvas.SetActive(false);
+    }
+
+    public void ToggleThemeMusic()
+    {
+        AudioManager.Instance._themeAudioSource.mute = !AudioManager.Instance._themeAudioSource.mute;
+        _isMasterVolumeInactive = !_isMasterVolumeInactive;
+        //_masterVolumeInactive.SetActive(_isMasterVolumeInactive);
+    }
+
+    public void ToggleSFX()
+    {
+        AudioManager.Instance._sfxAudioSource.mute = !AudioManager.Instance._sfxAudioSource.mute;
+        _isSfxVolumeInactive = !_isSfxVolumeInactive;
+        //_sfxVolumeInactive.SetActive(_isSfxVolumeInactive);
     }
 }
