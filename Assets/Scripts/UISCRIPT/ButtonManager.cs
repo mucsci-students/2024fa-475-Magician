@@ -47,6 +47,7 @@ public class ButtonManager : MonoBehaviour
         SceneManager.LoadScene("MainHub");
         GameIsPaused = false;
         mainMenuCanvas.SetActive(false);
+        settingMenuCanvas.SetActive(false);
         otherCanvas.SetActive(true);
     }
 
@@ -99,6 +100,7 @@ public class ButtonManager : MonoBehaviour
         mainMenuCanvas.SetActive(true);
         otherCanvas.SetActive(false);
         pauseMenuUI.SetActive(false);
+        settingMenuCanvas.SetActive(false);
     }
 
     // Method to resume the game
@@ -109,6 +111,7 @@ public class ButtonManager : MonoBehaviour
         Time.timeScale = 1f;                // Resume the game
         GameIsPaused = false;
         mainMenuCanvas.SetActive(false);
+        settingMenuCanvas.SetActive(false);
     }
 
     // Method to pause the game
@@ -118,5 +121,6 @@ public class ButtonManager : MonoBehaviour
         Time.timeScale = 0f;                // Pause the game
         GameIsPaused = true;
         mainMenuCanvas.SetActive(false);
+        settingMenuCanvas.SetActive(false);
     }
 }
