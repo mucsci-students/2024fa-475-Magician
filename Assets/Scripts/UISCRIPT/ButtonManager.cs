@@ -94,7 +94,7 @@ public class ButtonManager : MonoBehaviour
     public void MainMenu()
     {
         Time.timeScale = 0f;                // Reset time scale to ensure the game isn't paused
-        GameIsPaused = false;               // Reset the game paused state (fixed here)
+        GameIsPaused = true;               // Reset the game paused state (fixed here)
         SceneManager.LoadScene("MainMenu"); // Load the main menu scene
         mainMenuCanvas.SetActive(true);
         otherCanvas.SetActive(false);
