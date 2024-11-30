@@ -6,9 +6,9 @@ public class ButtonManager : MonoBehaviour
     public static bool GameIsPaused = true;
     Scene _currentScene;
 
+    [SerializeField] private GameObject mainMenuCanvas;
     [SerializeField] private GameObject pauseMenuUI;    // Reference to the Pause Menu UI
     [SerializeField] private GameObject previousCanvas;  // Reference to the previous UI Canvas (e.g., HUD)
-
 
     void Update()
     {
@@ -39,6 +39,7 @@ public class ButtonManager : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainHub");
         GameIsPaused = false;
+        mainMenuCanvas.SetActive(false);
     }
 
     // Method to quit the game
@@ -47,11 +48,6 @@ public class ButtonManager : MonoBehaviour
         // This will only work in a built version of the game, not in the editor
         Debug.Log("Quit Game");
         Application.Quit();
-    }
-
-    public void BackToMainMenu()
-    {
-        SceneManager.LoadScene("MainMenu"); // Load the main menu scene
     }
 
     // Reset stats
@@ -81,6 +77,7 @@ public class ButtonManager : MonoBehaviour
         Time.timeScale = 0f;                // Reset time scale to ensure the game isn't paused
         GameIsPaused = false;               // Reset the game paused state (fixed here)
         SceneManager.LoadScene("MainMenu"); // Load the main menu scene
+        mainMenuCanvas.SetActive(true);
     }
 
     // Method to resume the game
@@ -90,6 +87,7 @@ public class ButtonManager : MonoBehaviour
         previousCanvas.SetActive(true);     // Show the previous canvas (e.g., HUD)
         Time.timeScale = 1f;                // Resume the game
         GameIsPaused = false;
+        mainMenuCanvas.SetActive(false);
     }
 
     // Method to pause the game
@@ -99,5 +97,6 @@ public class ButtonManager : MonoBehaviour
         previousCanvas.SetActive(false);    // Hide the previous canvas (e.g., HUD)
         Time.timeScale = 0f;                // Pause the game
         GameIsPaused = true;
+        mainMenuCanvas.SetActive(false);
     }
 }
