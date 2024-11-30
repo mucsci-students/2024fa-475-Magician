@@ -150,7 +150,7 @@ public class PlayerActions : MonoBehaviour
     */
     void FixedUpdate()
     {
-        if(!_isDead && !InGameButtons.GameIsPaused)
+        if(!_isDead && !ButtonManager.GameIsPaused)
         {
             Run();
         }
@@ -296,7 +296,7 @@ public class PlayerActions : MonoBehaviour
 
     private void OnFire(InputValue inputValue)
     {
-        if (!_isRifle && !_isDead && !InGameButtons.GameIsPaused)
+        if (!_isRifle && !_isDead && !ButtonManager.GameIsPaused)
         {
             if (Time.time >= _nextFireTime)
             {
