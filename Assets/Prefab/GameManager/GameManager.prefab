@@ -3272,6 +3272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b121f438273c3064db25df8b2b621371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bulletinBoard: {fileID: 8487957395388696224}
 --- !u!1 &7086387273005266016
 GameObject:
   m_ObjectHideFlags: 0
@@ -5373,11 +5374,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2439006301850028522, guid: 4ac40e259645007438cd00caf73f9754, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16.5
+      value: -14.4
       objectReference: {fileID: 0}
     - target: {fileID: 2439006301850028522, guid: 4ac40e259645007438cd00caf73f9754, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 63.2
+      value: -24.3
       objectReference: {fileID: 0}
     - target: {fileID: 2439006301850028522, guid: 4ac40e259645007438cd00caf73f9754, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5470,6 +5471,10 @@ PrefabInstance:
     - target: {fileID: 8775535976773638865, guid: 4ac40e259645007438cd00caf73f9754, type: 3}
       propertyPath: _playerHealth
       value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 8775535976773638865, guid: 4ac40e259645007438cd00caf73f9754, type: 3}
+      propertyPath: _playerMoveSpeed
+      value: 7.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

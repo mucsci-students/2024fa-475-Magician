@@ -6,6 +6,10 @@ public class GameManager : MonoBehaviour
     // Singleton instance
     public static GameManager Instance { get; private set; }
 
+    [SerializeField] GameObject _bulletinBoard;
+
+    Scene _currentScene;
+
     // Reference to the initial location in the main hub
     private Transform _initialLocation;
     private Transform _respawnPosition;
@@ -29,9 +33,22 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        _currentScene = SceneManager.GetActiveScene();
         InitializeReferences();
         // Subscribe to the sceneLoaded event
         SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void Update()
+    {
+        if(_currentScene.name == "MainHub")
+        {
+            _bulletinBoard.SetActive(true);
+        }
+        else
+        {
+            _bulletinBoard.SetActive(false);
+        }
     }
 
     // Called every time a new scene is loaded

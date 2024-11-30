@@ -25,6 +25,7 @@ public class BulletinBoard : MonoBehaviour
         if (playerIsNear && Input.GetKeyDown(KeyCode.E))
         {
             Time.timeScale = 0f;
+            InGameButtons.GameIsPaused = true;
             ShowBulletinBoardUI();
         }
     }
@@ -42,6 +43,7 @@ public class BulletinBoard : MonoBehaviour
         storyScrollView.SetActive(false);      // Hide the story scroll view
         tutorialsScrollView.SetActive(false);  // Hide the tutorials scroll view
         Time.timeScale = 1f;                   // Resume the game
+        InGameButtons.GameIsPaused = false;
     }
 
     // Method to display the story
