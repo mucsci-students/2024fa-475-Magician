@@ -6442,6 +6442,10 @@ PrefabInstance:
       propertyPath: m_CullingMask.m_Bits
       value: 767
       objectReference: {fileID: 0}
+    - target: {fileID: 4479974748407531916, guid: 958f5d9036015f84eb3013dfe7fe3b28, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6949601395819932543, guid: 958f5d9036015f84eb3013dfe7fe3b28, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -6600,7 +6604,8 @@ PrefabInstance:
       propertyPath: shotgunAmmoText
       value: 
       objectReference: {fileID: 8980530070708085610}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4899527233635692060, guid: 4ac40e259645007438cd00caf73f9754, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2439006301850028522, guid: 4ac40e259645007438cd00caf73f9754, type: 3}
