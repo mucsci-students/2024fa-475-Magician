@@ -698,7 +698,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6123335981461675722
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1120,7 +1120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenuCanvas: {fileID: 307307620420006092}
   pauseMenuUI: {fileID: 6530200839502595651}
-  previousCanvas: {fileID: 6351382787634146179}
+  otherCanvas: {fileID: 6351382787634146179}
 --- !u!1 &1569402589166329887
 GameObject:
   m_ObjectHideFlags: 0
@@ -6111,11 +6111,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3167077547032524762, guid: 020581b89dd240444aac4ce4900e1f16, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3167077547032524762, guid: 020581b89dd240444aac4ce4900e1f16, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3523184275870699528, guid: 020581b89dd240444aac4ce4900e1f16, type: 3}
       propertyPath: m_IsActive
@@ -6228,6 +6228,10 @@ PrefabInstance:
     - target: {fileID: 6614415388962421572, guid: 020581b89dd240444aac4ce4900e1f16, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6614415388962421572, guid: 020581b89dd240444aac4ce4900e1f16, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7146980280636333495, guid: 020581b89dd240444aac4ce4900e1f16, type: 3}
       propertyPath: m_AnchoredPosition.x
