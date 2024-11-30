@@ -6,6 +6,7 @@ public class ButtonManager : MonoBehaviour
     public static bool GameIsPaused = true;
 
     [SerializeField] private GameObject mainMenuCanvas;
+    [SerializeField] private GameObject settingMenuCanvas;
     [SerializeField] private GameObject pauseMenuUI;    // Reference to the Pause Menu UI
     [SerializeField] private GameObject otherCanvas;  // Reference to the previous UI Canvas (e.g., HUD)
 
@@ -13,6 +14,7 @@ public class ButtonManager : MonoBehaviour
     {
         mainMenuCanvas.SetActive(true);
         otherCanvas.SetActive(false);
+        settingMenuCanvas.SetActive(false);
     }
 
     void Update()
@@ -54,6 +56,14 @@ public class ButtonManager : MonoBehaviour
         // This will only work in a built version of the game, not in the editor
         Debug.Log("Quit Game");
         Application.Quit();
+    }
+
+    public void SettingMenu()
+    {
+        mainMenuCanvas.SetActive(false);
+        otherCanvas.SetActive(false);
+        pauseMenuUI.SetActive(false);
+        settingMenuCanvas.SetActive(true);
     }
 
     // Reset stats
