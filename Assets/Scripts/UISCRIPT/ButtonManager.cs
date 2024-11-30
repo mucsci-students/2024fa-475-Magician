@@ -10,6 +10,11 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] private GameObject pauseMenuUI;    // Reference to the Pause Menu UI
     [SerializeField] private GameObject previousCanvas;  // Reference to the previous UI Canvas (e.g., HUD)
 
+    private void Start()
+    {
+        mainMenuCanvas.SetActive(true);
+    }
+
     void Update()
     {
         // Check if the player presses the Escape key to toggle the pause menu

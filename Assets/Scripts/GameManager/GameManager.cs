@@ -8,12 +8,11 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] GameObject _bulletinBoard;
 
-    // Reference to the initial location in the main hub
-    private Transform _initialLocation;
-    private Transform _respawnPosition;
-
-    // Reference to the player object
-    private GameObject _player;
+    [SerializeField] private GameObject _player;
+    [SerializeField] private GameObject _mainHubPosition;
+    [SerializeField] private GameObject _firstRespawn;
+    [SerializeField] private GameObject _secondRespawn;
+    [SerializeField] private GameObject _thirdRespawn;
 
     private void Awake()
     {
@@ -29,13 +28,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        InitializeReferences();
-        // Subscribe to the sceneLoaded event
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
     private void Update()
     {
         if(SceneManager.GetActiveScene().name == "MainHub")
@@ -49,69 +41,24 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Called every time a new scene is loaded
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    public void MovePlayerToRespawnPosition(int level)
     {
-        InitializeReferences();
-    }
-
-    private void InitializeReferences()
-    {
-        // Find the player object in the scene
-        _player = GameObject.FindGameObjectWithTag("Player");
-
-        // Find the initial location and respawn position objects in the scene
-        GameObject initialLocationObj = GameObject.Find("InitialPosition");
-        GameObject respawnPositionObj = GameObject.Find("RespawnPosition");
-
-        if (initialLocationObj != null)
+        if (level == 2)
         {
-            _initialLocation = initialLocationObj.transform;
+            _player.transform.position = _firstRespawn.transform.position;
         }
-        else
+        else if (level == 3) 
         {
-            Debug.LogWarning("InitialLocation object not found in the scene.");
+            _player.transform.position = _secondRespawn.transform.position;
         }
-
-        if (respawnPositionObj != null)
+        else if (level == 4)
         {
-            _respawnPosition = respawnPositionObj.transform;
-        }
-        else
-        {
-            Debug.LogWarning("RespawnPosition object not found in the scene.");
-        }
-    }
-
-    public void MovePlayerToRespawnPosition()
-    {
-        if (_player != null && _respawnPosition != null)
-        {
-            _player.transform.position = _respawnPosition.position;
-            Debug.Log("Player moved to the respawn position.");
-        }
-        else
-        {
-            Debug.LogWarning("Player or respawn position not set.");
+            _player.transform.position = _thirdRespawn.transform.position;
         }
     }
 
     public void MovePlayerToHub()
     {
-        if (_player != null && _initialLocation != null)
-        {
-            _player.transform.position = _initialLocation.position;
-            Debug.Log("Player moved to the main hub location.");
-        }
-        else
-        {
-            Debug.LogWarning("Player or initial location not set.");
-        }
-    }
-
-    private void OnDestroy()
-    {
-        // Unsubscribe from the sceneLoaded event to prevent memory leaks
-        SceneManager.sceneLoaded -= OnSceneLoaded;
+        _player.transform.position = _mainHubPosition.transform.position;
     }
 }
