@@ -122,11 +122,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &38524178 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1415333888514358578, guid: 735e0f116db873545b487d6ea135f6bc, type: 3}
-  m_PrefabInstance: {fileID: 1013139607}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &90280489
 GameObject:
   m_ObjectHideFlags: 0
@@ -530,11 +525,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!1 &983058720 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6351382787634146179, guid: 735e0f116db873545b487d6ea135f6bc, type: 3}
-  m_PrefabInstance: {fileID: 1013139607}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &992906378
 GameObject:
   m_ObjectHideFlags: 0
@@ -626,14 +616,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4824616519513115255, guid: 735e0f116db873545b487d6ea135f6bc, type: 3}
-      propertyPath: _player
-      value: 
-      objectReference: {fileID: 38524178}
-    - target: {fileID: 4824616519513115255, guid: 735e0f116db873545b487d6ea135f6bc, type: 3}
-      propertyPath: _initialCanvas
-      value: 
-      objectReference: {fileID: 983058720}
     - target: {fileID: 6325474063657321980, guid: 735e0f116db873545b487d6ea135f6bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 72.95197
