@@ -6,6 +6,13 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
+    [Header("Inventory Active Icon")]
+    [SerializeField] private GameObject _slot1;
+    [SerializeField] private GameObject _slot2;
+    [SerializeField] private GameObject _slot3;
+    [SerializeField] private GameObject _slot4;
+    [SerializeField] private GameObject _slot5;
+
     PlayerActions actions;
     PlayerStats playerStats;
     GameObject healFXObj;
@@ -13,6 +20,7 @@ public class Inventory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _slot2.SetActive(true);
         // Find the "Player" GameObject first
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
@@ -45,57 +53,61 @@ public class Inventory : MonoBehaviour
 
     void GunSwitch()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            Debug.Log("Number 1 key pressed!");
+            Debug.Log("Number 2 key pressed!");
             if(actions.hasPistol() == true)
             {
                 actions.setPistol(true);
                 actions.setRifle(false);
                 actions.setShotgun(false);
                 actions.setRocket(false);
+                SwitchActive(KeyCode.Alpha2);
             }
         }
 
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            Debug.Log("Number 2 key pressed!");
+            Debug.Log("Number 3 key pressed!");
             if (actions.hasShotgun() == true)
             {
                 actions.setShotgun(true);
                 actions.setRifle(false);
                 actions.setRocket(false);
                 actions.setPistol(false);
-            }
-        }
-
-        else if(Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            Debug.Log("Number 3 key pressed!");
-            if (actions.hasRocket() == true)
-            {
-                actions.setRocket(true);
-                actions.setRifle(false);
-                actions.setShotgun(false);
-                actions.setPistol(false);
+                SwitchActive(KeyCode.Alpha3);
             }
         }
 
         else if(Input.GetKeyDown(KeyCode.Alpha4))
         {
             Debug.Log("Number 4 key pressed!");
+            if (actions.hasRocket() == true)
+            {
+                actions.setRocket(true);
+                actions.setRifle(false);
+                actions.setShotgun(false);
+                actions.setPistol(false);
+                SwitchActive(KeyCode.Alpha4);
+            }
+        }
+
+        else if(Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            Debug.Log("Number 5 key pressed!");
             if (actions.hasRifle() == true)
             {
                 actions.setRifle(true);
                 actions.setShotgun(false);
                 actions.setPistol(false);
                 actions.setRocket(false);
+                SwitchActive(KeyCode.Alpha5);
             }
         }
 
-        else if (Input.GetKeyDown(KeyCode.Alpha5))
+        else if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            Debug.Log("Number 5 key pressed!");
+            Debug.Log("Number 1 key pressed!");
             if(PlayerCollision.healthPackAmount > 0)
             {
                 healFXObj.SetActive(true);
@@ -104,8 +116,51 @@ public class Inventory : MonoBehaviour
                 --PlayerCollision.healthPackAmount;
                 healFXAnimator.SetBool("isHeal", true);
                 Invoke("ResetHealAnimationWrapper", 1f);
+                SwitchActive(KeyCode.Alpha1);
             }
         }
+    }
+
+    void SwitchActive(KeyCode key)
+    {
+        if (key == KeyCode.Alpha1)
+        {
+            _slot1.SetActive(true);
+            Invoke("TurnOffHealthSlotActive", 0.1f);
+        }
+        else if (key == KeyCode.Alpha2)
+        {
+            _slot2.SetActive(true);
+            _slot3.SetActive(false);
+            _slot4.SetActive(false);
+            _slot5.SetActive(false);
+        }
+        else if (key == KeyCode.Alpha3)
+        {
+            _slot2.SetActive(false);
+            _slot3.SetActive(true);
+            _slot4.SetActive(false);
+            _slot5.SetActive(false);
+        }
+        else if (key == KeyCode.Alpha4)
+        {
+            _slot2.SetActive(false);
+            _slot3.SetActive(false);
+            _slot4.SetActive(true);
+            _slot5.SetActive(false);
+        }
+        else if (key == KeyCode.Alpha5)
+        {
+            _slot2.SetActive(false);
+            _slot3.SetActive(false);
+            _slot4.SetActive(false);
+            _slot5.SetActive(true);
+        }
+    }
+
+    void TurnOffHealthSlotActive()
+    {
+        _slot1.SetActive(false);
     }
 
     void ResetHealAnimationWrapper()
