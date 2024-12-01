@@ -33,7 +33,7 @@ public class ButtonManager : MonoBehaviour
     void Update()
     {
         // Check if the player presses the Escape key to toggle the pause menu
-        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name != "MainMenu")
+        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name != "MainMenu" && !BulletinBoard.isUsingBulletinBoard)
         {
             if (!GameIsPaused)
             {

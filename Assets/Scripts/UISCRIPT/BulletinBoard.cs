@@ -11,6 +11,8 @@ public class BulletinBoard : MonoBehaviour
 
     private bool playerIsNear = false; // Track if the player is near the bulletin board
 
+    public static bool isUsingBulletinBoard = false;
+
     void Start()
     {
         // Ensure the bulletin board UI and all scroll views are hidden at the start
@@ -27,6 +29,7 @@ public class BulletinBoard : MonoBehaviour
             Time.timeScale = 0f;
             ButtonManager.GameIsPaused = true;
             ShowBulletinBoardUI();
+            isUsingBulletinBoard = true;
         }
     }
 
@@ -44,6 +47,7 @@ public class BulletinBoard : MonoBehaviour
         tutorialsScrollView.SetActive(false);  // Hide the tutorials scroll view
         Time.timeScale = 1f;                   // Resume the game
         ButtonManager.GameIsPaused = false;
+        isUsingBulletinBoard = false;
     }
 
     // Method to display the story
