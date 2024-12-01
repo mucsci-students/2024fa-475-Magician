@@ -6,8 +6,10 @@ public class BulletinBoard : MonoBehaviour
     [SerializeField] private GameObject bulletinBoardUI; // Reference to the bulletin board UI (Pop-Up Panel)
     [SerializeField] private GameObject storyScrollView; // Scroll View for the Story
     [SerializeField] private GameObject tutorialsScrollView; // Scroll View for the Tutorials
+    [SerializeField] private GameObject tutorialsScrollView_2; // Scroll View for the Tutorials
     [SerializeField] private TMP_Text storyText;         // Reference to the Text component for the story
     [SerializeField] private TMP_Text tutorialsText;     // Reference to the Text component for the tutorials
+    [SerializeField] private TMP_Text tutorialsText_2;     // Reference to the Text component for the tutorials
 
     private bool playerIsNear = false; // Track if the player is near the bulletin board
 
@@ -55,14 +57,15 @@ public class BulletinBoard : MonoBehaviour
     {
         storyScrollView.SetActive(true);       // Show the story scroll view
         tutorialsScrollView.SetActive(false);  // Hide the tutorials scroll view
+        tutorialsScrollView_2.SetActive(false);
         storyText.text = "In a post-apocalyptic world ravaged by a deadly disease unleashed by a secretive government experiment, " +
-    "humanity teeters on the brink of extinction. The virus, a result of a failed scientific endeavor, has turned people into mindless, " +
-    "flesh-eating zombies, leaving only a few survivors struggling to stay alive. " +
-    "You are one of these survivors, determined to uncover the truth behind the outbreak and put an end to the nightmare. " +
-    "Your journey will lead you through desolate cities, abandoned government labs, and fortified research facilities underground, " +
-    "where you値l battle hordes of zombies and confront monstrous bosses. " +
-    "Your ultimate mission is to find and defeat the final zombie boss葉he former chief scientist who holds the secret to the cure but has succumbed to the disease himself. " +
-    "Only by defeating him and recovering the cure can you save humanity from its impending doom.";
+        "humanity teeters on the brink of extinction. The virus, a result of a failed scientific endeavor, has turned people into mindless, " +
+        "flesh-eating zombies, leaving only a few survivors struggling to stay alive. " +
+        "You are one of these survivors, determined to uncover the truth behind the outbreak and put an end to the nightmare. " +
+        "Your journey will lead you through desolate cities, abandoned government labs, and fortified research facilities underground, " +
+        "where you値l battle hordes of zombies and confront monstrous bosses. " +
+        "Your ultimate mission is to find and defeat the final zombie boss葉he former chief scientist who holds the secret to the cure but has succumbed to the disease himself. " +
+        "Only by defeating him and recovering the cure can you save humanity from its impending doom.";
 
     }
 
@@ -70,21 +73,33 @@ public class BulletinBoard : MonoBehaviour
     public void ShowTutorials()
     {
         tutorialsScrollView.SetActive(true);  // Show the tutorials scroll view
+        tutorialsScrollView_2.SetActive(true);
         storyScrollView.SetActive(false);     // Hide the story scroll view
+        // Set the main tutorials text
         tutorialsText.text = "Tutorials\n\n" +
             "Press ESC key to pause the game or click on the pause button on top right of the screen!\n\n" +
-            "Movement\n- Use WASD keys to move your character in different directions.\n\n" +
-            "Shooting\n- Use the Left Mouse Button to shoot your currently equipped weapon.\n\n" +
-            "Weapons and Items\n- You have 5 slots for different weapons and a health pack:\n" +
-            "  - 1: Pistol (unlimited ammo)\n" +
-            "  - 2: Shotgun (bullet will spread)\n" +
-            "  - 3: Rocket Launcher (has area damage, we can lure multiple enemies and shoot all of them)\n" +
-            "  - 4: Auto-Rifle\n" +
-            "  - 5: Health Pack\n" +
-            "Switching Items: Press 1, 2, 3, 4, or 5 to select the corresponding weapon or health pack.\n\n" +
-            "Health Recovery\n- To recover health, press 5 to use a health pack. Each health pack restores 15 HP.\n\n" +
-            "Melee Attack\n- Press Space to perform a melee attack, useful when enemies are too close or if you run out of ammo.\n\n" +
-            "Level Progression\n- There are 3 levels in the game:\n" +
+            "Movement\n" +
+            "- Use WASD keys to move your character in different directions.\n\n" +
+            "Shooting\n" +
+            "- Use the Left Mouse Button to shoot your currently equipped weapon.\n\n" +
+            "Weapons and Items\n" +
+            "- You have 5 slots for different weapons and a health pack:\n" +
+            "  1. Health Pack\n" +
+            "  2. Pistol (unlimited ammo)\n" +
+            "  3. Shotgun (bullet will spread)\n" +
+            "  4. Rocket Launcher (has area damage, we can lure multiple enemies and shoot all of them)\n" +
+            "  5. Auto-Rifle\n";
+
+        // Set additional tutorials text
+        tutorialsText_2.text =
+            "Switching Items\n" +
+            "- Press 1, 2, 3, 4, or 5 to select the corresponding weapon or health pack.\n\n" +
+            "Health Recovery\n" +
+            "- To recover health, press 5 to use a health pack. Each health pack restores 15 HP.\n\n" +
+            "Melee Attack\n" +
+            "- Press Space to perform a melee attack, useful when enemies are too close or if you run out of ammo.\n\n" +
+            "Level Progression\n" +
+            "- There are 3 levels in the game:\n" +
             "  1. In Level 1 (Go to North Gate), defeat the first boss to obtain the Shotgun.\n" +
             "  2. In Level 2 (Go to East Gate), defeat the second boss to acquire the Rocket Launcher.\n" +
             "  3. In the Final Level (Go to South Gate), explore the map to locate the Auto-Rifle and prepare to face the ultimate zombie boss.\n\n" +
