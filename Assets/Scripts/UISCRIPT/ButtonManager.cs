@@ -10,6 +10,10 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] private GameObject pauseMenuUI;    // Reference to the Pause Menu UI
     [SerializeField] private GameObject otherCanvas;  // Reference to the previous UI Canvas (e.g., HUD)
 
+    [Header("Button To Show From Pause Menu")]
+    [SerializeField] private GameObject _resumeButtonInMainMenu;
+    [SerializeField] private GameObject _resumeButtonInSettingMenu;
+
     [Header("Inactive Panels")]
     [SerializeField] private GameObject _masterVolumeInactive;
     [SerializeField] private GameObject _sfxVolumeInactive;
@@ -19,6 +23,8 @@ public class ButtonManager : MonoBehaviour
 
     private void Start()
     {
+        _resumeButtonInMainMenu.SetActive(false);
+        _resumeButtonInSettingMenu.SetActive(false);
         mainMenuCanvas.SetActive(true);
         otherCanvas.SetActive(false);
         settingMenuCanvas.SetActive(false);
@@ -110,6 +116,16 @@ public class ButtonManager : MonoBehaviour
         settingMenuCanvas.SetActive(false);
     }
 
+    public void SecondMainMenu()
+    {
+        Time.timeScale = 0f;                // Reset time scale to ensure the game isn't paused
+        GameIsPaused = true;               // Reset the game paused state (fixed here)
+        mainMenuCanvas.SetActive(true);
+        otherCanvas.SetActive(false);
+        pauseMenuUI.SetActive(false);
+        settingMenuCanvas.SetActive(false);
+    }
+
     // Method to resume the game
     public void Resume()
     {
@@ -129,6 +145,8 @@ public class ButtonManager : MonoBehaviour
         GameIsPaused = true;
         mainMenuCanvas.SetActive(false);
         settingMenuCanvas.SetActive(false);
+        _resumeButtonInMainMenu.SetActive(true);
+        _resumeButtonInSettingMenu.SetActive(true);
     }
 
     public void ToggleThemeMusic()
