@@ -72,6 +72,7 @@ public class BulletinBoard : MonoBehaviour
         tutorialsScrollView.SetActive(true);  // Show the tutorials scroll view
         storyScrollView.SetActive(false);     // Hide the story scroll view
         tutorialsText.text = "Tutorials\n\n" +
+            "Press ESC key to pause the game or click on the pause button on top right of the screen!\n\n" +
             "Movement\n- Use WASD keys to move your character in different directions.\n\n" +
             "Shooting\n- Use the Left Mouse Button to shoot your currently equipped weapon.\n\n" +
             "Weapons and Items\n- You have 5 slots for different weapons and a health pack:\n" +
@@ -87,7 +88,7 @@ public class BulletinBoard : MonoBehaviour
             "  1. In Level 1 (Go to North Gate), defeat the first boss to obtain the Shotgun.\n" +
             "  2. In Level 2 (Go to East Gate), defeat the second boss to acquire the Rocket Launcher.\n" +
             "  3. In the Final Level (Go to South Gate), explore the map to locate the Auto-Rifle and prepare to face the ultimate zombie boss.\n\n" +
-            "Use your skills wisely, stay alert, and good luck on your mission to end the zombie apocalypse!";
+            "GOOD LUCK!";
     }
 
     // Detect when the player enters the trigger zone
