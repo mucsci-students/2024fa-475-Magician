@@ -170,14 +170,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6599018548189119671, guid: 735e0f116db873545b487d6ea135f6bc, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SettingMenu
-      objectReference: {fileID: 0}
-    - target: {fileID: 6599018548189119671, guid: 735e0f116db873545b487d6ea135f6bc, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: ButtonManager, Assembly-CSharp
-      objectReference: {fileID: 0}
     - target: {fileID: 6980958041442625503, guid: 735e0f116db873545b487d6ea135f6bc, type: 3}
       propertyPath: m_Name
       value: GameManager
