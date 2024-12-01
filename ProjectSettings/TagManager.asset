@@ -30,6 +30,7 @@ TagManager:
   - Cure
   - RocketBullet
   - HealFx
+  - AnimalEnemy
   layers:
   - Default
   - TransparentFX

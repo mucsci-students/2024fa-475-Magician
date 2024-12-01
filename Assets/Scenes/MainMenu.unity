@@ -134,6 +134,42 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2255988070939710675, guid: 735e0f116db873545b487d6ea135f6bc, type: 3}
+      propertyPath: _sfxAudio.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2255988070939710675, guid: 735e0f116db873545b487d6ea135f6bc, type: 3}
+      propertyPath: _sfxAudio.Array.data[2]._audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 2628db55e50fe41cc9879051d359847a, type: 3}
+    - target: {fileID: 2255988070939710675, guid: 735e0f116db873545b487d6ea135f6bc, type: 3}
+      propertyPath: _sfxAudio.Array.data[2]._audioName
+      value: Z1Attack
+      objectReference: {fileID: 0}
+    - target: {fileID: 2255988070939710675, guid: 735e0f116db873545b487d6ea135f6bc, type: 3}
+      propertyPath: _sfxAudio.Array.data[3]._audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 2c706f39dc7b645e0a17766d7757d4c5, type: 3}
+    - target: {fileID: 2255988070939710675, guid: 735e0f116db873545b487d6ea135f6bc, type: 3}
+      propertyPath: _sfxAudio.Array.data[3]._audioName
+      value: Z2Attack
+      objectReference: {fileID: 0}
+    - target: {fileID: 2255988070939710675, guid: 735e0f116db873545b487d6ea135f6bc, type: 3}
+      propertyPath: _sfxAudio.Array.data[4]._audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 7666bab29b4a04b149e8f5cefdf0c6e6, type: 3}
+    - target: {fileID: 2255988070939710675, guid: 735e0f116db873545b487d6ea135f6bc, type: 3}
+      propertyPath: _sfxAudio.Array.data[4]._audioName
+      value: Z3Attack
+      objectReference: {fileID: 0}
+    - target: {fileID: 2255988070939710675, guid: 735e0f116db873545b487d6ea135f6bc, type: 3}
+      propertyPath: _sfxAudio.Array.data[5]._audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: c5e72c14120434b7d8c3248afc4851b6, type: 3}
+    - target: {fileID: 2255988070939710675, guid: 735e0f116db873545b487d6ea135f6bc, type: 3}
+      propertyPath: _sfxAudio.Array.data[5]._audioName
+      value: Z4Attack
+      objectReference: {fileID: 0}
     - target: {fileID: 2846522036213692485, guid: 735e0f116db873545b487d6ea135f6bc, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

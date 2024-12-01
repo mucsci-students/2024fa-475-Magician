@@ -379,7 +379,22 @@ public class GroundEnemyActions : MonoBehaviour
         {
             ApplyDamageToPlayer();
             _attackTimer = _attackCooldown;
-            enemyAudio[1].Play(); // Play enemy attack audio
+            if (gameObject.CompareTag("SmallEnemy"))
+            {
+                AudioManager.Instance.PlaySFX("Z1Attack");
+            }
+            else if (gameObject.CompareTag("MediumEnemy"))
+            {
+                AudioManager.Instance.PlaySFX("Z2Attack");
+            }
+            else if (gameObject.CompareTag("BigEnemy"))
+            {
+                AudioManager.Instance.PlaySFX("Z3Attack");
+            }
+            else if (gameObject.CompareTag("AnimalEnemy"))
+            {
+                AudioManager.Instance.PlaySFX("Z4Attack");
+            }
         }
     }
 
