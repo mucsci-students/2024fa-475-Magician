@@ -33,7 +33,7 @@ public class ButtonManager : MonoBehaviour
     void Update()
     {
         // Check if the player presses the Escape key to toggle the pause menu
-        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name != "MainMenu")
+        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name != "MainMenu" && !BulletinBoard.isUsingBulletinBoard)
         {
             if (!GameIsPaused)
             {
@@ -153,13 +153,13 @@ public class ButtonManager : MonoBehaviour
     {
         AudioManager.Instance._themeAudioSource.mute = !AudioManager.Instance._themeAudioSource.mute;
         _isMasterVolumeInactive = !_isMasterVolumeInactive;
-        //_masterVolumeInactive.SetActive(_isMasterVolumeInactive);
+        _masterVolumeInactive.SetActive(_isMasterVolumeInactive);
     }
 
     public void ToggleSFX()
     {
         AudioManager.Instance._sfxAudioSource.mute = !AudioManager.Instance._sfxAudioSource.mute;
         _isSfxVolumeInactive = !_isSfxVolumeInactive;
-        //_sfxVolumeInactive.SetActive(_isSfxVolumeInactive);
+        _sfxVolumeInactive.SetActive(_isSfxVolumeInactive);
     }
 }

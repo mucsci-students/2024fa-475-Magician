@@ -47,7 +47,6 @@ public class GroundEnemyActions : MonoBehaviour
     private bool _isDead;
     private bool _isEnemyShot;
     private bool _isChasingPlayer;
-    AudioSource[] enemyAudio;
 
     // Attack cooldown
     private float _attackCooldown = 1.5f;
@@ -57,7 +56,6 @@ public class GroundEnemyActions : MonoBehaviour
     {
         InitializeComponents();
         _currentState = EnemyState.Idle;
-        enemyAudio = GetComponents<AudioSource>();
     }
 
     void Update()
@@ -379,7 +377,22 @@ public class GroundEnemyActions : MonoBehaviour
         {
             ApplyDamageToPlayer();
             _attackTimer = _attackCooldown;
-            enemyAudio[1].Play(); // Play enemy attack audio
+            if (gameObject.CompareTag("SmallEnemy"))
+            {
+                AudioManager.Instance.PlaySFX("Z1Attack");
+            }
+            else if (gameObject.CompareTag("MediumEnemy"))
+            {
+                AudioManager.Instance.PlaySFX("Z2Attack");
+            }
+            else if (gameObject.CompareTag("BigEnemy"))
+            {
+                AudioManager.Instance.PlaySFX("Z3Attack");
+            }
+            else if (gameObject.CompareTag("AnimalEnemy"))
+            {
+                AudioManager.Instance.PlaySFX("Z4Attack");
+            }
         }
     }
 

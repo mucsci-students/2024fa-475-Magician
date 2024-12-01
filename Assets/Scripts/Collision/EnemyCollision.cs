@@ -54,6 +54,22 @@ public class EnemyCollision : MonoBehaviour
         {
             _enemyStat.TakeDamage(_gunDamage);
             _isEnemyShot = true;
+            if (gameObject.CompareTag("SmallEnemy"))
+            {
+                AudioManager.Instance.PlaySFX("Z1Hurt");
+            }
+            else if (gameObject.CompareTag("MediumEnemy"))
+            {
+                AudioManager.Instance.PlaySFX("Z2Hurt");
+            }
+            else if (gameObject.CompareTag("BigEnemy"))
+            {
+                AudioManager.Instance.PlaySFX("Z3Hurt");
+            }
+            else if (gameObject.CompareTag("AnimalEnemy"))
+            {
+                AudioManager.Instance.PlaySFX("Z4Hurt");
+            }
         }
     }
 
