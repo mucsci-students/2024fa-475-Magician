@@ -77,7 +77,7 @@ public class EnemySpawn : MonoBehaviour
                         enemyStat.SetEnemyDamage(_bigEnemyDamage);
                         enemyStat.SetEnemySpeed(_bigEnemySpeed);
                     }
-                    else if (spawnedEnemy.CompareTag("Boss"))
+                    else if (spawnedEnemy.CompareTag("Boss1") || spawnedEnemy.CompareTag("Boss2") || spawnedEnemy.CompareTag("Boss3"))
                     {
                         enemyStat.SetEnemyHealth(_bossHealth);
                         enemyStat.SetEnemyDamage(_bossDamage);

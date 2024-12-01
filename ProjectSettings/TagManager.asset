@@ -18,7 +18,6 @@ TagManager:
   - ShotgunAmmo
   - SniperAmmo
   - RocketAmmo
-  - Boss
   - Shotgun
   - Rifle
   - Rocket
@@ -31,6 +30,9 @@ TagManager:
   - RocketBullet
   - HealFx
   - AnimalEnemy
+  - Boss1
+  - Boss2
+  - Boss3
   layers:
   - Default
   - TransparentFX

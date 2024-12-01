@@ -11,7 +11,9 @@ public class AmmoCollision : MonoBehaviour
             collision.gameObject.CompareTag("MediumEnemy") ||
             collision.gameObject.CompareTag("BigEnemy") ||
             collision.gameObject.CompareTag("AnimalEnemy") ||
-            collision.gameObject.CompareTag("Boss"))
+            collision.gameObject.CompareTag("Boss1") ||
+            collision.gameObject.CompareTag("Boss2") ||
+            collision.gameObject.CompareTag("Boss3"))
         {
             if (gameObject.CompareTag("RocketBullet"))
             {

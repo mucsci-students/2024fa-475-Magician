@@ -58,15 +58,15 @@ public class EnemyCollision : MonoBehaviour
             {
                 AudioManager.Instance.PlaySFX("Z1Hurt");
             }
-            else if (gameObject.CompareTag("MediumEnemy"))
+            else if (gameObject.CompareTag("MediumEnemy") || gameObject.CompareTag("Boss1"))
             {
                 AudioManager.Instance.PlaySFX("Z2Hurt");
             }
-            else if (gameObject.CompareTag("BigEnemy"))
+            else if (gameObject.CompareTag("BigEnemy") || gameObject.CompareTag("Boss3"))
             {
                 AudioManager.Instance.PlaySFX("Z3Hurt");
             }
-            else if (gameObject.CompareTag("AnimalEnemy"))
+            else if (gameObject.CompareTag("AnimalEnemy") || gameObject.CompareTag("Boss2"))
             {
                 AudioManager.Instance.PlaySFX("Z4Hurt");
             }
