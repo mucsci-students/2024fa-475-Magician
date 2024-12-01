@@ -95,7 +95,7 @@ public class BulletinBoard : MonoBehaviour
             "Switching Items\n" +
             "- Press 1, 2, 3, 4, or 5 to select the corresponding weapon or health pack.\n\n" +
             "Health Recovery\n" +
-            "- To recover health, press 5 to use a health pack. Each health pack restores 15 HP.\n\n" +
+            "- To recover health, press 1 to use a health pack. Each health pack restores 15 HP.\n\n" +
             "Melee Attack\n" +
             "- Press Space to perform a melee attack, useful when enemies are too close or if you run out of ammo.\n\n" +
             "Level Progression\n" +
