@@ -502,6 +502,22 @@ MonoBehaviour:
     _audioClip: {fileID: 8300000, guid: 2203773368e4340d98c114f55c2dd7fd, type: 3}
   - _audioName: RocketLauncherFire
     _audioClip: {fileID: 8300000, guid: 40e71b0f7bd610849b40f150553f4702, type: 3}
+  - _audioName: Z1Attack
+    _audioClip: {fileID: 8300000, guid: 2628db55e50fe41cc9879051d359847a, type: 3}
+  - _audioName: Z2Attack
+    _audioClip: {fileID: 8300000, guid: 2c706f39dc7b645e0a17766d7757d4c5, type: 3}
+  - _audioName: Z3Attack
+    _audioClip: {fileID: 8300000, guid: 7666bab29b4a04b149e8f5cefdf0c6e6, type: 3}
+  - _audioName: Z4Attack
+    _audioClip: {fileID: 8300000, guid: c5e72c14120434b7d8c3248afc4851b6, type: 3}
+  - _audioName: Z1Hurt
+    _audioClip: {fileID: 8300000, guid: 137bb003119aa47dfb5ed791d840d650, type: 3}
+  - _audioName: Z2Hurt
+    _audioClip: {fileID: 8300000, guid: 7795e8b6c77494ac6beedc8fb493a1b6, type: 3}
+  - _audioName: Z3Hurt
+    _audioClip: {fileID: 8300000, guid: 840ba502ba2cf48688fa3eed24c5ffd7, type: 3}
+  - _audioName: Z4Hurt
+    _audioClip: {fileID: 8300000, guid: efec5f3a773b84f5fa2ae40719d54aea, type: 3}
   _themeAudioSource: {fileID: 3101664518206503481}
   _sfxAudioSource: {fileID: 3001300250174551836}
 --- !u!1 &249160987734108757
