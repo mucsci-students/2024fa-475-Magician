@@ -125,11 +125,13 @@ public class ButtonManager : MonoBehaviour
         otherCanvas.SetActive(false);
         pauseMenuUI.SetActive(false);
         settingMenuCanvas.SetActive(false);
+        AudioManager.Instance.PlayThemeMusic("ThemeAudio");
     }
 
     // Method to resume the game
     public void Resume()
     {
+        AudioManager.Instance.PlayThemeMusic("IngameAudio");
         pauseMenuUI.SetActive(false);       // Hide the pause menu
         otherCanvas.SetActive(true);     // Show the previous canvas (e.g., HUD)
         Time.timeScale = 1f;                // Resume the game
