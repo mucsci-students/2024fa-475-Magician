@@ -153,13 +153,13 @@ public class ButtonManager : MonoBehaviour
     {
         AudioManager.Instance._themeAudioSource.mute = !AudioManager.Instance._themeAudioSource.mute;
         _isMasterVolumeInactive = !_isMasterVolumeInactive;
-        //_masterVolumeInactive.SetActive(_isMasterVolumeInactive);
+        _masterVolumeInactive.SetActive(_isMasterVolumeInactive);
     }
 
     public void ToggleSFX()
     {
         AudioManager.Instance._sfxAudioSource.mute = !AudioManager.Instance._sfxAudioSource.mute;
         _isSfxVolumeInactive = !_isSfxVolumeInactive;
-        //_sfxVolumeInactive.SetActive(_isSfxVolumeInactive);
+        _sfxVolumeInactive.SetActive(_isSfxVolumeInactive);
     }
 }
