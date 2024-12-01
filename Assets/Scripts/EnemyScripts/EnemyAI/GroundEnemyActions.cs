@@ -47,7 +47,6 @@ public class GroundEnemyActions : MonoBehaviour
     private bool _isDead;
     private bool _isEnemyShot;
     private bool _isChasingPlayer;
-    AudioSource[] enemyAudio;
 
     // Attack cooldown
     private float _attackCooldown = 1.5f;
@@ -57,7 +56,6 @@ public class GroundEnemyActions : MonoBehaviour
     {
         InitializeComponents();
         _currentState = EnemyState.Idle;
-        enemyAudio = GetComponents<AudioSource>();
     }
 
     void Update()
