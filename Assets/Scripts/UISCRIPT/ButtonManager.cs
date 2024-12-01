@@ -62,6 +62,7 @@ public class ButtonManager : MonoBehaviour
         mainMenuCanvas.SetActive(false);
         settingMenuCanvas.SetActive(false);
         otherCanvas.SetActive(true);
+        AudioManager.Instance.PlayThemeMusic("IngameAudio");
     }
 
     // Method to quit the game
