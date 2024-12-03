@@ -209,7 +209,7 @@ MonoBehaviour:
   _detectionRadius: 8
   _enemyAttackRate: 8
   _enemyChaseTime: 5
-  _attackRange: 1.8
+  _attackRange: 2
 --- !u!114 &8624961858028318878
 MonoBehaviour:
   m_ObjectHideFlags: 0

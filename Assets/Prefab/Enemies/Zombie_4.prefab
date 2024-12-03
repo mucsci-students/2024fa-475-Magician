@@ -198,7 +198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyRigidBody: {fileID: 3923730634866465348}
   _enemyAnimator: {fileID: 1215409566268756884}
-  _raycastDistance: 1.5
+  _raycastDistance: 1.8
   _obstacleLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -209,7 +209,7 @@ MonoBehaviour:
   _detectionRadius: 14
   _enemyAttackRate: 5
   _enemyChaseTime: 15
-  _attackRange: 1.4
+  _attackRange: 2
 --- !u!114 &2566338243215592565
 MonoBehaviour:
   m_ObjectHideFlags: 0
