@@ -199,7 +199,8 @@ public class PlayerCollision : MonoBehaviour
     {
         // Move the player to the hub location
         GameManager.Instance.MovePlayerToHub();
-        SceneManager.LoadScene("WinningScene"); 
+        SceneManager.LoadScene("WinningScene");
+        AudioManager.Instance.PlayThemeMusic("WinningAudio");
     }
 
     // Method to show the pop-up message

@@ -127,6 +127,7 @@ public class ButtonManager : MonoBehaviour
         otherCanvas.SetActive(false);
         pauseMenuUI.SetActive(false);
         settingMenuCanvas.SetActive(false);
+        AudioManager.Instance.PlayThemeMusic("ThemeAudio");
     }
 
     public void SecondMainMenu()
