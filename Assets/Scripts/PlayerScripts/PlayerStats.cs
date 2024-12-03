@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -9,9 +11,22 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] float _playerHealth = 100f;
     [SerializeField] float _meleeDamage = 10f;
     [SerializeField] float _playerMoveSpeed = 1f;
+
+    [Header("Slider")]
+    [SerializeField] private Slider _healthBar;
+
     bool _isDead = false;
 
-    
+    private void Start()
+    {
+        _healthBar.maxValue = _playerHealth;
+        _healthBar.value = _playerHealth;
+    }
+
+    private void Update()
+    {
+        _healthBar.value = _playerHealth;
+    }
 
     public void TakeDamage(float damageAmount)
     {
