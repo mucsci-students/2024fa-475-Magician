@@ -178,6 +178,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8929729561332397571, guid: 735e0f116db873545b487d6ea135f6bc, type: 3}
+      propertyPath: _raycastDistanceLeft
+      value: 1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8929729561332397571, guid: 735e0f116db873545b487d6ea135f6bc, type: 3}
+      propertyPath: _raycastDistanceRight
+      value: 1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8929729561332397571, guid: 735e0f116db873545b487d6ea135f6bc, type: 3}
+      propertyPath: _raycastDistanceMiddle
+      value: 1.8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

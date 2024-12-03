@@ -8641,6 +8641,18 @@ PrefabInstance:
       propertyPath: shotgunAmmoText
       value: 
       objectReference: {fileID: 4421672715596428771}
+    - target: {fileID: 7105190118199825445, guid: 4ac40e259645007438cd00caf73f9754, type: 3}
+      propertyPath: _raycastDistanceLeft
+      value: 1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7105190118199825445, guid: 4ac40e259645007438cd00caf73f9754, type: 3}
+      propertyPath: _raycastDistanceRight
+      value: 1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7105190118199825445, guid: 4ac40e259645007438cd00caf73f9754, type: 3}
+      propertyPath: _raycastDistanceMiddle
+      value: 1.8
+      objectReference: {fileID: 0}
     - target: {fileID: 8775535976773638865, guid: 4ac40e259645007438cd00caf73f9754, type: 3}
       propertyPath: _healthBar
       value: 
