@@ -6275,7 +6275,7 @@ PrefabInstance:
     - target: {fileID: 1709651672694333545, guid: 020581b89dd240444aac4ce4900e1f16, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 1445978202, guid: 47513bd58430016438767a836599eedc, type: 3}
+      objectReference: {fileID: 96771630, guid: 9683cec7a01fe1d48b0bd77a0295a149, type: 3}
     - target: {fileID: 2384336031028566759, guid: 020581b89dd240444aac4ce4900e1f16, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.693944
@@ -6439,6 +6439,14 @@ PrefabInstance:
     - target: {fileID: 6614415388962421572, guid: 020581b89dd240444aac4ce4900e1f16, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6990835477372926655, guid: 020581b89dd240444aac4ce4900e1f16, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 320
+      objectReference: {fileID: 0}
+    - target: {fileID: 6990835477372926655, guid: 020581b89dd240444aac4ce4900e1f16, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 320
       objectReference: {fileID: 0}
     - target: {fileID: 7171693726078593035, guid: 020581b89dd240444aac4ce4900e1f16, type: 3}
       propertyPath: m_LocalScale.x
