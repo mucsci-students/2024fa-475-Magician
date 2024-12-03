@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class ButtonManager : MonoBehaviour
@@ -9,6 +10,7 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] private GameObject settingMenuCanvas;
     [SerializeField] private GameObject pauseMenuUI;    // Reference to the Pause Menu UI
     [SerializeField] private GameObject otherCanvas;  // Reference to the previous UI Canvas (e.g., HUD)
+    [SerializeField] private GameObject winningCanvas;
 
     [Header("Button To Show From Pause Menu")]
     [SerializeField] private GameObject _resumeButtonInMainMenu;
@@ -43,6 +45,16 @@ public class ButtonManager : MonoBehaviour
             {
                 Resume();
             }
+        }
+
+        if(SceneManager.GetActiveScene().name == "WinningScene")
+        {
+            _resumeButtonInMainMenu.SetActive(false);
+            winningCanvas.SetActive(true);
+        }
+        else
+        {
+            winningCanvas.SetActive(false);
         }
     }
 
@@ -115,6 +127,7 @@ public class ButtonManager : MonoBehaviour
         otherCanvas.SetActive(false);
         pauseMenuUI.SetActive(false);
         settingMenuCanvas.SetActive(false);
+        AudioManager.Instance.PlayThemeMusic("ThemeAudio");
     }
 
     public void SecondMainMenu()

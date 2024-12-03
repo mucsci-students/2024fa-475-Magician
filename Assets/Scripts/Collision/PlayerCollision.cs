@@ -191,7 +191,7 @@ public class PlayerCollision : MonoBehaviour
         {
             Destroy(collision.gameObject);
             Debug.Log($"Picked up {collision.gameObject.tag}!");
-            Invoke("LoadWinningSceneWrapper", 5f);
+            Invoke("LoadWinningSceneWrapper", 3f);
         }
     }
 
@@ -200,7 +200,7 @@ public class PlayerCollision : MonoBehaviour
         // Move the player to the hub location
         GameManager.Instance.MovePlayerToHub();
         SceneManager.LoadScene("WinningScene");
-        Time.timeScale = 0f;
+        AudioManager.Instance.PlayThemeMusic("WinningAudio");
     }
 
     // Method to show the pop-up message
