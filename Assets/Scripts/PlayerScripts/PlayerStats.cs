@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
@@ -15,7 +16,7 @@ public class PlayerStats : MonoBehaviour
     [Header("Slider")]
     [SerializeField] private Slider _healthBar;
 
-    bool _isDead = false;
+    public static bool _isDead = false;
 
     private void Start()
     {
@@ -40,8 +41,6 @@ public class PlayerStats : MonoBehaviour
 
     private void Die()
     {
-        // Add death animations, sounds, or other effects here
-        _playerAnimator.SetBool("isDead", true);
         Collider2D _playerCollider = gameObject.GetComponent<Collider2D>();
         _playerCollider.isTrigger = true;
 
@@ -50,6 +49,9 @@ public class PlayerStats : MonoBehaviour
         _playerRigidbody.isKinematic = true;            // Disable physics simulation
 
         _isDead = true;
+        GetComponent<PlayerInput>().enabled = false;
+        // Add death animations, sounds, or other effects here
+        _playerAnimator.SetBool("isDead", true);
     }
 
     public bool GetIsDead()
