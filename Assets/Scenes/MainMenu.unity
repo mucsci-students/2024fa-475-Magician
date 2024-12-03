@@ -130,18 +130,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2255988070939710675, guid: 735e0f116db873545b487d6ea135f6bc, type: 3}
-      propertyPath: _themeAudio.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2255988070939710675, guid: 735e0f116db873545b487d6ea135f6bc, type: 3}
-      propertyPath: _themeAudio.Array.data[2]._audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 5279c405aa3054248a197bfe626c01c2, type: 3}
-    - target: {fileID: 2255988070939710675, guid: 735e0f116db873545b487d6ea135f6bc, type: 3}
-      propertyPath: _themeAudio.Array.data[2]._audioName
-      value: WinningAudio
-      objectReference: {fileID: 0}
     - target: {fileID: 6325474063657321980, guid: 735e0f116db873545b487d6ea135f6bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 72.95197
