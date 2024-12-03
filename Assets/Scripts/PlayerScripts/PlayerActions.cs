@@ -571,6 +571,7 @@ public class PlayerActions : MonoBehaviour
     // Respawns player and reloads scene
     private void respawnOnDeath()
     {
+        GetComponent<PlayerInput>().enabled = true;
         _playerStat.SetPlayerHealth(200f);
         _playerStat.SetIsDead(false);
         _playerAnimator.SetBool("isDead", false);

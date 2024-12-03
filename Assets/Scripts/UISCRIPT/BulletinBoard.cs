@@ -47,6 +47,7 @@ public class BulletinBoard : MonoBehaviour
         bulletinBoardUI.SetActive(false);      // Hide the bulletin board UI
         storyScrollView.SetActive(false);      // Hide the story scroll view
         tutorialsScrollView.SetActive(false);  // Hide the tutorials scroll view
+        tutorialsScrollView_2.SetActive(false);
         Time.timeScale = 1f;                   // Resume the game
         ButtonManager.GameIsPaused = false;
         isUsingBulletinBoard = false;
