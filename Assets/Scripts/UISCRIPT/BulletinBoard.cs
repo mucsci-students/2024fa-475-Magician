@@ -78,7 +78,7 @@ public class BulletinBoard : MonoBehaviour
         storyScrollView.SetActive(false);     // Hide the story scroll view
         // Set the main tutorials text
         tutorialsText.text = "Tutorials\n\n" +
-            "Press ESC key to pause the game or click on the pause button on top right of the screen!\n\n" +
+            "Press ESC key to pause the game or click on the pause button on top right of the screen! Click the house button next to pause button to go back to main hub!\n\n" +
             "Movement\n" +
             "- Use WASD keys to move your character in different directions.\n\n" +
             "Shooting\n" +
