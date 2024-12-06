@@ -131,6 +131,24 @@ public class ButtonManager : MonoBehaviour
         }
     }
 
+    public void MainHub()
+    {
+        GameObject manager = GameObject.Find("GameManager");
+        if (manager)
+        {
+            // Move the player to the hub location
+            GameManager.Instance.MovePlayerToHub();
+        }
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainHub");
+        GameIsPaused = false;
+        completedLevelsCanvas.SetActive(false);
+        mainMenuCanvas.SetActive(false);
+        settingMenuCanvas.SetActive(false);
+        otherCanvas.SetActive(true);
+        AudioManager.Instance.PlayThemeMusic("IngameAudio");
+    }
+
     // Method to start the game (load the next scene)
     public void StartGame()
     {
