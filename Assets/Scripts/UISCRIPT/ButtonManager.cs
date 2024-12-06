@@ -11,6 +11,7 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] private GameObject pauseMenuUI;    // Reference to the Pause Menu UI
     [SerializeField] private GameObject otherCanvas;  // Reference to the previous UI Canvas (e.g., HUD)
     [SerializeField] private GameObject winningCanvas;
+    [SerializeField] private GameObject completedLevelsCanvas;
 
     [Header("Button To Show From Pause Menu")]
     [SerializeField] private GameObject _resumeButtonInMainMenu;
@@ -20,16 +21,22 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] private GameObject _masterVolumeInactive;
     [SerializeField] private GameObject _sfxVolumeInactive;
 
+    [Header("Inactive Completed Levels")]
+    [SerializeField] private GameObject _slot1;
+    [SerializeField] private GameObject _slot2;
+    [SerializeField] private GameObject _slot3;
+
     private bool _isMasterVolumeInactive = false;
     private bool _isSfxVolumeInactive = false;
 
     private void Start()
     {
+        mainMenuCanvas.SetActive(true);
         _resumeButtonInMainMenu.SetActive(false);
         _resumeButtonInSettingMenu.SetActive(false);
-        mainMenuCanvas.SetActive(true);
         otherCanvas.SetActive(false);
         settingMenuCanvas.SetActive(false);
+        completedLevelsCanvas.SetActive(false);
     }
 
     void Update()
@@ -56,6 +63,72 @@ public class ButtonManager : MonoBehaviour
         {
             winningCanvas.SetActive(false);
         }
+
+        UpdateLevelCompleted();
+    }
+
+    private void UpdateLevelCompleted()
+    {
+        if (PlayerCollision._isMapOneCompleted)
+        {
+            _slot1.SetActive(false);
+        }
+        if (PlayerCollision._isMapTwoCompleted)
+        {
+            _slot2.SetActive(false);
+        }
+        if (PlayerCollision._isMapThreeCompleted)
+        {
+            _slot3.SetActive(false);
+        }
+    }
+
+    public void LoadMap1()
+    {
+        if(PlayerCollision._isMapOneCompleted)
+        {
+            Time.timeScale = 1f;
+            GameIsPaused = false;
+            completedLevelsCanvas.SetActive(false);
+            mainMenuCanvas.SetActive(false);
+            settingMenuCanvas.SetActive(false);
+            otherCanvas.SetActive(true);
+            SceneManager.LoadScene("Map1");
+            GameManager.Instance.MovePlayerToRespawnPosition(2);
+            AudioManager.Instance.PlayThemeMusic("IngameAudio");
+        }
+    }
+
+    public void LoadMap2()
+    {
+        if (PlayerCollision._isMapTwoCompleted)
+        {
+            Time.timeScale = 1f;
+            GameIsPaused = false;
+            completedLevelsCanvas.SetActive(false);
+            mainMenuCanvas.SetActive(false);
+            settingMenuCanvas.SetActive(false);
+            otherCanvas.SetActive(true);
+            SceneManager.LoadScene("Map2");
+            GameManager.Instance.MovePlayerToRespawnPosition(3);
+            AudioManager.Instance.PlayThemeMusic("IngameAudio");
+        }
+    }
+
+    public void LoadMap3()
+    {
+        if (PlayerCollision._isMapThreeCompleted)
+        {
+            Time.timeScale = 1f;
+            GameIsPaused = false;
+            completedLevelsCanvas.SetActive(false);
+            mainMenuCanvas.SetActive(false);
+            settingMenuCanvas.SetActive(false);
+            otherCanvas.SetActive(true);
+            SceneManager.LoadScene("Map3");
+            GameManager.Instance.MovePlayerToRespawnPosition(4);
+            AudioManager.Instance.PlayThemeMusic("IngameAudio");
+        }
     }
 
     // Method to start the game (load the next scene)
@@ -71,6 +144,7 @@ public class ButtonManager : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainHub");
         GameIsPaused = false;
+        completedLevelsCanvas.SetActive(false);
         mainMenuCanvas.SetActive(false);
         settingMenuCanvas.SetActive(false);
         otherCanvas.SetActive(true);
@@ -85,11 +159,21 @@ public class ButtonManager : MonoBehaviour
         Application.Quit();
     }
 
+    public void CompletedLevelsCanvas()
+    {
+        mainMenuCanvas.SetActive(false);
+        otherCanvas.SetActive(false);
+        pauseMenuUI.SetActive(false);
+        settingMenuCanvas.SetActive(false);
+        completedLevelsCanvas.SetActive(true);
+    }
+
     public void SettingMenu()
     {
         mainMenuCanvas.SetActive(false);
         otherCanvas.SetActive(false);
         pauseMenuUI.SetActive(false);
+        completedLevelsCanvas.SetActive(false);
         settingMenuCanvas.SetActive(true);
     }
 
@@ -127,6 +211,7 @@ public class ButtonManager : MonoBehaviour
         otherCanvas.SetActive(false);
         pauseMenuUI.SetActive(false);
         settingMenuCanvas.SetActive(false);
+        completedLevelsCanvas.SetActive(false);
         AudioManager.Instance.PlayThemeMusic("ThemeAudio");
     }
 
@@ -138,6 +223,7 @@ public class ButtonManager : MonoBehaviour
         otherCanvas.SetActive(false);
         pauseMenuUI.SetActive(false);
         settingMenuCanvas.SetActive(false);
+        completedLevelsCanvas.SetActive(false);
         AudioManager.Instance.PlayThemeMusic("ThemeAudio");
     }
 
@@ -150,6 +236,7 @@ public class ButtonManager : MonoBehaviour
         Time.timeScale = 1f;                // Resume the game
         GameIsPaused = false;
         mainMenuCanvas.SetActive(false);
+        completedLevelsCanvas.SetActive(false);
         settingMenuCanvas.SetActive(false);
     }
 

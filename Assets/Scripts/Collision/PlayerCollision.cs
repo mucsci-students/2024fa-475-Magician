@@ -36,6 +36,10 @@ public class PlayerCollision : MonoBehaviour
     [SerializeField] TMP_Text rifleAmmoText;
     [SerializeField] TMP_Text healthPackText;
 
+    public static bool _isMapOneCompleted = false;
+    public static bool _isMapTwoCompleted = false;
+    public static bool _isMapThreeCompleted = false;
+
     void Start()
     {
         UpdateUI();
@@ -159,6 +163,7 @@ public class PlayerCollision : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Shotgun"))
         {
+            _isMapOneCompleted = true;
             // Enable the Shotgun object in the Canvas
             shotgun.SetActive(true);
             playerAction.SetShotgunAqquire(true);
@@ -178,6 +183,7 @@ public class PlayerCollision : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Rocket"))
         {
+            _isMapTwoCompleted = true;
             // Enable the Rocket object in the Canvas
             rocket.SetActive(true);
             playerAction.SetRocketAqquire(true);
@@ -189,6 +195,7 @@ public class PlayerCollision : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Cure"))
         {
+            _isMapThreeCompleted = true;
             Destroy(collision.gameObject);
             Debug.Log($"Picked up {collision.gameObject.tag}!");
             Invoke("LoadWinningSceneWrapper", 3f);
